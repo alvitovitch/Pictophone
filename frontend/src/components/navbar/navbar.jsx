@@ -5,6 +5,7 @@ import logo from "../../images/vintage-candlestick-telephone-vector-21717680.jpg
 class NavBar extends React.Component {
 
     render() {
+ splashNav
         // if (this.props.loggedIn) {
             return (
                 <div id='navBar'>
@@ -13,6 +14,9 @@ class NavBar extends React.Component {
                             <img id='logoPic' src={logo} />    
                         </div>
                     Pictophone
+
+    
+        
                     </div>
                     <div id='navButtons'>
                         <button className="navButton">

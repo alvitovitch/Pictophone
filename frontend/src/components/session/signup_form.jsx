@@ -7,6 +7,7 @@ class SignupForm extends React.Component {
             username: '',
             password: ''
         }
+    this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(e) {
@@ -20,27 +21,31 @@ class SignupForm extends React.Component {
     }
 
     render() {
-        <div className='signup-form-container'>
-            <form
-                className='signup-form'
-                onSubmit={this.handleSubmit}
-            >
-                <div className='username-input-container'>
-                    <input
-                        type="text"
-                        onChange={this.update(field)} />
-                    <label>Username</label>
-                </div>
-                <div className='password-input-container'>
-                    <input
-                        type="password"
-                        onChange={this.update(field)} />
-                    <label>Password</label>
-                </div>
-                <button>Sign In</button>
-            </form>
 
-        </div>
+        return (
+            <div className='signup-form-container'>
+                <form
+                    className='signup-form'
+                    onSubmit={this.handleSubmit}
+                >
+                    <div className='username-input-container'>
+                        <input
+                            type="text"
+                            onChange={this.update('username')} />
+                        <label>Username</label>
+                    </div>
+                    <div className='password-input-container'>
+                        <input
+                            type="password"
+                            onChange={this.update('password')} />
+                        <label>Password</label>
+                    </div>
+                    <button>Sign Up</button>
+                </form>
+
+            </div>
+        )
+      
     }
 }
 
