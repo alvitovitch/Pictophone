@@ -73,7 +73,15 @@ router.patch("/:room_id",
   (req, res) => {
     Room.findById(req.params.room_id)
       .then(room => {
-        room.players.push(req.body.player);
+        // if the room does not include the player passed into the reqeust body and there is still open space in the room
+        !room.players.includes(req.body.playerId) && room.players.length < room.size ?
+        // then add the request body playerId into the room's players array in the backend
+        room.players.push(req.body.playerId) : 
+        // else filter out the request body playerId from the room's player array
+        room.players = room.players.filter(player => {
+          player !== req.body.playerId
+        });
+        // save the updated room and render it as json
         room.save().then(res.json(room));
       })
       .catch(err => 
