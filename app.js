@@ -6,7 +6,7 @@ const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const io = require('socket.io')(5000, {
+const io = require('socket.io')(6000, {
     cors: {
         origin: ['http://localhost:3000']
     }
