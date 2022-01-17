@@ -10,7 +10,7 @@ class LobbyIndex extends React.Component {
                 </aside>
                 <section className="rooms-container">
                     <ul>
-                        <div className="room">Room</div>
+                        <div className="room"><h1>Hello</h1></div>
                         <div className="room">Room</div>
                         <div className="room">Room</div>
                     </ul>
