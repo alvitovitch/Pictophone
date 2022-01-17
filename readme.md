@@ -43,9 +43,87 @@ During gameplay each player will receive a prompt and attempt to draw it within 
 
 ## Technologies & Technical Challenges
 
-## Wireframes
+* Websockets - socket.io
+* Drawing board - P5.js
+* Asset Storage - AWS
+* Passing gameplay vs shared views
+* Integrating websockets into a drawing board
+* hand off of assets between players
+* fetch and organize assets and guesses for presentation
+
+# Wireframes
+
+## Splash
+<img src='./Splash.png' height='400px'/>
+
+## Login/Signup
+<img src='./Login-Signup.png' height='400px'/>
+
+## Index
+<img src='./Index.png'  height='400px'/>
+
+## Game Room
+<img src='./Game_Room.png'  height='400px'/>
+
+## Draw Modal
+<img src='./Draw_modal.png'  height='400px'/>
+
+## Guess Modal
+<img src='./Guess_modal.png'  height='400px'/>
 
 
 ## Schedule
 
+Alex Dziuba, Stephanie Soni, Kyle Ginzburg, Andrew Vitovitch
 
+* Day 0
+    * setup Auth
+    * splash skeleton (/)
+        * nav bar
+        * main content
+            * screenshots on how to play
+        * footer
+    * signup/login skeleton 
+        * seperate forms (/signup, /login)
+    * backend routes for everything!
+        * build users collection
+            * User owns room (1 max)
+
+* Day 1
+    * main lobby index skeleton
+        *(/lobby)
+    * Rooms collection
+        * connected to the user that built it
+        * id, name, size (min: 2 (ideal 4+), max: 8, even: true)
+        * Array of player ids
+    * Rooms Routes
+        * GET - all rooms
+        * GET - individual room
+        * PATCH - individual room (when players join)
+        * POST - create room
+        * DELETE - destroy room
+    * Room skeleton
+        * (/rooms/:id)
+
+* Day 2
+    * Building out frontend (Websockets & P5)
+        * Chat
+        * Free draw
+        * Backend? (potential storage of free draw canvas)
+            * collections for drawings
+                * id, user_id, asset_link
+            * guess collection
+                *  id, user_id, guess
+        * start on game logic
+
+
+* Day 3
+
+
+* Day 4
+
+* Beyond Day 4
+    * BONUS!!!!
+        * private/public rooms
+        * password protect 
+        * User Profile Page
