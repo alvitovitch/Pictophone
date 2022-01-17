@@ -37,9 +37,10 @@ class NavBar extends React.Component {
                         </div>
                     Pictophone
                     </div>
-                    <div>
-                        <Link to={'/login'}>Login</Link>
-                        <Link to={'/signup'}>Sign up</Link>
+                    <div id='navButtons'>
+                        <button className="navButton">Profile</button>
+                        <button className="navButton">Settings</button>
+                        <button className="navButton" onClick={this.props.logout}>Logout</button>
                     </div>
                 </div>
             )
