@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
+    
     switch (action.type) {
         case RECEIVE_USER_LOGOUT:
             return {
@@ -21,8 +22,10 @@ export default function (state = initialState, action) {
                 user: action.currentUser
             }
         case RECEIVE_USER_SIGN_IN:
+            
             return{
                 ...state,
+                isAuthenticated: !!action.currentUser,
                 isSignedIn: true
             }
         default:
