@@ -49,3 +49,42 @@ a {
     text-decoration: inherit;
     color: inherit;
 }
+
+#linkBar {
+    display: flex;
+    flex-direction: row;
+    width: 75vw;
+    justify-content: space-between;
+}
+
+.githubImg {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.linkedinImg {
+    height: 100%;
+    border-radius: 10px;
+
+}
+
+.personalLinks {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 5px;
+}
+
+.personalLinks > div {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+
+
+
+.linkName {
+    align-items: center;
+}
