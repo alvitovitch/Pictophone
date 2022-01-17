@@ -2,9 +2,15 @@ import React from "react";
 import LobbyIndexItem from "./lobby_index_item";
 
 class LobbyIndex extends React.Component {
+
+    componentDidMount(){
+        this.props.requestAllRooms();
+    }
+
     render(){
         const room = {id: 1, name: "room", size: 6, host: "Host name", players: [1,2,3,4]}
-        const rooms = [room, room, room, room]
+        const { rooms } = this.props
+        if (rooms.length === 0) return null;
         return(
             <div className="lobby-page">
                 <section className="rooms-container">
