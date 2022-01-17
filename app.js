@@ -6,6 +6,25 @@ const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const io = require('socket.io')(6000, {
+    cors: {
+        origin: ['http://localhost:3000']
+    }
+})
+
+
+// socket.io connection
+
+io.on('connection', socket => {
+    console.log(socket.id)
+    socket.on('send-message',  (message, room) => {
+        socket.to(room).emit('receive-message', message)
+    })
+    socket.on('join-room', room => {
+        socket.join(room)
+    })
+})
+
 
 // Mongoose connecting to our database
 mongoose

@@ -8,7 +8,6 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import RoomContainer from "./room/roomContainer";
 import LobbyContainer from './lobby/lobby_container';
-import LinkBar from "./linkbar/linkBar";
 
 
 
@@ -20,7 +19,7 @@ const App = () => (
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
             <AuthRoute exact path='/' component={Splash} />
 
-            <ProtectedRoute patch='/room/:roomId' component={RoomContainer}/> 
+            <ProtectedRoute path='/rooms/:roomId' component={RoomContainer}/> 
             <ProtectedRoute path='/lobby' component={LobbyContainer}/>
         </Switch>
         <LinkBarContainer />

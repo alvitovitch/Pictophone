@@ -1,10 +1,12 @@
 import React from "react";
-
+import { io } from 'socket.io-client'
+import MessageBoxContainer from "../messages/messageBoxContainer";
 class Room extends React.Component {
     constructor(props){
         super(props)
         this.socket = io('http://localhost:6000')
         this.socket.emit('join-room', this.props.roomId)
+
         this.leaveRoom = this.leaveRoom.bind(this)
     }
 
@@ -12,6 +14,7 @@ class Room extends React.Component {
         debugger
         this.props.updateRoom(this.props.roomId)
         this.props.history.push('../lobby')
+
     }
 
     render() {
@@ -21,7 +24,7 @@ class Room extends React.Component {
                     Free Draw
                 </div>
                 <div id='roomChat'>
-                    Chat bar
+                    <MessageBoxContainer socket={this.socket} roomId={this.props.roomId} />
                 </div>
                 <button onClick={this.leaveRoom}
                  id='leaveRoom'>

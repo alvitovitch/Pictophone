@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import Room from './room';
+
 import { updateRoom } from '../../actions/rooms_actions'
 
 const mSTP = (state, ownProps) => {
     return{
         // players: Object.values(state.entities.users)
+        roomId: ownProps.match.params.roomId
     }
 }
 

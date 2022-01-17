@@ -106,4 +106,14 @@ router.post("/login", (req, res) => {
     })
 })
 
+router.get("/", 
+  passport.authenticate('jwt', { session: false }),
+
+  (req, res) => {
+    User.find()
+      .sort({ date: -1 })
+      .then(users => res.json(users))
+      .catch(err => res.status(404).json({ nousersfound: 'No users found' }))
+})
+
 module.exports = router;
