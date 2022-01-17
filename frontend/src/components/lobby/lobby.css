@@ -1,0 +1,7 @@
+.lobby-page {
+    width: 100%;
+    min-height: calc(100vh - 280px);
+    border: 1px solid red;
+    display: flex;
+}
+
