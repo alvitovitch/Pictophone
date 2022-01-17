@@ -1,5 +1,4 @@
 import React from "react";
-// import './lobby.css'
 
 class LobbyIndex extends React.Component {
     render(){
