@@ -24,10 +24,15 @@ router.get("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    Room.findOne({id: req.params.room_id})
+    Room.findById(req.params.room_id)
       .then(room => res.json(room))
-      .catch(err =>
-        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+      .catch(err => 
+        res.status(404).json({ noroomfound: 'No room found with that ID'}))
+    // This didn't work
+    // Room.findOne({id: req.params.room_id})
+    //   .then(room => res.json(room))
+    //   .catch(err =>
+    //     res.status(404).json({ noroomfound: 'No room found with that ID' }))
   }
 )
 
@@ -50,7 +55,8 @@ router.post("/",
         } else {
           const newRoom = new Room({
             name: req.body.name,
-            size: req.body.size
+            size: req.body.size,
+            host: req.body.host_id
           });
 
           newRoom.save().then(room => res.json(room));
@@ -59,8 +65,34 @@ router.post("/",
   }
 )
 
-// patch room
+// PATCH a room backend route
 
-// delete room
+router.patch("/:room_id",
+  passport.authenticate('jwt', { session: false }),
+
+  (req, res) => {
+    Room.findById(req.params.room_id)
+      .then(room => {
+        room.players.push(req.body.player);
+        room.save().then(res.json(room));
+      })
+      .catch(err => 
+        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+  }
+)
+
+
+// DELETE a room backend route
+router.delete("/:room_id",
+  passport.authenticate('jwt', { session: false }),
+
+  (req, res) => {
+    console.log(req.params)
+    Room.findByIdAndDelete(req.params.room_id)
+      .then(room => res.json(room))
+      .catch(err =>
+        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+  }
+)
 
 module.exports = router;
