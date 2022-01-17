@@ -5,16 +5,16 @@ class MessageBox extends React.Component {
 
     constructor(props) {
         super(props)
-
+        debugger
         this.state = {
             message: ''
         }
-        this.socket = io('http://localhost:5000')
+        //this.socket = io('http://localhost:5000')
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.socket.on('receive-message', message => {
+        this.props.socket.on('receive-message', message => {
             console.log(message)
+            console.log(this.props.socket)
             this.createMessage(message)
-            debugger
         })
     }
 
@@ -25,23 +25,22 @@ class MessageBox extends React.Component {
         const messageDiv = document.createElement('div')
         messageDiv.innerText = `${user}: ${message}`
         document.getElementById('chatMessages').appendChild(messageDiv)
-        console.log(messageDiv)
-        this.socket.emit('send-message', {user, message})
+        
+
+        this.props.socket.emit('send-message', {user, message}, this.props.roomId)
         this.setState({message: ''})
     }
     
     createMessage(message) {
-        debugger
         const text = message.message
-        debugger
+        
         const user = message.user
-        debugger
         const newMessage = document.createElement('div')
-        debugger
+        
         newMessage.innerText = `${user}: ${text}`
-        debugger
+        
         document.getElementById('chatMessages').appendChild(newMessage)
-        debugger
+        
 
     }
 
