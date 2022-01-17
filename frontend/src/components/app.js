@@ -6,6 +6,7 @@ import { Switch } from 'react-router-dom';
 import Splash from "./splash/splash";
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
+import LobbyContainer from './lobby/lobby_container';
 import LinkBar from "./linkbar/linkBar";
 
 
@@ -19,7 +20,7 @@ const App = () => (
             <AuthRoute exact path='/' component={Splash} />
 
             <ProtectedRoute path='/lobby' component={LobbyContainer}/>
-            <ProtectedRoute patch='/room/:roomId' component={RoomContainer}/> 
+            {/* <ProtectedRoute path='/room/:roomId' component={RoomContainer}/>  */}
         </Switch>
         <LinkBarContainer />
     </div>
