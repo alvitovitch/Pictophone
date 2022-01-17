@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
+const rooms = require("./routes/api/rooms");
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/users", users);
+app.use("/api/rooms", rooms);
 
 const port = process.env.PORT || 4000;
 

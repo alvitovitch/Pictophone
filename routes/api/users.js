@@ -8,8 +8,10 @@ const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 const passport = require('passport');
 
+// Test route for users
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
+// Testing current authenticated user route
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     id: req.user.id,
@@ -17,6 +19,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
   });
 })
 
+// Signup backend route
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -61,6 +64,8 @@ router.post("/register", (req, res) => {
       }
     })
 })
+
+// Login backend route
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
