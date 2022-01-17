@@ -1,43 +1,56 @@
 import React, { userEffect } from 'react';
 import { ReactP5Wrapper } from 'react-p5-wrapper';
+import P5 from 'p5';
 
-// import sketch from './sketch';
+import sketch from './sketch';
 
 class DrawingBoard extends React.Component{
     constructor(props) {
         super(props)
-        this.state = { 
-            x: undefined,
-            y: undefined
-        }
-    this.getMousePos = this.getMousePos.bind(this);
-    this.sketch = this.sketch.bind(this);
     }
 
-    sketch(p5) {
+    setup(p) {
         let canvas;
+        p.setup = () => canvas = p.createCanvas(500, 500)
+    }
 
-        p5.setup = () => {
-            canvas = p5.createCanvas(500, 500);
+    draw(p) {
+        p.draw = () => {
+            p.background('red');
+            if (p.mouseIsPressed) {
+                p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
+                p.strokeWeight(10);
+                p.fill('white');
+
+            }
+        }
+    }
+
+    // sketch(p5) {
+    //     let canvas;
+    //     p5.setup = () => {
+    //         canvas = p5.createCanvas(500, 500);
+    //         // canvas.parent(document.querySelector('.canvas-container'));
            
-        }
-        const coords = this.state
-        p5.draw = () => {
-            p5.background('red');
-            p5.ellipse(coords.x, coords.y, 10, 10);
-            p5.fill('white');
-        }
-    }
-
-    getMousePos(e) {
-        debugger
-        this.setState({x: e.clientX, y: e.clientY})
-    }
+    //     }
+    //     p5.draw = () => {
+    //         p5.background('red');
+    //         if (p5.mouseIsPressed) {
+    //             p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+    //             p5.strokeWeight(10);
+    //             p5.fill('white');
+               
+    //         }
+    //     }
+    // }
 
     render() {
+        const board = this.setup(p5);
+        board.draw(p5);
         return (
-            <div onMouseMove={this.getMousePos}>
-                <ReactP5Wrapper  sketch={this.sketch} ></ReactP5Wrapper>
+            <div className='canvas-container'>
+                <P5>sketch={board}</P5>
+                {/* <ReactP5Wrapper sketch={board}></ReactP5Wrapper> */}
             </div>
         )
     }

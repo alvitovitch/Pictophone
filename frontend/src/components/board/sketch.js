@@ -1,16 +1,19 @@
 import React from "react";
 
-export default function sketch(p) {
-    let canvas;
+export default function sketch(p5) {
+        let canvas;
+        p5.setup = () => {
+            canvas = p5.createCanvas(500, 500);
 
-    p.setup = () => {
-        canvas = p.createCanvas(500, 500);
-    }
+        }
+        p5.draw = () => {
+            p5.background('red');
+            if (p5.mouseIsPressed) {
+                p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+                p5.strokeWeight(10);
+                p5.stroke('white');
 
-    p.draw = (props) => {
-        debugger
-        p.background('red');
-        p.ellipse(props.x, props.y, 10, 10);
-    }
+            }
+        }
+ }
 
-}
