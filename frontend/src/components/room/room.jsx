@@ -1,6 +1,10 @@
 import React from "react";
-
+import MessageBoxContainer from "../messages/messageBoxContainer";
 class Room extends React.Component {
+    constructor(props){
+        super(props)
+        
+    }
 
     render() {
         return (
@@ -9,7 +13,7 @@ class Room extends React.Component {
                     Free Draw
                 </div>
                 <div id='roomChat'>
-                    Chat bar
+                    <MessageBoxContainer socket={this.socket} />
                 </div>
             </div>
         )
