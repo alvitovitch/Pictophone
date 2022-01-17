@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Room from './room';
-const mSTP = state => {
+import { updateRoom } from '../../actions/rooms_actions'
+
+const mSTP = (state, ownProps) => {
     return{
         // players: Object.values(state.entities.users)
     }
@@ -8,7 +10,7 @@ const mSTP = state => {
 
 const mDTP = dispatch => {
     return{
-        // create board
+        updateRoom: roomId => dispatch(updateRoom(roomId))
         // update board
     }
 }
