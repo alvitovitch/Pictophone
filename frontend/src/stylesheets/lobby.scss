@@ -2,6 +2,28 @@
     width: 100%;
     min-height: calc(100vh - 280px);
     border: 1px solid red;
+    padding: 20px;
     display: flex;
+    justify-content: center;
 }
 
+
+.rooms-container {
+    width: 60%;
+    border: 5px solid purple;
+    padding: 20px;
+    .rooms-container-header {
+        border: 1px solid red;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.index-room {
+    border: 2px solid blue;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
