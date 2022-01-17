@@ -9,7 +9,7 @@ const passport = require('passport');
 router.get("/test", (req, res) => res.json({ msg: "This is the rooms route" }));
 
 // GET all rooms backend route
-router.get("/rooms",
+router.get("/",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
@@ -20,11 +20,11 @@ router.get("/rooms",
 })
 
 // GET individual room backend route
-router.get("/rooms/:room_id", 
+router.get("/:room_id", 
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    Room.find({room: req.params.room_id})
+    Room.findOne({id: req.params.room_id})
       .then(room => res.json(room))
       .catch(err =>
         res.status(404).json({ noroomfound: 'No room found with that ID' }))
@@ -32,7 +32,7 @@ router.get("/rooms/:room_id",
 )
 
 // POST a room backend route
-router.post("/rooms", 
+router.post("/", 
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {

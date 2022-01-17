@@ -6,15 +6,15 @@ module.exports = function validateRoomInput(data) {
   let errors = {};
 
   data.name = validText(data.name) ? data.name : '';
-  data.size = validNum(data.size) ? data.size : 4;
+  data.size = validNum(parseInt(data.size)) ? parseInt(data.size) : 4;
 
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Room name field is required';
   }
 
-  if (Validator.isEmpty(data.size)) {
-    errors.size = 'Room size field is required';
-  }
+  // if (Validator.isNumeric(data.size)) {
+  //   errors.size = 'Room size field is required';
+  // }
 
   return {
     errors,
