@@ -5,7 +5,7 @@ import logo from "../../images/vintage-candlestick-telephone-vector-21717680.jpg
 class NavBar extends React.Component {
 
     render() {
-        // if (this.props.loggedIn) {
+        if (!this.props.loggedIn) {
             return (
                 <div id='navBar'>
                     <div id='logoTitle'>
@@ -28,22 +28,22 @@ class NavBar extends React.Component {
 
                 </div>
             )
-        // } else {
-        //     return(
-        //         <div id='navBar'>
-        //             <div id='logoTitle'>
-        //                 <div id='Logo'>
-        //                     <img id='logoPic' src={logo} />    
-        //                 </div>
-        //             Pictophone
-        //             </div>
-        //             <div>
-        //                 <Link to={'/login'}>Login</Link>
-        //                 <Link to={'/signup'}>Sign up</Link>
-        //             </div>
-                
-        //     )
-        // }
+        } else {
+            return(
+                <div id='navBar'>
+                    <div id='logoTitle'>
+                        <div id='Logo'>
+                            <img id='logoPic' src={logo} />    
+                        </div>
+                    Pictophone
+                    </div>
+                    <div>
+                        <Link to={'/login'}>Login</Link>
+                        <Link to={'/signup'}>Sign up</Link>
+                    </div>
+                </div>
+            )
+        }
     }
 } 
 
