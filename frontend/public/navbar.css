@@ -1,0 +1,30 @@
+#navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    
+}
+
+#logoPic {
+    width: 6vw;
+    height: auto;
+}
+
+#logoTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 6vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#loginButton {
+    border-style: none;
+}
+
+#signupButton {
+    border-style: none;
+
+}
