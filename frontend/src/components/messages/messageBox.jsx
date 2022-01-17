@@ -9,7 +9,6 @@ class MessageBox extends React.Component {
         this.state = {
             message: ''
         }
-        //this.socket = io('http://localhost:5000')
         this.handleSubmit = this.handleSubmit.bind(this)
         this.props.socket.on('receive-message', message => {
             console.log(message)

@@ -4,7 +4,7 @@ import MessageBoxContainer from "../messages/messageBoxContainer";
 class Room extends React.Component {
     constructor(props){
         super(props)
-        this.socket = io('http://localhost:5000')
+        this.socket = io('http://localhost:6000')
         this.socket.emit('join-room', this.props.roomId)
     }
 
