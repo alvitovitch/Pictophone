@@ -8,7 +8,6 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import RoomContainer from "./room/roomContainer";
 import LobbyContainer from './lobby/lobby_container';
-import LinkBar from "./linkbar/linkBar";
 
 
 

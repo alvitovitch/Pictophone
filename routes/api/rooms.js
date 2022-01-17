@@ -24,10 +24,15 @@ router.get("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    Room.findOne({id: req.params.room_id})
+    Room.findById(req.params.room_id)
       .then(room => res.json(room))
-      .catch(err =>
-        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+      .catch(err => 
+        res.status(404).json({ noroomfound: 'No room found with that ID'}))
+    // This didn't work
+    // Room.findOne({id: req.params.room_id})
+    //   .then(room => res.json(room))
+    //   .catch(err =>
+    //     res.status(404).json({ noroomfound: 'No room found with that ID' }))
   }
 )
 
@@ -50,7 +55,8 @@ router.post("/",
         } else {
           const newRoom = new Room({
             name: req.body.name,
-            size: req.body.size
+            size: req.body.size,
+            host: req.body.host_id
           });
 
           newRoom.save().then(room => res.json(room));
@@ -59,8 +65,42 @@ router.post("/",
   }
 )
 
-// patch room
+// PATCH a room backend route
 
-// delete room
+router.patch("/:room_id",
+  passport.authenticate('jwt', { session: false }),
+
+  (req, res) => {
+    Room.findById(req.params.room_id)
+      .then(room => {
+        // if the room does not include the player passed into the reqeust body and there is still open space in the room
+        !room.players.includes(req.body.playerId) && room.players.length < room.size ?
+        // then add the request body playerId into the room's players array in the backend
+        room.players.push(req.body.playerId) : 
+        // else filter out the request body playerId from the room's player array
+        room.players = room.players.filter(player => {
+          player !== req.body.playerId
+        });
+        // save the updated room and render it as json
+        room.save().then(res.json(room));
+      })
+      .catch(err => 
+        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+  }
+)
+
+
+// DELETE a room backend route
+router.delete("/:room_id",
+  passport.authenticate('jwt', { session: false }),
+
+  (req, res) => {
+    console.log(req.params)
+    Room.findByIdAndDelete(req.params.room_id)
+      .then(room => res.json(room))
+      .catch(err =>
+        res.status(404).json({ noroomfound: 'No room found with that ID' }))
+  }
+)
 
 module.exports = router;
