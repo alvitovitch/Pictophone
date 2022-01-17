@@ -8,6 +8,7 @@ import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions'
 
 import './index.scss'
+import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,4 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // DELETE LATER
   window.dispatch = store.dispatch;
   window.logout = logout;
+  window.requestAllRooms = requestAllRooms;
+  window.requestRoom = requestRoom;
+  window.createRoom = createRoom;
+  window.updateRoom = updateRoom;
+  window.deleteRoom = deleteRoom;
+  window.getState = store.getState;
 })

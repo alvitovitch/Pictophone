@@ -10,9 +10,10 @@ const RoomsReducer = (state = {}, action) => {
 
     switch(action.type){
         case RECEIVE_ALL_ROOMS:
-            return action.rooms;
+            action.rooms.data.forEach(room => nextState[room._id] = room);
+            return nextState;
         case RECEIVE_ROOM:
-            nextState[action.room.id] = action.room;
+            nextState[action.room.data._id] = action.room.data;
             return nextState;
         case REMOVE_ROOM:
             delete nextState[action.roomId];
