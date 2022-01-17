@@ -14,11 +14,11 @@ class NavBar extends React.Component {
                         </div>
                     Pictophone
                     </div>
-                    <div>
-                        <button id='loginButton'>
+                    <div id='navButtons'>
+                        <button className="navButton">
                             <Link to={'/login'}>Login</Link>
                         </button>
-                        <button id='signupButton'>
+                        <button className="navButton">
                             <Link to={'/signup'}>Sign up</Link>
                         </button>
                     </div>

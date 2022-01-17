@@ -5,8 +5,25 @@ class Splash extends React.Component {
 
     render() {
         return (
-            <div>
-                this is the splash
+            <div id='splashMain'>
+                <div>
+                    this is a screenshot
+                    <div>
+                        Screenshot Text
+                    </div>
+                </div>
+                <div>
+                    this is a screenshot
+                    <div>
+                        Screenshot Text
+                    </div>
+                </div>
+                <div>
+                    this is a screenshot
+                    <div>
+                        Screenshot Text
+                    </div>
+                </div>
             </div>
         )
     }

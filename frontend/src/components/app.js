@@ -7,7 +7,7 @@ import Splash from "./splash/splash";
 
 
 const App = () => (
-    <div>
+    <div id='appMain'>
         <NavBarContainer />
         <Switch>
             <AuthRoute exact path='/' component={Splash} />
