@@ -77,15 +77,18 @@ During gameplay each player will receive a prompt and attempt to draw it within 
 Alex Dziuba, Stephanie Soni, Kyle Ginzburg, Andrew Vitovitch
 
 * Day 0
-    * setup Auth
-    * splash skeleton (/)
+    * setup Auth -Alex
+
+    * splash skeleton (/)  -Andrew
         * nav bar
         * main content
             * screenshots on how to play
         * footer
-    * signup/login skeleton 
+
+    * signup/login skeleton - Stephanie 
         * seperate forms (/signup, /login)
-    * backend routes for everything!
+
+    * backend routes for everything! - Kyle
         * build users collection
             * User owns room (1 max)
 
@@ -111,14 +114,19 @@ Alex Dziuba, Stephanie Soni, Kyle Ginzburg, Andrew Vitovitch
         * Free draw
         * Backend? (potential storage of free draw canvas)
             * collections for drawings
-                * id, user_id, asset_link
+                * id, room_id, user_id, chain_id(letter),  asset_link, timestamps
             * guess collection
                 *  id, user_id, guess
         * start on game logic
 
 
 * Day 3
-
+    * Build out frontend draw and guess modals
+        * drawing board - P5
+    * Build Prompt Collection
+        * if sampled is same as previous, sample again
+    * Finish game logic
+    * AWS integration - Andrew
 
 * Day 4
 
