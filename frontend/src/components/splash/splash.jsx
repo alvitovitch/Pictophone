@@ -3,7 +3,7 @@ import React from "react";
 
 class Splash extends React.Component {
 
-    remder() {
+    render() {
         return (
             <div>
                 this is the splash
