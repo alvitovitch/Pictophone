@@ -5,7 +5,6 @@ import logo from "../../images/vintage-candlestick-telephone-vector-21717680.jpg
 class NavBar extends React.Component {
 
     render() {
- splashNav
         // if (this.props.loggedIn) {
             return (
                 <div id='navBar'>
