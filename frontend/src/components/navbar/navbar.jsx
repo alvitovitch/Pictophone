@@ -6,7 +6,7 @@ import logo from "../../images/vintage-candlestick-telephone-vector-21717680.jpg
 class NavBar extends React.Component {
 
     render() {
-        debugger
+    
         return (
             <div id='navBar'>
                 <div>
