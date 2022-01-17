@@ -1,4 +1,5 @@
 import React from "react";
+import DrawingBoard from "../board/drawing_board";
 
 class Room extends React.Component {
 
@@ -6,7 +7,7 @@ class Room extends React.Component {
         return (
             <div id='Room'>
                 <div id='freeDrawSpace'>
-                    Free Draw
+                    <DrawingBoard/>
                 </div>
                 <div id='roomChat'>
                     Chat bar
