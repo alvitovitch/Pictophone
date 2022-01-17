@@ -1,3 +1,17 @@
+#Room {
+    width: 70vw;
+    min-height: calc(95vh - 280px);
+    border: 3px dotted black;
+    display: flex;
+}
+
 #freeDrawSpace {
-    
+    width: 70%;
+    border-right: 3px dotted black;
+    background-color: wheat;
+}
+
+#roomChat {
+    width: 30%;
+    background-color: wheat;
 }
