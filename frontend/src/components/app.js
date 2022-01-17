@@ -1,9 +1,10 @@
 import React from "react";
+import NavBar from "./navbar/navbar";
 
 
 const App = () => (
     <div>
-       <p>Pictophone</p>
+       <NavBar/>
     </div>
 );
 
