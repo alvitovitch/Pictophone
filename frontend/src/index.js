@@ -7,7 +7,8 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions'
 
-import './stylesheets/reset.scss'
+import './index.scss'
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
