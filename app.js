@@ -11,7 +11,7 @@ const guesses = require("./routes/api/guesses");
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const io = require('socket.io')(6000, {
+const io = require('socket.io')(4040, {
     cors: {
         origin: ['http://localhost:3000']
     }
