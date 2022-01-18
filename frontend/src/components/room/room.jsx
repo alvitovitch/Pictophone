@@ -24,12 +24,12 @@ class Room extends React.Component {
                     Free Draw
                 </div>
                 <div id='roomChat'>
+                    <button onClick={this.leaveRoom}
+                    id='leaveRoom'>
+                        Leave Room
+                    </button>
                     <MessageBoxContainer socket={this.socket} roomId={this.props.roomId} />
                 </div>
-                <button onClick={this.leaveRoom}
-                 id='leaveRoom'>
-                     Leave Room
-                </button>
             </div>
         )
     }

@@ -12,6 +12,17 @@
 }
 
 #roomChat {
-    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: wheat;
+    width: 25vw;
+}
+
+#leaveRoom {
+ width: 100%;   
+}
+
+#chatMessages {
+    overflow: hidden;
 }
