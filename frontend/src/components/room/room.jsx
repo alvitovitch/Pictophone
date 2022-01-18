@@ -7,7 +7,7 @@ import Board from '../board/board';
 class Room extends React.Component {
     constructor(props){
         super(props)
-        this.socket = io()
+        this.socket = io('https://pictophone.herokuapp.com:4040')
         this.socket.emit('join-room', this.props.roomId)
 
         this.leaveRoom = this.leaveRoom.bind(this)
@@ -18,7 +18,6 @@ class Room extends React.Component {
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
         this.props.updateRoom(object);
         this.props.history.push('/lobby');
-
     }
 
     render() {
