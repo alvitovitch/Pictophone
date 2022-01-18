@@ -8,7 +8,7 @@ const LobbyIndexItem = (props) => {
     const join = (e) => {
         e.preventDefault();
         if(room.size > room.players.length) {
-            props.updateRoom(room._id, currentUser.id)
+            props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
                 .then( () => props.history.push(`/rooms/${room._id}`))
         } else {
             console.log("Room is full")
