@@ -43,6 +43,7 @@ io.on('connection', socket => {
     })
 })
 
+// test
 
 // Mongoose connecting to our database
 mongoose
