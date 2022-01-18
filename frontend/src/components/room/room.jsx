@@ -7,7 +7,7 @@ import Board from '../board/board';
 class Room extends React.Component {
     constructor(props){
         super(props)
-        this.socket = io('http://localhost:6000')
+        this.socket = io('http://localhost:4040')
         this.socket.emit('join-room', this.props.roomId)
 
         this.leaveRoom = this.leaveRoom.bind(this)
