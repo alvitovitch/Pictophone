@@ -27,7 +27,8 @@ class LobbyIndex extends React.Component {
                                     <LobbyIndexItem
                                         key={i}
                                         currentUser={currentUser}
-                                        updateRoom={this.props.updateRoom} 
+                                        updateRoom={this.props.updateRoom}
+                                        deleteRoom={this.props.deleteRoom} 
                                         users={users}
                                         room={room}/>
                                 ))}
