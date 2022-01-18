@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
 
+
 const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
@@ -17,6 +18,15 @@ const io = require('socket.io')(4040, {
     }
 })
 
+const path = require('path');
+
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/public'));
+    app.get('/', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'frontend', 'public', 'index.html'));
+    })
+  }
 
 // socket.io connection
 
@@ -33,6 +43,7 @@ io.on('connection', socket => {
     })
 })
 
+// test
 
 // Mongoose connecting to our database
 mongoose
