@@ -98,7 +98,7 @@ class Board extends React.Component {
             that.ctx.closePath();
             that.ctx.stroke();
 
-            if (that.timeout != undefined) clearTimeout(that.timeout);
+            if (that.timeout !== undefined) clearTimeout(that.timeout);
             that.timeout = setTimeout(function () {
                 const drawingData = that.canvas.toDataURL("image/png");
                 that.socket.emit("send-drawing", drawingData, that.props.roomId);
