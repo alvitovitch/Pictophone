@@ -10,24 +10,24 @@ class Board extends React.Component {
         }
         this.timeout = undefined;
     
-        this.socket = io.connect("http://localhost:6000");
-        this.socket.on("drawing", (drawing) => {
-            const that = this;
-            const interval = setInterval(()  => {
-                if (that.state.recordSketch) return;
-                that.state.recordSketch = true;
-                clearInterval(interval);
-                const image = new Image();
-                const canvas = document.querySelector('.board');
-                const ctx = canvas.getContext('2d');
-                image.onload = ()  => {
-                    ctx.drawImage(image, 0, 0);
+        // this.socket = io.connect("http://localhost:6000");
+        // this.socket.on("drawing", (drawing) => {
+        //     const that = this;
+        //     const interval = setInterval(()  => {
+        //         if (that.state.recordSketch) return;
+        //         that.state.recordSketch = true;
+        //         clearInterval(interval);
+        //         const image = new Image();
+        //         const canvas = document.querySelector('.board');
+        //         const ctx = canvas.getContext('2d');
+        //         image.onload = ()  => {
+        //             ctx.drawImage(image, 0, 0);
 
-                    that.state.recordSketch = false;
-                };
-                image.src = drawing;
-            }, 200)
-        })
+        //             that.state.recordSketch = false;
+        //         };
+        //         image.src = drawing;
+        //     }, 200)
+        // })
     }
 
 
@@ -38,7 +38,7 @@ class Board extends React.Component {
     drawSketch() {
         const canvas = document.querySelector('.board');
         const ctx = canvas.getContext('2d');
-        canvas.width = 1000;
+        canvas.width = 600;
         canvas.height = 600;
 
         const currentPos = { x: 0, y: 0 };
@@ -49,7 +49,6 @@ class Board extends React.Component {
             prevPos.y = currentPos.y;
 
             currentPos.x = e.pageX - e.currentTarget.offsetLeft;
-            debugger
             currentPos.y = e.pageY - e.currentTarget.offsetTop;
         }, false);
        
@@ -75,11 +74,11 @@ class Board extends React.Component {
 
             const that = this;
 
-            if (that.timeout != undefined) clearTimeout(that.timeout);
-            that.timeout = setTimeout(function () {
-                var drawingData = canvas.toDataURL("image/png");
-                that.socket.emit("canvas-data", drawingData);
-            }, 1000)
+            // if (that.timeout != undefined) clearTimeout(that.timeout);
+            // that.timeout = setTimeout(function () {
+            //     var drawingData = canvas.toDataURL("image/png");
+            //     that.socket.emit("canvas-data", drawingData);
+            // }, 1000)
         };
     }
 
