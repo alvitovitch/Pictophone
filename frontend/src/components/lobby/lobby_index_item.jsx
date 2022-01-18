@@ -21,7 +21,7 @@ const LobbyIndexItem = (props) => {
                 {/* <h2>{props.room.host}</h2> */}
             </div>
             <div className="right-side">
-                <h2>{props.room.size}</h2>
+                <h2>{props.room.players.length}/{props.room.size}</h2>
                 <button onClick={e => join(e)}>Join</button>
             </div>
         </div>
