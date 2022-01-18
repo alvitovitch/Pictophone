@@ -5,7 +5,7 @@ import { updateRoom } from '../../actions/rooms_actions'
 
 const mSTP = (state, ownProps) => {
     return{
-        // players: Object.values(state.entities.users)
+        currentUser: state.session.user,
         roomId: ownProps.match.params.roomId
     }
 }
