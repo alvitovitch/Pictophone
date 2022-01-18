@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const io = require('socket.io')(4040, {
     cors: {
-        origin: ['https://pictophone.herokuapp.com/'],
+        origin: ['https://pictophone.herokuapp.com'],
         transports: ["xhr-polling"]
 
     }
