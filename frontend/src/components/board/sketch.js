@@ -1,12 +1,14 @@
 import React from "react";
+import EntitiesReducer from "../../reducers/entities_reducer";
 
-export default function sketch(p5) {
+//FAILED EXPERIMENT 
+export default function Sketch(p5) {
         let canvas;
-        p5.setup = () => {
+    p5.setup = () => {
             canvas = p5.createCanvas(500, 500);
 
-        }
-        p5.draw = () => {
+        };
+     p5.draw = () => {
             p5.background('red');
             if (p5.mouseIsPressed) {
                 p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
@@ -14,6 +16,9 @@ export default function sketch(p5) {
                 p5.stroke('white');
 
             }
-        }
+        };
+    return (
+        <></>
+    )
  }
 

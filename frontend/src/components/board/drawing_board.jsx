@@ -4,6 +4,7 @@ import P5 from 'p5';
 
 import sketch from './sketch';
 
+// FAILED EXPERIMENT 
 class DrawingBoard extends React.Component{
     constructor(props) {
         super(props)
@@ -46,8 +47,7 @@ class DrawingBoard extends React.Component{
     }
 
     render() {
-        const board = this.setup(p5);
-        board.draw(p5);
+
         return (
             <div className='canvas-container'>
                 

@@ -1,7 +1,8 @@
 import React from "react";
 import { io } from 'socket.io-client'
 import MessageBoxContainer from "../messages/messageBoxContainer";
-import DrawingBoard from '../board/drawing_board';
+// import DrawingBoard from '../board/drawing_board';
+import Board from '../board/board';
 
 class Room extends React.Component {
     constructor(props){
@@ -23,7 +24,7 @@ class Room extends React.Component {
         return (
             <div id='Room'>
                 <div id='freeDrawSpace'>
-                    <DrawingBoard/>
+                    <Board></Board>
                 </div>
                 <div id='roomChat'>
                     <MessageBoxContainer socket={this.socket} roomId={this.props.roomId} />
