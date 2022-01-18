@@ -15,7 +15,7 @@ class Room extends React.Component {
 
     leaveRoom() {
         debugger
-        this.props.updateRoom(this.props.roomId)
+        this.props.updateRoom(this.props.roomId, this.props.currentUser.id)
         this.props.history.push('../lobby')
 
     }

@@ -6,7 +6,9 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recordSketch: false
+            recordSketch: false,
+            color: 'black',
+            size: 5
         }
         this.timeout = undefined;
     
@@ -29,6 +31,8 @@ class Board extends React.Component {
                 image.src = drawing;
             }, 200)
         })
+    this.updateColor = this.updateColor.bind(this);
+    this.updateSize = this.updateSize.bind(this);
     }
 
 
@@ -53,10 +57,10 @@ class Board extends React.Component {
             currentPos.y = e.pageY - e.currentTarget.offsetTop;
         }, false);
        
-        ctx.lineWidth = 10;
+        ctx.lineWidth = this.state.size;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = this.state.color;
 
         canvas.addEventListener('mousedown', (e)  => {
             canvas.addEventListener('mousemove', drawLine, false);
@@ -83,10 +87,63 @@ class Board extends React.Component {
         };
     }
 
+    updateColor(color) {
+        this.setState({color: color})
+    }
+
+    updateSize(size) {
+        this.setState({size: size})
+    }
 
     render() {
         return (
             <div className="board-container" >
+                <div className='colors-dropdown'>
+
+                    <button className='color-btn'>color</button>
+
+                    <div className='color-dropdown-content'>
+                        <p
+                            onClick={this.updateColor('black')}>
+                            black
+                        </p>
+                        <p
+                            onClick={this.updateColor('red')}>
+                            red
+                        </p>
+                        <p
+                            onClick={this.updateColor('blue')}>
+                            blue
+                        </p>
+                        <p
+                            onClick={this.updateColor('green')}>
+                            green
+                        </p>
+                    </div>
+                </div>
+                <div className='size-dropdown'>
+
+                    <button className='size-btn'>size</button>
+
+                    <div className='size-dropdown-content'>
+                        <p
+                            onClick={this.updateSize('5')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('10')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('15')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('20')}>
+                            
+                        </p>
+                    </div>
+                </div>
                 <canvas className="board" ></canvas>
             </div>
         )
