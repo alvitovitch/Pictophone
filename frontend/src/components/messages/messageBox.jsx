@@ -52,7 +52,7 @@ class MessageBox extends React.Component {
         
         return (
             
-                <div>
+                <div id='roomChat'>
                     <div id='chatMessages'>
 
                     </div>
