@@ -10,12 +10,9 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            <img id='logoPic' src={logo} />    
+                            {/* <img id='logoPic' src={logo} />     */}
                         </div>
-                    Pictophone
-
-    
-        
+                        <h1>PICTOPHONE</h1>
                     </div>
                     <div id='navButtons'>
                         <button className="navButton">

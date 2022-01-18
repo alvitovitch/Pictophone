@@ -1,13 +1,15 @@
 #navBar {
     display: flex;
     flex-direction: row;
-    width: 75%;
-    justify-content: space-evenly;
-}
-
-#logoPic {
-    width: 6vw;
-    height: auto;
+    width: 100vw;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    font-family: 'Noticia Text', serif;
+    // background-color: rgb(240,219,192);
+    // background-color: rgb(252,217,156);
+    background-image: url("../images/paper_texture.png");
+    background-repeat: repeat;
+    color: rgb(31,28,18);
 }
 
 #logoTitle {
@@ -16,26 +18,46 @@
     justify-content: space-around;
     align-items: center;
     font-size: 6vw;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
+
+#logoTitle {
+    margin: 5px 0 5px 20px;
+    font-size: 60px;
+
+    #logoPic {
+        width: 4vw;
+        height: auto;
+        margin-left: 10px;
+    }
+
+    h1 {
+        padding: 0 0 10px 5px;
+    }
+}
+
 
 #navButtons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 15%;
+    justify-content: end;
+    width: 15vw;
+    margin-right: 20px;
 }
 
 .navButton {
-    border-style: none;
-    color: white;
-    background-color: wheat;
+    border: 2px solid rgb(31,28,18);
+    // border-right: 4px solid rgb(31, 28, 18);
+    // border-bottom: 4px solid rgb(31, 28, 18);
+    box-shadow: 4px 4px 0px rgb(31,28,18);
+    background-color: transparent;
     text-decoration: none;
     white-space:nowrap;
-    border: 3px black dotted;
+    margin-left: 10px;
     padding: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: black;
+    color: rgb(31,28,18);
+    font-family: 'Noticia Text', serif;
+    font-size: 25px;
 
 }
 
