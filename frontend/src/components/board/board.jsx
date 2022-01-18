@@ -6,28 +6,33 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recordSketch: false
+            recordSketch: false,
+            color: 'black',
+            size: 5
         }
         this.timeout = undefined;
     
-        // this.socket = io.connect("http://localhost:6000");
-        // this.socket.on("drawing", (drawing) => {
-        //     const that = this;
-        //     const interval = setInterval(()  => {
-        //         if (that.state.recordSketch) return;
-        //         that.state.recordSketch = true;
-        //         clearInterval(interval);
-        //         const image = new Image();
-        //         const canvas = document.querySelector('.board');
-        //         const ctx = canvas.getContext('2d');
-        //         image.onload = ()  => {
-        //             ctx.drawImage(image, 0, 0);
+        this.socket = io("http://localhost:4040");
+        this.socket.emit('join-room', this.props.roomId)
+        this.socket.on("receive-drawing", (drawing) => {
+            const that = this;
+            const interval = setInterval(()  => {
+                if (that.state.recordSketch) return;
+                that.state.recordSketch = true;
+                clearInterval(interval);
+                const image = new Image();
+                const canvas = document.querySelector('.board');
+                const ctx = canvas.getContext('2d');
+                image.onload = ()  => {
+                    ctx.drawImage(image, 0, 0);
 
-        //             that.state.recordSketch = false;
-        //         };
-        //         image.src = drawing;
-        //     }, 200)
-        // })
+                    that.state.recordSketch = false;
+                };
+                image.src = drawing;
+            }, 200)
+        })
+    this.updateColor = this.updateColor.bind(this);
+    this.updateSize = this.updateSize.bind(this);
     }
 
 
@@ -52,10 +57,10 @@ class Board extends React.Component {
             currentPos.y = e.pageY - e.currentTarget.offsetTop;
         }, false);
        
-        ctx.lineWidth = 10;
+        ctx.lineWidth = this.state.size;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = this.state.color;
 
         canvas.addEventListener('mousedown', (e)  => {
             canvas.addEventListener('mousemove', drawLine, false);
@@ -65,6 +70,8 @@ class Board extends React.Component {
             canvas.removeEventListener('mousemove', drawLine, false);
         }, false);
 
+        const that = this;
+
         const drawLine = function () {
             ctx.beginPath();
             ctx.moveTo(prevPos.x, prevPos.y);
@@ -72,20 +79,71 @@ class Board extends React.Component {
             ctx.closePath();
             ctx.stroke();
 
-            const that = this;
-
-            // if (that.timeout != undefined) clearTimeout(that.timeout);
-            // that.timeout = setTimeout(function () {
-            //     var drawingData = canvas.toDataURL("image/png");
-            //     that.socket.emit("canvas-data", drawingData);
-            // }, 1000)
+            if (that.timeout != undefined) clearTimeout(that.timeout);
+            that.timeout = setTimeout(function () {
+                const drawingData = canvas.toDataURL("image/png");
+                that.socket.emit("send-drawing", drawingData, that.props.roomId);
+            }, 1000)
         };
     }
 
+    updateColor(color) {
+        this.setState({color: color})
+    }
+
+    updateSize(size) {
+        this.setState({size: size})
+    }
 
     render() {
         return (
             <div className="board-container" >
+                <div className='colors-dropdown'>
+
+                    <button className='color-btn'>color</button>
+
+                    <div className='color-dropdown-content'>
+                        <p
+                            onClick={this.updateColor('black')}>
+                            black
+                        </p>
+                        <p
+                            onClick={this.updateColor('red')}>
+                            red
+                        </p>
+                        <p
+                            onClick={this.updateColor('blue')}>
+                            blue
+                        </p>
+                        <p
+                            onClick={this.updateColor('green')}>
+                            green
+                        </p>
+                    </div>
+                </div>
+                <div className='size-dropdown'>
+
+                    <button className='size-btn'>size</button>
+
+                    <div className='size-dropdown-content'>
+                        <p
+                            onClick={this.updateSize('5')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('10')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('15')}>
+                            
+                        </p>
+                        <p
+                            onClick={this.updateSize('20')}>
+                            
+                        </p>
+                    </div>
+                </div>
                 <canvas className="board" ></canvas>
             </div>
         )

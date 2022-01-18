@@ -15,7 +15,7 @@ class Room extends React.Component {
 
     leaveRoom() {
         debugger
-        this.props.updateRoom(this.props.roomId)
+        this.props.updateRoom(this.props.roomId, this.props.currentUser.id)
         this.props.history.push('../lobby')
 
     }
@@ -24,7 +24,7 @@ class Room extends React.Component {
         return (
             <div id='Room'>
                 <div id='freeDrawSpace'>
-                    <Board></Board>
+                    <Board roomId={this.props.roomId}></Board>
                 </div>
                 <div id='roomChat'>
                     <button onClick={this.leaveRoom}

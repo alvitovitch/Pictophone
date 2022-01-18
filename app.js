@@ -28,6 +28,9 @@ io.on('connection', socket => {
     socket.on('join-room', room => {
         socket.join(room)
     })
+    socket.on('send-drawing', (drawing, room) => {
+        socket.to(room).emit('receive-drawing', drawing)
+    })
 })
 
 
