@@ -5,7 +5,7 @@ class MessageBox extends React.Component {
 
     constructor(props) {
         super(props)
-        debugger
+        
         this.state = {
             message: ''
         }

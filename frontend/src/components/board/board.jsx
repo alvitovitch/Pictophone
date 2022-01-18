@@ -40,6 +40,10 @@ class Board extends React.Component {
         this.drawSketch();
     }
 
+    componentDidUpdate() {
+        this.drawSketch();
+    }
+
     drawSketch() {
         const canvas = document.querySelector('.board');
         const ctx = canvas.getContext('2d');
@@ -88,63 +92,63 @@ class Board extends React.Component {
     }
 
     updateColor(color) {
-        this.setState({color: color})
+        console.log(color);
+        this.setState({color: color});
     }
 
     updateSize(size) {
-       this.setState({size: size})
+       this.setState({size: size});
     }
 
     render() {
         return (
             <div className="board-container" >
-                <div className='colors-dropdown'>
-
-                    <button className='color-btn'>color</button>
-
-                    <div className='color-dropdown-content'>
-                        <p
-                            onClick={() => this.updateColor('black')}>
-                            black
-                        </p>
-                        <p
-                            onClick={() => this.updateColor('red')}>
-                            red
-                        </p>
-                        <p
-                            onClick={() => this.updateColor('blue')}>
-                            blue
-                        </p>
-                        <p
-                            onClick={() => this.updateColor('green')}>
-                            green
-                        </p>
-                    </div>
-                </div>
-                <div className='size-dropdown'>
-
-                    <button className='size-btn'>size</button>
-
-                    <div className='size-dropdown-content'>
-                        <p
-                            onClick={() => this.updateSize('5')}>
-                            
-                        </p>
-                        <p
-                            onClick={() => this.updateSize('10')}>
-                            
-                        </p>
-                        <p
-                            onClick={() => this.updateSize('15')}>
-                            
-                        </p>
-                        <p
-                            onClick={() => this.updateSize('20')}>
-                            
-                        </p>
-                    </div>
-                </div>
                 <canvas className="board" ></canvas>
+                <div className='draw-controls'>
+                    <div className='colors-dropdown'>
+
+                        <button className='color-btn'>color</button>
+
+                        <div className='color-dropdown-content'>
+                            <p
+                                onClick={() => this.updateColor('black')}>
+                                black
+                            </p>
+                            <p
+                                onClick={() => this.updateColor('red')}>
+                                red
+                            </p>
+                            <p
+                                onClick={() => this.updateColor('blue')}>
+                                blue
+                            </p>
+                            <p
+                                onClick={() => this.updateColor('green')}>
+                                green
+                            </p>
+                        </div>
+                    </div>
+                    <div className='size-dropdown'>
+
+                        <button className='size-btn'>size</button>
+
+                        <div className='size-dropdown-content'>
+                            <p  className='size-5'
+                                onClick={() => this.updateSize('5')}>.</p>
+                            <p
+                                className='size-10'
+                                onClick={() => this.updateSize('10')}>.</p>
+                            <p
+                                className='size-15'
+                                onClick={() => this.updateSize('15')}>.</p>
+                            <p
+                                className='size-20'
+                                onClick={() => this.updateSize('20')}>.</p>
+                        </div>
+                    </div>
+                </div>
+               
+                
             </div>
         )
     }
