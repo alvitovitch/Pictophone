@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { closeModal, openModal } from "../../actions/modal_actions"
+import { closeModal } from "../../actions/modal_actions"
 import { createRoom } from "../../actions/rooms_actions"
 import RoomForm from "./room_form"
 
@@ -13,7 +13,7 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
     formAction: (room) => dispatch(createRoom(room)),
-    closeModal: () => dispatch(closeModal)
+    closeModal: () => dispatch(closeModal())
 })
 
 export default connect(mSTP,mDTP)(RoomForm)

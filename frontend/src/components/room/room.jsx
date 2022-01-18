@@ -18,7 +18,6 @@ class Room extends React.Component {
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
         this.props.updateRoom(object);
         this.props.history.push('/lobby');
-
     }
 
     render() {
