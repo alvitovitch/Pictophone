@@ -15,6 +15,7 @@ const passport = require('passport');
 const io = require('socket.io')(4040, {
     cors: {
         origin: ['https://pictophone.herokuapp.com'],
+        secure: true,
         transports: ["xhr-polling"]
 
     }
