@@ -12,7 +12,12 @@ code {
     monospace;
 } */
 
+
 @use './stylesheets/reset.scss';
+
+@use './stylesheets/splash.scss';
 @use './stylesheets/lobby.scss';
 @use './stylesheets/navbar.scss';
 @use './stylesheets/room.scss';
+
+$noticia: 'Noticia Text', serif;
