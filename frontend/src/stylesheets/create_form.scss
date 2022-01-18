@@ -1,0 +1,19 @@
+.create-room-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    h2 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    form {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    input[type=submit] {
+        margin: 10px;
+    }
+
+}

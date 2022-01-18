@@ -5,19 +5,28 @@
     padding: 20px;
     display: flex;
     justify-content: center;
+    background-image: url(../images/lobby-bg.jpg);
 }
 
 
 .rooms-container {
     width: 60%;
-    border: 5px solid purple;
-    padding: 20px;
+    border: 5px solid black;
+    background-color: #eece9c;
+    display: flex;
+    flex-direction: column;
     .rooms-container-header {
+        height: 20%;
         border: 1px solid red;
-        padding: 10px 0;
+        // padding: 10px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .rooms-container-list {
+        margin-top: 20px;
+        border: 4px solid green;
+        height: 60%;
     }
 }
 
