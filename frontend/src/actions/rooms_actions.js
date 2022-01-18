@@ -51,10 +51,10 @@ export const createRoom = room => dispatch => {
             errors => dispatch(receiveErrors(errors.response.data))))
 }
 
-export const updateRoom = (roomId, playerId) => dispatch => {
-    return RoomsApiUtils.updateRoom(roomId, playerId)
-        .then(room => dispatch(receiveRoom(room),
-            errors => dispatch(receiveErrors(errors.response.data))))
+export const updateRoom = (object) => dispatch => {
+    return RoomsApiUtils.updateRoom(object['roomId'], object['playerId'])
+        .then(room => dispatch(receiveRoom(room)))
+
 }
 
 export const deleteRoom = (roomId) => dispatch => {

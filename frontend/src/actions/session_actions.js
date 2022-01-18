@@ -16,7 +16,6 @@ export const receiveCurrentUser = currentUser => ({
 });
 
 // export const receiveUserSignIn = () => {
-//     debugger
 //     return {
 //     type: RECEIVE_USER_SIGN_IN
 // }};
