@@ -7,6 +7,7 @@ const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
 const drawings = require("./routes/api/drawings");
+const guesses = require("./routes/api/guesses");
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -50,6 +51,7 @@ app.use("/api/users", users);
 app.use("/api/rooms", rooms);
 app.use("/api/prompts", prompts);
 app.use("/api/drawings", drawings);
+app.use("/api/guesses", guesses);
 
 const port = process.env.PORT || 4000;
 

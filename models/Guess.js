@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DrawingSchema = new Schema({
-  assetUrl: {
+const GuessSchema = new Schema({
+  word: {
     type: String,
     required: true
   },
@@ -22,4 +22,4 @@ const DrawingSchema = new Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('Drawing', DrawingSchema);
+module.exports = mongoose.model('Guess', GuessSchema);
