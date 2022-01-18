@@ -112,7 +112,16 @@ router.get("/",
   (req, res) => {
     User.find()
       .sort({ date: -1 })
-      .then(users => res.json(users))
+      .then(users => {
+        let safeUsers = [];
+        users.forEach(user => {
+          safeUsers.push({
+            "_id": user["_id"],
+            "username": user["username"]
+          })
+        })
+        res.json(safeUsers);
+      })
       .catch(err => res.status(404).json({ nousersfound: 'No users found' }))
 })
 
