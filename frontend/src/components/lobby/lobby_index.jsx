@@ -33,7 +33,6 @@ class LobbyIndex extends React.Component {
                         ))}
                     </ul>
                 </section>
-                <CreateRoomContainer />
             </div>
         )
     }
