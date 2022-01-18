@@ -12,8 +12,9 @@ export const createRoom = room => {
     return axios.post(`/api/rooms/`, room)
 }
 
-export const updateRoom = (room) => {
-    return axios.patch(`/api/rooms/${room.id}`, room)
+export const updateRoom = (roomId, playerId) => {
+    debugger
+    return axios.patch(`/api/rooms/${roomId}`, {"playerId":playerId})
 }
 
 export const deleteRoom = (roomId) => {

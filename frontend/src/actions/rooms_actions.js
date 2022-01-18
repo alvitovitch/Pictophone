@@ -40,8 +40,8 @@ export const createRoom = room => dispatch => {
         .then(room => dispatch(receiveRoom(room)))
 }
 
-export const updateRoom = (room) => dispatch => {
-    RoomsApiUtils.updateRoom(room)
+export const updateRoom = (roomId, playerId) => dispatch => {
+    RoomsApiUtils.updateRoom(roomId, playerId)
         .then(room => dispatch(receiveRoom(room)))
 }
 

@@ -4,6 +4,7 @@ import LobbyIndexItem from "./lobby_index_item";
 class LobbyIndex extends React.Component {
 
     componentDidMount(){
+        this.props.requestAllUsers();
         this.props.requestAllRooms();
     }
 
