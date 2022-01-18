@@ -26,26 +26,26 @@ const removeRoom = roomId => {
 }
 
 export const requestAllRooms = () => dispatch =>{
-    RoomsApiUtils.fetchAllRooms()
+    return RoomsApiUtils.fetchAllRooms()
         .then(rooms => dispatch(receiveAllRooms(rooms)))
 }
 
 export const requestRoom = (roomId) => dispatch => {
-    RoomsApiUtils.fetchRoom(roomId)
+    return RoomsApiUtils.fetchRoom(roomId)
         .then(room => dispatch(receiveRoom(room)))
 }
 
 export const createRoom = room => dispatch => {
-    RoomsApiUtils.createRoom(room)
+    return RoomsApiUtils.createRoom(room)
         .then(room => dispatch(receiveRoom(room)))
 }
 
-export const updateRoom = (room) => dispatch => {
-    RoomsApiUtils.updateRoom(room)
+export const updateRoom = (roomId, playerId) => dispatch => {
+    return RoomsApiUtils.updateRoom(roomId, playerId)
         .then(room => dispatch(receiveRoom(room)))
 }
 
 export const deleteRoom = (roomId) => dispatch => {
-    RoomsApiUtils.deleteRoom(roomId)
+    return RoomsApiUtils.deleteRoom(roomId)
         .then(() => dispatch(removeRoom(roomId)))
 }

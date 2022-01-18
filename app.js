@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
+
 const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
+const prompts = require("./routes/api/prompts");
+const drawings = require("./routes/api/drawings");
+const guesses = require("./routes/api/guesses");
+
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const io = require('socket.io')(6000, {
+const io = require('socket.io')(4040, {
     cors: {
         origin: ['http://localhost:3000']
     }
@@ -22,6 +27,9 @@ io.on('connection', socket => {
     })
     socket.on('join-room', room => {
         socket.join(room)
+    })
+    socket.on('send-drawing', (drawing, room) => {
+        socket.to(room).emit('receive-drawing', drawing)
     })
 })
 
@@ -44,6 +52,9 @@ app.use(bodyParser.json());
 
 app.use("/api/users", users);
 app.use("/api/rooms", rooms);
+app.use("/api/prompts", prompts);
+app.use("/api/drawings", drawings);
+app.use("/api/guesses", guesses);
 
 const port = process.env.PORT || 4000;
 
