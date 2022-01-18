@@ -20,7 +20,7 @@ const LobbyIndexItem = (props) => {
             <div className="left-side">
                 <h2>{room.name}</h2>
                 {/* Need to replace with users[room.host] */}
-                <h2>{users[room.host].username}</h2>
+                {/* <h2>{users[room.host_id].username}</h2> */}
             </div>
             <div className="right-side">
                 <h2>{room.players.length}/{room.size}</h2>
