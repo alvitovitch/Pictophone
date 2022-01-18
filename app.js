@@ -18,6 +18,11 @@ const io = require('socket.io')(4040, {
     }
 })
 
+io.configure(function () { 
+    io.set("transports", ["xhr-polling"]); 
+    io.set("polling duration", 10); 
+  });
+
 const path = require('path');
 
 
