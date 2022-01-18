@@ -9,8 +9,10 @@
     "axios": "^0.24.0",
     "jwt-decode": "^3.1.2",
     "node-sass": "^7.0.1",
+    "p5": "^1.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-p5-wrapper": "^3.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.1",
     "react-scripts": "5.0.0",
@@ -21,6 +23,9 @@
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
     "web-vitals": "^2.1.3"
+  },
+  "overrides": {
+    "mini-css-extract-plugin": "2.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +51,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000/",
+  "devDependencies": {
+    "mini-css-extract-plugin": "2.4.5"
+  }
 }

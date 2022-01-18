@@ -5,7 +5,6 @@ class MessageBox extends React.Component {
 
     constructor(props) {
         super(props)
-        debugger
         this.state = {
             message: ''
         }
@@ -52,7 +51,7 @@ class MessageBox extends React.Component {
         
         return (
             
-                <div>
+                <div id='roomChat'>
                     <div id='chatMessages'>
 
                     </div>

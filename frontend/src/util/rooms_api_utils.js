@@ -13,7 +13,6 @@ export const createRoom = room => {
 }
 
 export const updateRoom = (roomId, playerId) => {
-    debugger
     return axios.patch(`/api/rooms/${roomId}`, {"playerId":playerId})
 }
 

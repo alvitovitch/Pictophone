@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
 
+
 const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
@@ -11,12 +12,23 @@ const guesses = require("./routes/api/guesses");
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const io = require('socket.io')(6000, {
+const io = require('socket.io')(4040, {
     cors: {
-        origin: ['http://localhost:3000']
+        origin: ['https://pictophone.herokuapp.com'],
+        transports: ["xhr-polling"]
+
     }
 })
 
+const path = require('path');
+
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('/', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    })
+  }
 
 // socket.io connection
 
@@ -28,8 +40,12 @@ io.on('connection', socket => {
     socket.on('join-room', room => {
         socket.join(room)
     })
+    socket.on('send-drawing', (drawing, room) => {
+        socket.to(room).emit('receive-drawing', drawing)
+    })
 })
 
+// test
 
 // Mongoose connecting to our database
 mongoose

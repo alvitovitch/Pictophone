@@ -20,4 +20,4 @@ code {
 @use './stylesheets/navbar.scss';
 @use './stylesheets/room.scss';
 
-$noticia: 'Noticia Text', serif;
+@use './stylesheets/modal.scss';

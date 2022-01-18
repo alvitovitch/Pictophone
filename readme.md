@@ -1,38 +1,36 @@
 # Pictophone
 
- Pictophone is an online mulitplayer experience that lets users play a collaborative drawing game.
+ Pictophone is an online, mulitplayer, collaborative drawing game.
 
 ## Background and Overview
 
-Do you remember people? Not photos of them on your screen, but a real live breathing person within 6 feet of you? It seems so long ago that we could gather and play drawing based games! In a post Among Us society we yearn for the next online group experience. 
-Enter Pictophone
+Do you remember people? Not photos of them on your screen, but a real live breathing person within 6 feet of you? It seems so long ago that we could gather and play drawing based games! In a post Among Us society we yearn for the next online group experience...
 
-Pictophone lets people join an online community of Pictophoners<sup>tm</sup> where you can create online party rooms. After joining a room the users can communicate via live chat while they are waiting for the start of the game. 
+Enter Pictophone.
 
-During gameplay each player will receive a prompt and attempt to draw it within a given time. Once the time has elapsed their drawing will be passed to the subsequent player, who will guess the prompt! Their guess is then passed to the next player who will draw based off of the guess! The cycle continues until the last player in the cycle guesses. When the cycle ends players will see the journey their drawings/prompts took and how they mutated over time. 
+Upon signing up or logging in, Pictophoners<sup>tm</sup> can create or join their own online party rooms. Upon entering a room, a user can communicate with others in the room via live chat and participate in a communcal 'free draw' session while they are waiting for the start of the game. 
 
+During gameplay each player will receive a unique prompt and attempt to draw it within a given time. Once the time has elapsed, their drawing will be passed to the subsequent player, who will guess the prompt! Their guess is then passed to the next player who will draw based off of the guess! The cycle continues until the last player in the cycle guesses. When the cycle ends players will see the journey their drawings/prompts took and how they mutated over time. 
 
 ## We will need to:
 
 * Create a splash page that allows users to create a Pictophone account or login with an existing account
-    * Also will have the option for a guest login
-* Create a main lobby where all ongoing pictophone games are listed
-    * if not fully occupied users can join the room as a player
+    * Add a guest login option
+* Create a main lobby where all ongoing Pictophone games are listed
+    * Maintain a record of each room's current number of players and whether the room is full or joinable
     * BONUS: Users can join a full room as an audience member
-* When players join a room there will be a live chat available as well as a free draw board before the game begins
-* When the game begins each player recieves a distinct randomized prompt and has a specified amount of time to draw it on the provided canvas. 
-    * For this we will need to provide each player with a personalized modal with a distinct drawing board
-* Each player's drawing will be saved and then fetched for the subsequent player
-    * For this we will need to utilize a drawing api
-* Once the drawing is fetched/rendered for the next player they will post their guess which will in turn be passed to the next player.
-    * and so on and so forth until the game is over which occurs when the final player in each chain makes their guess
-* Each of the gueses and pictures will be displayed in order at the end of the game
-    * Chat will be renabled at this point
+* Create a live chat and free draw board for each room, available only before and after gameplay
+* Program the game flow, wherein each player receives a distince randomized prompt to start
+    * Set and reset timers for each round
+    * Create personalized modals for each player
+* Store and fetch the drawings as needed during game play
+* Transmit drawings and guesses accurately between players
+* Fetch and organize all the drawings and guesses at the end of the game for review by the players
+    * Re-enable chat to allow players to laugh and discuss the game
     * BONUS: If there are viewers in the room they can score the pictures of the players at this time
 
 ## Functionality & MVP
 
- 
 * User Auth / Sign in 
 * CRUD Cycle for Rooms & Main Lobby
 * CRUD Cycle for Drawings
@@ -43,13 +41,16 @@ During gameplay each player will receive a prompt and attempt to draw it within 
 
 ## Technologies & Technical Challenges
 
+Technologies:
 * Websockets - socket.io
-* Drawing board - P5.js
+* Drawing board - canvas, P5.js
 * Asset Storage - AWS
-* Passing gameplay vs shared views
+
+Challenges:
+* Passing gameplay vs. shared views
 * Integrating websockets into a drawing board
-* hand off of assets between players
-* fetch and organize assets and guesses for presentation
+* Hand off of assets between players
+* Fetching and organize assets and guesses for presentation
 
 # Wireframes
 
@@ -74,64 +75,46 @@ During gameplay each player will receive a prompt and attempt to draw it within 
 
 ## Schedule
 
-Alex Dziuba, Stephanie Soni, Kyle Ginzburg, Andrew Vitovitch
+Frontend Lead: Alex Dziuba, 
+Team Lead: Stephanie Soni, 
+Backend Lead: Kyle Ginzburg
+Flex Lead: Andrew Vitovitch
 
 * Day 0
-    * setup Auth -Alex
-
-    * splash skeleton (/)  -Andrew
-        * nav bar
-        * main content
-            * screenshots on how to play
-        * footer
-
-    * signup/login skeleton - Stephanie 
-        * seperate forms (/signup, /login)
-
-    * backend routes for everything! - Kyle
-        * build users collection
-            * User owns room (1 max)
+    * Setup frontend auth - Alex
+    * Splash skeleton (/) - Andrew
+    * Signup/login skeleton - Stephanie 
+    * Backend routes for everything! - Kyle
 
 * Day 1
-    * main lobby index skeleton
+    * Main lobby index skeleton - Alex
         *(/lobby)
-    * Rooms collection
-        * connected to the user that built it
-        * id, name, size (min: 2 (ideal 4+), max: 8, even: true)
-        * Array of player ids
-    * Rooms Routes
-        * GET - all rooms
-        * GET - individual room
-        * PATCH - individual room (when players join)
-        * POST - create room
-        * DELETE - destroy room
-    * Room skeleton
-        * (/rooms/:id)
+    * Rooms collection - Stephanie
+    * Rooms routes - Kyle
+    * Room skeleton - Andrew
 
 * Day 2
-    * Building out frontend (Websockets & P5)
-        * Chat
-        * Free draw
-        * Backend? (potential storage of free draw canvas)
-            * collections for drawings
-                * id, room_id, user_id, chain_id(letter),  asset_link, timestamps
-            * guess collection
-                *  id, user_id, guess
-        * start on game logic
-
+    * Chat - Andrew
+    * Free draw - Stephanie
+    * Backend collections and routes - Kyle
+        * Drawings
+        * Guesses
+    * Start on frontend game logic - Alex
 
 * Day 3
-    * Build out frontend draw and guess modals
-        * drawing board - P5
-    * Build Prompt Collection
-        * if sampled is same as previous, sample again
-    * Finish game logic
+    * Build out frontend draw and guess modals - Alex
+    * Build prompt collection - Kyle
+    * Finish game logic - Stephanie
     * AWS integration - Andrew
 
 * Day 4
+    * Seed all collections - Kyle
+    * Styling - Andrew
+    * Testing and debugging of game - Alex
+    * Deploying to Heroku - Stephanie
 
 * Beyond Day 4
-    * BONUS!!!!
+    * BONUS
         * private/public rooms
         * password protect 
         * User Profile Page
