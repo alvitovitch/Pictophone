@@ -24,7 +24,7 @@ class Room extends React.Component {
         return (
             <div id='Room'>
                 <div id='freeDrawSpace'>
-                    <Board></Board>
+                    <Board roomId={this.props.roomId}></Board>
                 </div>
                 <div id='roomChat'>
                     <button onClick={this.leaveRoom}

@@ -10,24 +10,25 @@ class Board extends React.Component {
         }
         this.timeout = undefined;
     
-        // this.socket = io.connect("http://localhost:6000");
-        // this.socket.on("drawing", (drawing) => {
-        //     const that = this;
-        //     const interval = setInterval(()  => {
-        //         if (that.state.recordSketch) return;
-        //         that.state.recordSketch = true;
-        //         clearInterval(interval);
-        //         const image = new Image();
-        //         const canvas = document.querySelector('.board');
-        //         const ctx = canvas.getContext('2d');
-        //         image.onload = ()  => {
-        //             ctx.drawImage(image, 0, 0);
+        this.socket = io("http://localhost:4040");
+        this.socket.emit('join-room', this.props.roomId)
+        this.socket.on("receive-drawing", (drawing) => {
+            const that = this;
+            const interval = setInterval(()  => {
+                if (that.state.recordSketch) return;
+                that.state.recordSketch = true;
+                clearInterval(interval);
+                const image = new Image();
+                const canvas = document.querySelector('.board');
+                const ctx = canvas.getContext('2d');
+                image.onload = ()  => {
+                    ctx.drawImage(image, 0, 0);
 
-        //             that.state.recordSketch = false;
-        //         };
-        //         image.src = drawing;
-        //     }, 200)
-        // })
+                    that.state.recordSketch = false;
+                };
+                image.src = drawing;
+            }, 200)
+        })
     }
 
 
@@ -65,6 +66,8 @@ class Board extends React.Component {
             canvas.removeEventListener('mousemove', drawLine, false);
         }, false);
 
+        const that = this;
+
         const drawLine = function () {
             ctx.beginPath();
             ctx.moveTo(prevPos.x, prevPos.y);
@@ -72,13 +75,11 @@ class Board extends React.Component {
             ctx.closePath();
             ctx.stroke();
 
-            const that = this;
-
-            // if (that.timeout != undefined) clearTimeout(that.timeout);
-            // that.timeout = setTimeout(function () {
-            //     var drawingData = canvas.toDataURL("image/png");
-            //     that.socket.emit("canvas-data", drawingData);
-            // }, 1000)
+            if (that.timeout != undefined) clearTimeout(that.timeout);
+            that.timeout = setTimeout(function () {
+                const drawingData = canvas.toDataURL("image/png");
+                that.socket.emit("send-drawing", drawingData, that.props.roomId);
+            }, 1000)
         };
     }
 
