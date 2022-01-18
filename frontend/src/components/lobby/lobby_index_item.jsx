@@ -3,8 +3,9 @@ import { withRouter } from 'react-router-dom'
 
 const LobbyIndexItem = (props) => {
     
-    const { room, users, currentUser } = props;
+    
 
+    const { room, users, currentUser } = props;
     const join = (e) => {
         e.preventDefault();
         if(room.size > room.players.length) {
@@ -14,6 +15,7 @@ const LobbyIndexItem = (props) => {
             console.log("Room is full")
         }
     }
+
 
     return(
         <div className="index-room">

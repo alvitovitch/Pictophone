@@ -7,6 +7,7 @@ class LobbyIndex extends React.Component {
     componentDidMount(){
         this.props.requestAllUsers()
             .then(() => this.props.requestAllRooms())
+            .catch((err) => console.log(err))
     }
 
     render(){
@@ -20,7 +21,7 @@ class LobbyIndex extends React.Component {
                         <button onClick={e=>this.props.openModal('createRoom')}>Create a room</button>
                     </div>
                     <div className="rooms-container-list">
-                        {rooms.length === 0 ?  
+                        {(rooms.length === 0 || Object.values(users).length === 0) ?  
                         ("") : (
                             <ul>
                                 {rooms.map((room, i) => (
