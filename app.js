@@ -14,14 +14,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const io = require('socket.io')(4040, {
     cors: {
-        origin: ['https://pictophone.herokuapp.com/']
+        origin: ['https://pictophone.herokuapp.com/'],
+        transports: ["xhr-polling"]
+
     }
 })
-
-io.configure(function () { 
-    io.set("transports", ["xhr-polling"]); 
-    io.set("polling duration", 10); 
-  });
 
 const path = require('path');
 
