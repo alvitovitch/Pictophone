@@ -15,14 +15,15 @@ class RoomForm extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="create-room-form">
                 <h2>Create a room</h2>
                 <form onSubmit={this.handleSubmit}>
+                    <h3>Room name: </h3>
                     <input 
                         type="text"
                         value={this.state.name}
-                        placeholder="Room name"
                         onChange={e=>this.setState({name: e.currentTarget.value})}/>
+                    <h3>Room Size: </h3>
                     <select
                         onChange={e=>this.setState({size: e.currentTarget.value})}>
                         <option value="2">2</option>
