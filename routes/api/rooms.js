@@ -71,10 +71,8 @@ router.patch("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    console.log(req.body.playerId);
     Room.findById(req.params.room_id)
       .then(room => {
-        console.log(room.players);
         // if the room does not include the player passed into the reqeust body and there is still open space in the room
         !room.players.includes(req.body.playerId) && room.players.length < room.size ?
         // then add the request body playerId into the room's players array in the backend
@@ -95,7 +93,6 @@ router.delete("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    console.log(req.params)
     Room.findByIdAndDelete(req.params.room_id)
       .then(room => res.json(room))
       .catch(err =>
