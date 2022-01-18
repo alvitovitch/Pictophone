@@ -30,30 +30,46 @@ class Board extends React.Component {
                 };
                 image.src = drawing;
             }, 200)
+        
         })
+    // this.canvas = document.querySelector('.board');
+    // this.ctx = this.canvas.getContext('2d');
+    // this.canvas.width = 600;
+    // this.canvas.height = 600;
     this.updateColor = this.updateColor.bind(this);
     this.updateSize = this.updateSize.bind(this);
+    this.updateErase = this.updateErase.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     }
 
+    createCanvas() {
+        this.canvas = document.querySelector('.board');
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.width = 600;
+        this.canvas.height = 600;
+    }
 
     componentDidMount() {
+        this.createCanvas();
         this.drawSketch();
     }
+
 
     componentDidUpdate() {
         this.drawSketch();
     }
 
     drawSketch() {
-        const canvas = document.querySelector('.board');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 600;
-        canvas.height = 600;
+        // const canvas = document.querySelector('.board');
+        // const ctx = canvas.getContext('2d');
+        // canvas.width = 600;
+        // canvas.height = 600;
 
         const currentPos = { x: 0, y: 0 };
         const prevPos = { x: 0, y: 0 };
-        
-        canvas.addEventListener('mousemove', (e) => {
+        const that = this;
+
+        this.canvas.addEventListener('mousemove', (e) => {
             prevPos.x = currentPos.x;
             prevPos.y = currentPos.y;
 
@@ -61,31 +77,30 @@ class Board extends React.Component {
             currentPos.y = e.pageY - e.currentTarget.offsetTop;
         }, false);
        
-        ctx.lineWidth = this.state.size;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = this.state.color;
+        this.ctx.lineWidth = this.state.size;
+        this.ctx.lineJoin = 'round';
+        this.ctx.lineCap = 'round';
+        this.ctx.strokeStyle = this.state.color;
 
-        canvas.addEventListener('mousedown', (e)  => {
-            canvas.addEventListener('mousemove', drawLine, false);
+        this.canvas.addEventListener('mousedown', (e)  => {
+            that.canvas.addEventListener('mousemove', drawLine, false);
         }, false);
 
-        canvas.addEventListener('mouseup', ()  => {
-            canvas.removeEventListener('mousemove', drawLine, false);
+        this.canvas.addEventListener('mouseup', ()  => {
+            this.canvas.removeEventListener('mousemove', drawLine, false);
         }, false);
 
-        const that = this;
 
         const drawLine = function () {
-            ctx.beginPath();
-            ctx.moveTo(prevPos.x, prevPos.y);
-            ctx.lineTo(currentPos.x, currentPos.y);
-            ctx.closePath();
-            ctx.stroke();
+            that.ctx.beginPath();
+            that.ctx.moveTo(prevPos.x, prevPos.y);
+            that.ctx.lineTo(currentPos.x, currentPos.y);
+            that.ctx.closePath();
+            that.ctx.stroke();
 
             if (that.timeout != undefined) clearTimeout(that.timeout);
             that.timeout = setTimeout(function () {
-                const drawingData = canvas.toDataURL("image/png");
+                const drawingData = that.canvas.toDataURL("image/png");
                 that.socket.emit("send-drawing", drawingData, that.props.roomId);
             }, 1000)
         };
@@ -100,6 +115,14 @@ class Board extends React.Component {
        this.setState({size: size});
     }
 
+    updateErase(size) {
+        this.setState({size: size, color: 'wheat'})
+    }
+
+    handleClear(){
+        this.createCanvas();
+        this.drawSketch();
+    }
     render() {
         return (
             <div className="board-container" >
@@ -134,18 +157,40 @@ class Board extends React.Component {
 
                         <div className='size-dropdown-content'>
                             <p  className='size-5'
-                                onClick={() => this.updateSize('5')}>.</p>
+                                onClick={() => this.updateSize('5')}></p>
                             <p
                                 className='size-10'
-                                onClick={() => this.updateSize('10')}>.</p>
+                                onClick={() => this.updateSize('10')}></p>
                             <p
                                 className='size-15'
-                                onClick={() => this.updateSize('15')}>.</p>
+                                onClick={() => this.updateSize('15')}></p>
                             <p
                                 className='size-20'
-                                onClick={() => this.updateSize('20')}>.</p>
+                                onClick={() => this.updateSize('20')}></p>
                         </div>
                     </div>
+                    <div className='erase-dropdown'>
+
+                        <button className='size-btn'>erase</button>
+
+                        <div className='erase-dropdown-content'>
+                            <p className='size-5'
+                                onClick={() => this.updateErase('5')}></p>
+                            <p
+                                className='size-10'
+                                onClick={() => this.updateErase('10')}></p>
+                            <p
+                                className='size-15'
+                                onClick={() => this.updateErase('15')}></p>
+                            <p
+                                className='size-20'
+                                onClick={() => this.updateErase('20')}></p>
+                        </div>
+                    </div>
+
+                    <button 
+                        className='clear-btn'
+                        onClick={() => this.handleClear()}>clear</button>
                 </div>
                
                 
