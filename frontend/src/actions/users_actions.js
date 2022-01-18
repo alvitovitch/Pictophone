@@ -8,6 +8,6 @@ const receiveAllUsers = users => ({
 })
 
 export const requestAllUsers = () => dispatch => {
-    UsersApiUtils.fetchAllUsers()
+    return UsersApiUtils.fetchAllUsers()
         .then(users => dispatch(receiveAllUsers(users)))
 }
