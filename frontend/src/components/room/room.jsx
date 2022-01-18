@@ -13,10 +13,11 @@ class Room extends React.Component {
         this.leaveRoom = this.leaveRoom.bind(this)
     }
 
-    leaveRoom() {
-        debugger
-        this.props.updateRoom(this.props.roomId, this.props.currentUser.id)
-        this.props.history.push('../lobby')
+    leaveRoom(e) {
+        e.preventDefault();
+        let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
+        this.props.updateRoom(object);
+        this.props.history.push('/lobby');
 
     }
 
