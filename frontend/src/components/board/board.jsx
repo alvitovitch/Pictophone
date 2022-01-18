@@ -12,7 +12,7 @@ class Board extends React.Component {
         }
         this.timeout = undefined;
     
-        this.socket = io.connect();
+        this.socket = io.connect("https://pictophone.herokuapp.com:4040");
         this.socket.emit('join-room', this.props.roomId)
         this.socket.on("receive-drawing", (drawing) => {
             const that = this;
