@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
-import * as aws from './aws';
-
+const aws = require('./aws');
 const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
