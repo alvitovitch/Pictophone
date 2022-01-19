@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const Drawing = require('../../models/Drawing');
 // const validateDrawingInput = require('../../validation/drawing');
 const passport = require('passport');
-const res = require("express/lib/response");
 
 // Test route for drawings
 router.get("/test", (req, res) => res.json({ msg: "This is the drawings route" }));

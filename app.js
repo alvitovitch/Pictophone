@@ -9,6 +9,7 @@ const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
 const drawings = require("./routes/api/drawings");
 const guesses = require("./routes/api/guesses");
+const games = require("./routes/api/games");
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -96,6 +97,7 @@ app.use("/api/rooms", rooms);
 app.use("/api/prompts", prompts);
 app.use("/api/drawings", drawings);
 app.use("/api/guesses", guesses);
+app.use("/api/games", games);
 
 // const port = process.env.PORT || 4000;
 
