@@ -15,11 +15,12 @@ class Room extends React.Component {
 
     componentDidMount(){
         this.props.requestRoom(this.props.roomId);
+        console.log(this.props.room)
     }
 
     componentWillUnmount(){
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
-        this.props.updateRoom(object);
+        this.props.updateRoom(object);g
     }
 
     leaveRoom(e) {
