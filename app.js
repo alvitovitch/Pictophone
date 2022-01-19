@@ -12,30 +12,36 @@ const guesses = require("./routes/api/guesses");
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
-// const io = require('socket.io')(4040, {
-//     cors: {
-//         origin: ['https://pictophone.herokuapp.com/#/'],
-//         transports: ["websocket", "polling"]
 
-//     }
-// })
+// app.use(function (
+//     req, res, next) {
+//         res.header('Access-Control-Allow-Origin', '*')
+//         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+//         next();
+// });
 
-app.use(function (
-    req, res, next) {
-        res.header('Access-Control-Allow-Origin', '*')
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-        next();
-    } )
+const port = process.env.PORT || 4000;
 
-const http = require("http");
-const httpServer = http.createServer(app);
-const io = require("socket.io")(httpServer, {
-  cors: {
-    origins: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
-    methods: ["GET", "POST"],
-    transports: ["websocket"]
-  }
-});
+const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        transports: ["websocket", "polling"]
+
+    }
+})
+
+// const http = require("http");
+// const httpServer = http.createServer(app);
+// const io = require("socket.io")(httpServer, {
+//   cors: {
+//     origins: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+//     methods: ["GET", "POST"],
+//     transports: ["websocket"]
+//   }
+// });
 
 const path = require('path');
 const { response } = require('express');
@@ -49,9 +55,6 @@ if (process.env.NODE_ENV === 'production') {
   }
 
 // socket.io connection
-
-
-
 
 io.on('connection', socket => {
     console.log(socket.id)
@@ -68,9 +71,6 @@ io.on('connection', socket => {
         console.log(`connect_error due to ${err.message}`);
       });
 })
-
-
-// test
 
 // Mongoose connecting to our database
 mongoose
@@ -94,9 +94,9 @@ app.use("/api/prompts", prompts);
 app.use("/api/drawings", drawings);
 app.use("/api/guesses", guesses);
 
-const port = process.env.PORT || 4000;
+// const port = process.env.PORT || 4000;
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+// app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 // httpServer.listen(port, function () {
 //     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
