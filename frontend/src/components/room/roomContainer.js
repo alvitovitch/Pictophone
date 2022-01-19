@@ -18,7 +18,6 @@ const mDTP = dispatch => {
     return{
         requestRoom: roomId => dispatch(requestRoom(roomId)),
         updateRoom: roomId => dispatch(updateRoom(roomId)),
-        randomPrompts: (roomSize, state)
         // update board
     }
 }
