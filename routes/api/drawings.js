@@ -19,6 +19,8 @@ router.get("/",
       .catch(err => res.status(404).json({ nodrawingsfound: 'No drawings found' }))
 })
 
+// axios.get("/:drawingId", {roomId, chainId}
+
 // GET individual drawings backend route
 // Conditional on whether the req body is passed a drawingId wildcard or a chainId/roomId
 router.get("/:drawingId",

@@ -1,4 +1,5 @@
 import React from "react";
+import GuessFormContainer from "./guess_form_container";
 
 
 class Game extends React.Component {
@@ -45,7 +46,7 @@ class Game extends React.Component {
             <div className="game-modal">
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
-
+                    <GuessFormContainer />
                 </div>
             </div>
         )
