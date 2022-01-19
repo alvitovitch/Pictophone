@@ -4,6 +4,7 @@ import { socket } from '../../util/socket_util';
 import MessageBoxContainer from "../messages/messageBoxContainer";
 // import DrawingBoard from '../board/drawing_board';
 import Board from '../board/board';
+import Game_container from "../game/game_container";
 
 class Room extends React.Component {
     constructor(props){
@@ -46,6 +47,7 @@ class Room extends React.Component {
                     <MessageBoxContainer roomId={this.props.roomId} />
                 </div>
             </div>
+            <Game_container room={this.props.room}/>
         </div>
            
         )
