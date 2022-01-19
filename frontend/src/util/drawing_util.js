@@ -3,7 +3,7 @@ import bike from '../images/avatars/bicycle.png';
 
 export const uploadImage = async () => {
     let file = {bike};
-    const { url } = await axios.get('http://localhost:4000/awsUrl').then(res => res.json());
+    const url = await axios.get('http://localhost:4000/awsUrl').then(res => console.log(res.data.url));
     console.log(url);
 
     await axios.post(url, {
@@ -20,5 +20,5 @@ export const uploadImage = async () => {
     console.log(imageUrl);
 }
 
-
+// res.json()
    
