@@ -13,14 +13,24 @@ class Room extends React.Component {
         this.leaveRoom = this.leaveRoom.bind(this)
     }
 
+    componentDidMount(){
+        this.props.requestRoom(this.props.roomId);
+    }
+
+    componentWillUnmount(){
+        let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
+        this.props.updateRoom(object);
+    }
+
     leaveRoom(e) {
         e.preventDefault();
-        let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
-        this.props.updateRoom(object);
+        // let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
+        // this.props.updateRoom(object);
         this.props.history.push('/lobby');
     }
 
     render() {
+        // if (!this.props.room) return null;
         return (
         <div className='room-main'>
             <div id='draw-container'>
