@@ -9,8 +9,11 @@ class Game extends React.Component {
         } 
     }
 
+
+/// socket timeout when turn starts 30 to draw then 15sec to guess
+
+
     componentDidMount() {
-        
     }
 
 
