@@ -14,6 +14,9 @@ class MessageBox extends React.Component {
             console.log(this.props.socket)
             this.createMessage(message)
         })
+        this.props.socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+          });
     }
 
     handleSubmit(e) {
