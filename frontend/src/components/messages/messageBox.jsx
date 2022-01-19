@@ -1,5 +1,5 @@
 import React from "react";
-import { io } from "socket.io-client";
+import { socket } from "../../util/socket_util";
 
 class MessageBox extends React.Component {
 
@@ -9,11 +9,16 @@ class MessageBox extends React.Component {
             message: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.props.socket.on('receive-message', message => {
+       
+        this.socket = socket;
+        this.socket.on('receive-message', message => {
             console.log(message)
-            console.log(this.props.socket)
+            console.log(this.socket)
             this.createMessage(message)
         })
+        this.socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+          });
     }
 
     handleSubmit(e) {
@@ -25,13 +30,12 @@ class MessageBox extends React.Component {
         document.getElementById('chatMessages').appendChild(messageDiv)
         
 
-        this.props.socket.emit('send-message', {user, message}, this.props.roomId)
+        this.socket.emit('send-message', {user, message}, this.props.roomId)
         this.setState({message: ''})
     }
     
     createMessage(message) {
         const text = message.message
-        
         const user = message.user
         const newMessage = document.createElement('div')
         
@@ -54,7 +58,7 @@ class MessageBox extends React.Component {
                     <div id='chatMessages'>
 
                     </div>
-                    <form onSubmit={this.handleSubmit}>
+                    <form className='chat-form' onSubmit={this.handleSubmit}>
                         <input onChange={this.handleUpdate('message')} type="text" id='textBox' value={this.state.message}/>
                         <button>
                             Send

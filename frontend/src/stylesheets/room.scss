@@ -1,26 +1,64 @@
-#Room {
+.room-main {
+    width: 100%;
+    height: 100%;
+    font-family: 'Noticia Text', serif;
+    background-image: url('../images/paper_texture.png');
+    display: flex;
+    justify-content: center;
+}
+#draw-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 70vw;
     min-height: calc(95vh - 280px);
-    border: 3px dotted black;
+    // border: 3px dotted black;
     display: flex;
+    background-image: url('../images/paper_texture.png');
 }
 
 #freeDrawSpace {
     width: 70%;
-    border-right: 3px dotted black;
     background-color: wheat;
+    border: 3px solid black;
+    outline: 2px solid black;
+    outline-offset: -9px;
+
 }
 
-#roomChat {
+#chat-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     background-color: wheat;
     width: 25vw;
+    margin-left: 10px;
+    border: 3px solid black;
+    outline: 2px solid black;
+    outline-offset: -9px;
+
 }
 
 #leaveRoom {
- width: 100%;   
+   border: 2px solid rgb(31,28,18);
+    // border-right: 4px solid rgb(31, 28, 18);
+    // border-bottom: 4px solid rgb(31, 28, 18);
+    box-shadow: 4px 4px 0px rgb(31,28,18);
+    background-color: transparent;
+    text-decoration: none;
+    white-space:nowrap;
+    width: fit-content;
+    margin-top: 10px;
+    padding: 5px;
+    color: rgb(31,28,18);
+    font-family: 'Noticia Text', serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#leaveRoom:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
 }
 
 #chatMessages {
@@ -34,24 +72,45 @@
 }
 
 .color-dropdown-content, .size-dropdown-content, .erase-dropdown-content {
-     height: fit-content;
-     width: fit-content;
+     height: 100px;
+     width: 50px;
      padding: 10px;
     display: none;
     position: absolute;
-    bottom: 20px;
-    background-color: rgb(194, 192, 192);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    bottom: 37px;
+    margin-left: 3px;
+    background-color: wheat;
+    opacity: 85%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
     z-index: 2;
     border:  0.25px solid rgba(128, 128, 128, .4);
     font-size: 18px;
 }
 
+// .size-dropdown-content {
+//     left: 72px;
+// }
+
+// .erase-dropdown-content {
+//     left: 135px;
+// }
+
 .color-dropdown-content p, .size-dropdown-content p, .erase-dropdown-content p {
     color: black;
     cursor: pointer;
     text-align: center;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.color-dropdown-content p:hover {
+    font-weight: bold;
+}
+
+.size-dropdown-content p:hover, .erase-dropdown-content p:hover {
+    outline: 2px solid rgb(109, 107, 107);
+    // border-style: inset;
+    
 }
 
 .size-5 {
@@ -95,7 +154,72 @@
  
 
 .draw-controls {
+    width: fit-content;
     position: relative;
-    bottom: 0;
+    margin: 0 auto;
+    bottom: 20px;
     display: flex;
+    justify-content: space-around;
+
+}
+
+.draw-controls button {
+    border: 2px solid rgb(31,28,18);
+    box-shadow: 4px 4px 0px rgb(31,28,18);
+    background-color: transparent;
+    text-decoration: none;
+    white-space:nowrap;
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    color: rgb(31,28,18);
+    font-family: 'Noticia Text', serif;
+    font-size: 18px;
+    cursor: pointer;
+    
+}
+
+#roomChat {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.chat-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.chat-form button {
+     border: 2px solid rgb(31,28,18);
+    box-shadow: 4px 4px 0px rgb(31,28,18);
+    background-color: transparent;
+    text-decoration: none;
+    white-space:nowrap;
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    color: rgb(31,28,18);
+    font-family: 'Noticia Text', serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-form input {
+    height: 30px;
+    width: 50%;
+    font-family: 'Noticia Text', serif;
+    font-weight: bold;
+    outline: 0;
 }
