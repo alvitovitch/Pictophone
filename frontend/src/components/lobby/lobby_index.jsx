@@ -13,6 +13,7 @@ class LobbyIndex extends React.Component {
     render(){
         const { rooms, users, currentUser } = this.props
         return(
+            
             <div className="lobby-page">
                 <Modal />
                 <section className="rooms-container">
