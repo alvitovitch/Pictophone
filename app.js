@@ -14,8 +14,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const io = require('socket.io')(4040, {
     cors: {
-        origin: ['http://localhost:3000']
-       
+        origin: ['http://localhost:3000'],
+        secure: true,
+        transports: ["websocket", "polling"]
 
     }
 })

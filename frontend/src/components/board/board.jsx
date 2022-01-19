@@ -11,8 +11,8 @@ class Board extends React.Component {
             size: 5
         }
         this.timeout = undefined;
-    
-        this.socket = io.connect('http://localhost:4040');
+        this.port = process.env.PORT || 4000
+        this.socket = io.connect(`http://localhost:4040`);
         this.socket.emit('join-room', this.props.roomId)
         this.socket.on("receive-drawing", (drawing) => {
             const that = this;
