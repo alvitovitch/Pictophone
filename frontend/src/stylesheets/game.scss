@@ -1,10 +1,18 @@
+.game-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding: 115px 0;
+}
+
 .game-container {
     border:3px solid red;
-    width: 1000px;
-    height: 500px;
-    background-color: cornflowerblue;
-    position: fixed;
-    top: 20%;
-    left: 25%;
-    z-index: 10;
+    width: 80%;
+    height: 650px;
+    background-color: white;
 }
