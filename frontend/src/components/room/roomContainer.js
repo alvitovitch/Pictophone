@@ -9,7 +9,7 @@ const mSTP = (state, ownProps) => {
     return{
         currentUser: state.session.user,
         roomId: ownProps.match.params.roomId,
-        room: requestRoom(ownProps.match.params.roomId),
+
     }
     
 }

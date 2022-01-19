@@ -38,7 +38,6 @@ class RoomForm extends React.Component {
                         type="text"
                         value={this.state.name}
                         onChange={e=>this.setState({name: e.currentTarget.value})}/>
-                    {errors.name ? <p>{errors.name}</p> : ""}
                     <h3>Room Size: </h3>
                     <select
                         onChange={e=>this.setState({size: e.currentTarget.value})}>
@@ -49,6 +48,7 @@ class RoomForm extends React.Component {
                     </select>
                     <input type="submit" value="Submit" />
                 </form>
+                {errors.name ? <p>{errors.name}</p> : ""}
             </div>
         )
     }
