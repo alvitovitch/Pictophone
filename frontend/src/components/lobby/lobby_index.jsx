@@ -17,8 +17,13 @@ class LobbyIndex extends React.Component {
                 <Modal />
                 <section className="rooms-container">
                     <div className="rooms-container-header">
-                        <p>Current Games</p>
-                        <button onClick={e=>this.props.openModal('createRoom')}>Create a room</button>
+                        <h1>CURRENT GAMES</h1>
+                        <div 
+                            className="index-conrainer-btn"
+                            onClick={e=>this.props.openModal('createRoom')}>
+                            Create a Room
+                        </div>
+                        {/* <button onClick={e=>this.props.openModal('createRoom')}>Create a room</button> */}
                     </div>
                     <div className="rooms-container-list">
                         {(rooms.length === 0 || Object.values(users).length === 0) ?  
