@@ -1,3 +1,6 @@
+import React from 'react';
+import AWS from 'aws-sdk';
+
 class GameBoard extends React.Component {
     constructor(props) {
         super(props);
@@ -5,14 +8,60 @@ class GameBoard extends React.Component {
             color: 'black',
             size: 5
         }
-        this.timer = setTimeout(() => this.sendImage, 30000);
+        // this.timer = setTimeout(() => this.getCanvas, 30000);
+
+        AWS.config.update({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        });
+
+        this.bucket = new AWS.S3({
+            params: { Bucket: 'pictophone-uploads' },
+            region: 'us-east-1',
+        });
 
         this.updateColor = this.updateColor.bind(this);
         this.updateSize = this.updateSize.bind(this);
         this.updateErase = this.updateErase.bind(this);
         this.handleClear = this.handleClear.bind(this);
+        this.getCanvas = this.getCanvas.bind(this);
     }
 
+    getCanvas() {
+        const drawing = document.querySelector('.game-board');
+        drawing.toBlob(blob => {
+            blob.name = 'blob1'
+            console.log('upload');
+            console.log(blob)
+            this.uploadFile(blob);
+        })
+    }
+
+    uploadFile = (file) => {
+        const params = {
+            ACL: 'public-read',
+            Key: file.name,
+            ContentType: file.type,
+            Body: file,
+        }
+
+        this.bucket.upload(params).promise().then(function (data) {
+            console.log(`File uploaded successfully. ${data.Location}`);
+        }, function (err) {
+            console.error("Upload failed", err);
+        })
+        // this.bucket.putObject(params)
+        //     .on('httpUploadProgress', (e) => {
+        //         this.setState({
+        //             progress: Math.round((e.loaded / e.total) * 100),
+        //         })
+        //     })
+        //     .send((err) => {
+        //         if (err) {
+
+        //         }
+        //     })
+    }
     
 
     createCanvas() {
@@ -22,9 +71,7 @@ class GameBoard extends React.Component {
         this.canvas.height = 600;
     }
 
-    sendImage() {
-        const drawingData = this.canvas.toDataURL("image/png");
-    }
+
 
     componentDidMount() {
         this.createCanvas();
@@ -101,6 +148,7 @@ class GameBoard extends React.Component {
         return (
             <div className="game-board-container" >
                 <canvas className="game-board" ></canvas>
+                <button width='50px' height='50px' onClick={this.getCanvas}></button>
                 <div className='game-draw-controls'>
                     <div className='game-colors-dropdown'>
 
@@ -173,4 +221,4 @@ class GameBoard extends React.Component {
     }
 }
 
-export default Board;
+export default GameBoard;
