@@ -1,6 +1,6 @@
 import React from 'react';
 import io from 'socket.io-client';
-
+import { socket } from '../../util/socket_util';
 
 class Board extends React.Component {
     constructor(props) {
@@ -12,7 +12,10 @@ class Board extends React.Component {
         }
         this.timeout = undefined;
     
-        this.socket = io.connect("https://pictophone.herokuapp.com:4040");
+        // this.socket = io.connect("https://pictophone.herokuapp.com:4040");
+        // this.socket = io.connect("http://localhost:4040");
+
+        this.socket = socket;
         this.socket.emit('join-room', this.props.roomId)
         this.socket.on("receive-drawing", (drawing) => {
             const that = this;

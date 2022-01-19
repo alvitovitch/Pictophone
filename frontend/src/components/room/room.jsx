@@ -1,5 +1,6 @@
 import React from "react";
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
+import { socket } from '../../util/socket_util';
 import MessageBoxContainer from "../messages/messageBoxContainer";
 // import DrawingBoard from '../board/drawing_board';
 import Board from '../board/board';
@@ -7,8 +8,8 @@ import Board from '../board/board';
 class Room extends React.Component {
     constructor(props){
         super(props)
-        this.socket = io.connect('https://pictophone.herokuapp.com:4040')
-        this.socket.emit('join-room', this.props.roomId)
+        this.socket = socket;
+        this.socket.emit('join-room', this.props.roomId);
 
         this.leaveRoom = this.leaveRoom.bind(this)
     }
@@ -42,7 +43,7 @@ class Room extends React.Component {
                         id='leaveRoom'>
                         Leave Room
                     </button>
-                    <MessageBoxContainer socket={this.socket} roomId={this.props.roomId} />
+                    <MessageBoxContainer roomId={this.props.roomId} />
                 </div>
             </div>
         </div>
