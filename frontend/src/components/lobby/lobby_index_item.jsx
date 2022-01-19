@@ -19,18 +19,19 @@ const LobbyIndexItem = (props) => {
 
     return(
         <div className="index-room">
-            <div className="left-side">
-                <h2>{room.name}</h2>
-                {/* Need to replace with users[room.host] */}
-                <h2>{users[room.host].username}</h2>
-            </div>
-            <div className="right-side">
+            <div className="top-row">
+                <h2>Room: {room.name}</h2>
                 <h2>{room.players.length}/{room.size}</h2>
-                <button onClick={e => join(e)}>Join</button>
-                {currentUser.id === room.host ? 
-                    (
-                        <button onClick={e=>props.deleteRoom(room._id)}>Delete</button>
-                    ) : ("")}
+            </div>
+            <div className="bottom-row">
+                <h2>{users[room.host].username}</h2>
+                <div className="button-box">
+                    <button onClick={e => join(e)}>Join</button>
+                    {currentUser.id === room.host ? 
+                        (
+                            <button onClick={e=>props.deleteRoom(room._id)}>Delete</button>
+                        ) : ("")}
+                </div>
             </div>
         </div>
     )

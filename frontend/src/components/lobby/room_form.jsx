@@ -16,7 +16,7 @@ class RoomForm extends React.Component {
     render(){
         return(
             <div className="create-room-form">
-                <h2>Create a room</h2>
+                <h2>CREATE A ROOM</h2>
                 <form onSubmit={this.handleSubmit}>
                     <h3>Room name: </h3>
                     <input 
@@ -31,7 +31,7 @@ class RoomForm extends React.Component {
                         <option value="6">6</option>
                         <option value="8">8</option>
                     </select>
-                    <input type="submit" value="Create a room" />
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
         )
