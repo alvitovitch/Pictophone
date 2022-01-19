@@ -21,6 +21,7 @@ const mDTP = dispatch => {
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal))
         // randomPrompts: (roomSize, state)
+
         // update board
     }
 }
