@@ -22,18 +22,21 @@ class Room extends React.Component {
 
     render() {
         return (
-            <div id='Room'>
+        <div className='room-main'>
+            <div id='draw-container'>
                 <div id='freeDrawSpace'>
                     <Board roomId={this.props.roomId}></Board>
                 </div>
-                <div id='roomChat'>
+                <div id='chat-container'>
                     <button onClick={this.leaveRoom}
-                    id='leaveRoom'>
+                        id='leaveRoom'>
                         Leave Room
                     </button>
                     <MessageBoxContainer socket={this.socket} roomId={this.props.roomId} />
                 </div>
             </div>
+        </div>
+           
         )
     }
 }
