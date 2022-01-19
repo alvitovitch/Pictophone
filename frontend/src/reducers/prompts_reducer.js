@@ -3,7 +3,7 @@ import {
 } from "../actions/prompts_actions"
 
 
-const PromptsReducer = (oldState, action ) => {
+const PromptsReducer = (oldState = {}, action ) => {
     Object.freeze(oldState)
     const nextState =Object.assign({}, oldState)
 
