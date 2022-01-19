@@ -43,7 +43,11 @@ io.on('connection', socket => {
     socket.on('send-drawing', (drawing, room) => {
         socket.to(room).emit('receive-drawing', drawing)
     })
+    socket.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+      });
 })
+
 
 // test
 
