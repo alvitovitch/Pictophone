@@ -9,7 +9,7 @@ import avatar1 from '../../images/avatars/bicycle.png';
 import avatar2 from '../../images/avatars/chair.png';
 import avatar3 from '../../images/avatars/globe.png';
 import avatar4 from '../../images/avatars/peacock.png';
-
+import Modal from "../modal/modal";
 
 class Room extends React.Component {
     constructor(props){
@@ -48,6 +48,8 @@ class Room extends React.Component {
         return (
         <div className='room-main'>
             <div className='players-container'>
+                <button onClick={e => this.props.openModal('game')}>Start</button>
+                {this.props.modal === "game" ? <Game_container/> : ""}
                 <img src={avatar1} alt="" />
                 <p></p>
             </div>
@@ -63,7 +65,7 @@ class Room extends React.Component {
                     <MessageBoxContainer roomId={this.props.roomId} />
                 </div>
             </div>
-            <Game_container room={this.props.room}/>
+            {/* <Game_container room={this.props.room}/> */}
         </div>
            
         )
