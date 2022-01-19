@@ -27,18 +27,18 @@ class SignupForm extends React.Component {
                 <form
                     className='signup-form'
                     onSubmit={this.handleSubmit}
-                >
+                >   <div className="signup-header">
+                        <h2>SIGN UP FOR PICTOPHONE</h2>
+                    </div>
                     <div className='username-input-container'>
                         <input
                             type="text"
-                            onChange={this.update('username')} />
-                        <label>Username</label>
+                            onChange={this.update('username')} placeholder="Username"/>
                     </div>
                     <div className='password-input-container'>
                         <input
                             type="password"
-                            onChange={this.update('password')} />
-                        <label>Password</label>
+                            onChange={this.update('password')} placeholder="Password"/>
                     </div>
                     <button>Sign Up</button>
                 </form>

@@ -12,14 +12,14 @@ class NavBar extends React.Component {
                         <div id='Logo'>
                             {/* <img id='logoPic' src={logo} />     */}
                         </div>
-                        <h1>PICTOPHONE</h1>
+                        <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
                     <div id='navButtons'>
                         <button className="navButton">
-                            <Link to={'/login'}>Login</Link>
+                            <Link to={'/login'}>LOGIN</Link>
                         </button>
                         <button className="navButton">
-                            <Link to={'/signup'}>Sign up</Link>
+                            <Link to={'/signup'}>SIGN UP</Link>
                         </button>
                     </div>
 
@@ -32,7 +32,7 @@ class NavBar extends React.Component {
                         <div id='Logo'>
                             <img id='logoPic' src={logo} />    
                         </div>
-                    Pictophone
+                        <h1>Pictophone</h1>
                     </div>
                     <div id='navButtons'>
                         <button className="navButton">Profile</button>

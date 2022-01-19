@@ -4,37 +4,43 @@ import Modal from "../modal/modal";
 
 class LobbyIndex extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.requestAllUsers()
             .then(() => this.props.requestAllRooms())
             .catch((err) => console.log(err))
     }
 
-    render(){
+    render() {
         const { rooms, users, currentUser } = this.props
-        return(
+        return (
+
             <div className="lobby-page">
                 <Modal />
                 <section className="rooms-container">
                     <div className="rooms-container-header">
-                        <p>Current Games</p>
-                        <button onClick={e=>this.props.openModal('createRoom')}>Create a room</button>
+                        <h1>CURRENT GAMES</h1>
+                        <div
+                            className="index-conrainer-btn"
+                            onClick={e => this.props.openModal('createRoom')}>
+                            Create a Room
+                        </div>
+                        {/* <button onClick={e=>this.props.openModal('createRoom')}>Create a room</button> */}
                     </div>
                     <div className="rooms-container-list">
-                        {(rooms.length === 0 || Object.values(users).length === 0) ?  
-                        ("") : (
-                            <ul>
-                                {rooms.map((room, i) => (
-                                    <LobbyIndexItem
-                                        key={i}
-                                        currentUser={currentUser}
-                                        updateRoom={this.props.updateRoom}
-                                        deleteRoom={this.props.deleteRoom} 
-                                        users={users}
-                                        room={room}/>
-                                ))}
-                            </ul>
-                        )}
+                        {(rooms.length === 0 || Object.values(users).length === 0) ?
+                            ("") : (
+                                <ul>
+                                    {rooms.map((room, i) => (
+                                        <LobbyIndexItem
+                                            key={i}
+                                            currentUser={currentUser}
+                                            updateRoom={this.props.updateRoom}
+                                            deleteRoom={this.props.deleteRoom}
+                                            users={users}
+                                            room={room} />
+                                    ))}
+                                </ul>
+                            )}
                     </div>
                 </section>
             </div>
