@@ -14,13 +14,18 @@ class Room extends React.Component {
     }
 
     componentDidMount(){
-        this.props.requestRoom(this.props.roomId);
-        console.log(this.props.room)
+        this.props.requestRoom(this.props.roomId)
+            .then(()=>{
+                if(!this.props.room.players.includes(this.props.currentUser.id)){
+                    let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
+                    this.props.updateRoom(object);
+                }
+            })
     }
 
     componentWillUnmount(){
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
-        this.props.updateRoom(object);g
+        this.props.updateRoom(object);
     }
 
     leaveRoom(e) {
@@ -31,7 +36,7 @@ class Room extends React.Component {
     }
 
     render() {
-        // if (!this.props.room) return null;
+        if (!this.props.room) return null;
         return (
         <div className='room-main'>
             <div id='draw-container'>
