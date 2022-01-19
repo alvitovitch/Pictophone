@@ -31,7 +31,6 @@ class MessageBox extends React.Component {
     
     createMessage(message) {
         const text = message.message
-        
         const user = message.user
         const newMessage = document.createElement('div')
         
