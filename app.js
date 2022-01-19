@@ -96,7 +96,7 @@ app.use("/api/guesses", guesses);
 
 app.get('/awsUrl', (req, res) => {
     const url = await aws.generateUploadUrl()
-    res.send({url});
+    res.send({ url });
 })
 
 // const port = process.env.PORT || 4000;
