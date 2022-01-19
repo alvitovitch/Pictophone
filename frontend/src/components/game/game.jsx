@@ -39,7 +39,8 @@ class Game extends React.Component {
 
     render() {
         return (
-        <div>
+        <div className="game-container">
+            <button onClick={this.props.closeModal}>Close</button>
 
         </div>
         )
