@@ -28,6 +28,7 @@ class Room extends React.Component {
         e.preventDefault();
         // let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
         // this.props.updateRoom(object);
+        this.socket.emit('leave-room', this.props.roomId);
         this.props.history.push('/lobby');
     }
 
