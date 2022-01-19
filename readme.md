@@ -55,22 +55,22 @@ Challenges:
 # Wireframes
 
 ## Splash
-<img src='./Splash.png' height='400px'/>
+<img src='./Wireframes/Splash.png' height='400px'/>
 
 ## Login/Signup
-<img src='./Login-Signup.png' height='400px'/>
+<img src='./Wireframes/Login-Signup.png' height='400px'/>
 
 ## Index
-<img src='./Index.png'  height='400px'/>
+<img src='./Wireframes/Index.png'  height='400px'/>
 
 ## Game Room
-<img src='./Game_Room.png'  height='400px'/>
+<img src='./Wireframes/Game_Room.png'  height='400px'/>
 
 ## Draw Modal
-<img src='./Draw_modal.png'  height='400px'/>
+<img src='./Wireframes/Draw_modal.png'  height='400px'/>
 
 ## Guess Modal
-<img src='./Guess_modal.png'  height='400px'/>
+<img src='./Wireframes/Guess_modal.png'  height='400px'/>
 
 
 ## Schedule
