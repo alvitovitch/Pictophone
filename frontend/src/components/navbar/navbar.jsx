@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import logo from "../../images/vintage-candlestick-telephone-vector-21717680.jpg"
+import logo from "../../images/transparent_phone.png";
 
 class NavBar extends React.Component {
 
@@ -32,7 +32,7 @@ class NavBar extends React.Component {
                         <div id='Logo'>
                             <img id='logoPic' src={logo} />    
                         </div>
-                        <h1>Pictophone</h1>
+                        <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
                     <div id='navButtons'>
                         <button className="navButton">Profile</button>

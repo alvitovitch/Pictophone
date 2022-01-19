@@ -3,6 +3,7 @@ import { randomPrompts } from '../../reducers/selectors';
 
 import { fetchRoom } from '../../actions/rooms_actions';
 import Game from './game'
+import { closeModal } from '../../actions/modal_actions';
 
 
 const mSTP = (state, ownProps) => {
@@ -17,6 +18,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => {
     return {
+        closeModal: () => dispatch(closeModal())
     }
 }
 

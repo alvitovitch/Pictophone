@@ -5,6 +5,11 @@ import MessageBoxContainer from "../messages/messageBoxContainer";
 // import DrawingBoard from '../board/drawing_board';
 import Board from '../board/board';
 import Game_container from "../game/game_container";
+import avatar1 from '../../images/avatars/bicycle.png';
+import avatar2 from '../../images/avatars/chair.png';
+import avatar3 from '../../images/avatars/globe.png';
+import avatar4 from '../../images/avatars/peacock.png';
+import Modal from "../modal/modal";
 
 class Room extends React.Component {
     constructor(props){
@@ -16,7 +21,13 @@ class Room extends React.Component {
     }
 
     componentDidMount(){
-        this.props.requestRoom(this.props.roomId);
+        this.props.requestRoom(this.props.roomId)
+            .then(()=>{
+                if(!this.props.room.players.includes(this.props.currentUser.id)){
+                    let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
+                    this.props.updateRoom(object);
+                }
+            })
     }
 
     componentWillUnmount(){
@@ -33,9 +44,15 @@ class Room extends React.Component {
     }
 
     render() {
-        // if (!this.props.room) return null;
+        if (!this.props.room) return null;
         return (
         <div className='room-main'>
+            <div className='players-container'>
+                <button onClick={e => this.props.openModal('game')}>Start</button>
+                {this.props.modal === "game" ? <Game_container/> : ""}
+                <img src={avatar1} alt="" />
+                <p></p>
+            </div>
             <div id='draw-container'>
                 <div id='freeDrawSpace'>
                     <Board roomId={this.props.roomId}></Board>
@@ -48,7 +65,7 @@ class Room extends React.Component {
                     <MessageBoxContainer roomId={this.props.roomId} />
                 </div>
             </div>
-            <Game_container room={this.props.room}/>
+            {/* <Game_container room={this.props.room}/> */}
         </div>
            
         )
