@@ -30,9 +30,21 @@
       justify-content: center;
       h1 {
         font-size: 45px;
+        background-color: rgb(31,28,18);
+        color: #fcd99c;
+        text-align: center;
+        text-shadow: -1px 1px 0 rgb(31,28,18),
+        1px 1px 0 rgb(31,28,18),
+        1px -1px 0 rgb(31,28,18),
+        -1px -1px 0 rgb(31,28,18),
+        -2px 2px #fcd99c;
+        //Useful
+        padding: 5px 5px 10px 10px;
       }
       h2 {
-        font-size: 25px;
+        font-size: 30px;
+        border: 4px solid rgb(31,28,18);
+        padding: 5px;
       }
     }
 
