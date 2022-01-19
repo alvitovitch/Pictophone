@@ -54,7 +54,7 @@ class MessageBox extends React.Component {
                     <div id='chatMessages'>
 
                     </div>
-                    <form onSubmit={this.handleSubmit}>
+                    <form className='chat-form' onSubmit={this.handleSubmit}>
                         <input onChange={this.handleUpdate('message')} type="text" id='textBox' value={this.state.message}/>
                         <button>
                             Send
