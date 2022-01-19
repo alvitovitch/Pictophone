@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Room from './room';
 
 import { updateRoom } from '../../actions/rooms_actions'
+import { fetchRoom } from '../../util/rooms_api_utils';
 
 const mSTP = (state, ownProps) => {
     return{
@@ -12,7 +13,8 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => {
     return{
-        updateRoom: roomId => dispatch(updateRoom(roomId))
+        updateRoom: roomId => dispatch(updateRoom(roomId)),
+        fetchRoom: roomId => dispatch(fetchRoom(roomId))
         // update board
     }
 }
