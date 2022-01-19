@@ -3,17 +3,33 @@
     flex-direction: column;
     align-items: center;
     padding: 20px 30px;
+    border: solid 4px black;
+    background-color: rgb(243, 201, 138);
     h2 {
-        font-size: 25px;
+        font-size: 45px;
         margin-bottom: 10px;
     }
     form {
+        font-size: 20px;
         height: 100%;
         display: flex;
         flex-direction: column;
+        font-size: 25px;
     }
+
+
     input[type=submit] {
         margin: 10px;
+        font-size: 25px;
+        padding: 15px 5px;
+        background-color: #eece9c;
+        border: 2px solid black;
+        box-shadow: 4px 4px black;
+        &:hover{
+            cursor: pointer;
+            transform: scale(105%);
+            transition-duration: 0.5s;
+        }
     }
 
 }
