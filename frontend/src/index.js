@@ -10,6 +10,7 @@ import { logout } from './actions/session_actions'
 import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
 import { createDrawing, requestAllDrawings, requestDrawing } from './actions/drawings_actions';
+import { requestAllGuesses, requestGuess, createGuess } from './actions/guesses_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,4 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAllDrawings = requestAllDrawings;
   window.requestDrawing = requestDrawing;
   window.createDrawing = createDrawing;
+  window.requestAllGuesses = requestAllGuesses;
+  window.requestGuess = requestGuess;
+  window.createGuess = createGuess;
 })

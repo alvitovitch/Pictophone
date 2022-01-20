@@ -4,8 +4,8 @@ export const fetchAllGuesses = () => {
     return axios.get("/api/guesses");
 }
 
-export const fetchGuess = (guessObject) => {
-    return axios.get(`/api/guesses/?rooomId=${guessObject.roomId}&chainId=${guessObject.chainId}`);
+export const fetchGuess = (guessObj) => {
+    return axios.get(`/api/guesses/${guessObj.roomId},${guessObj.chainId}`);
 }
 
 export const createGuess = (guess) => {

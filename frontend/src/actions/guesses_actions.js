@@ -17,7 +17,7 @@ const receiveGuess = guess => {
     }
 }
 
-export const requestAllguesses = () => dispatch =>{
+export const requestAllGuesses = () => dispatch =>{
     return GuessesApiUtils.fetchAllGuesses()
         .then(guesses => dispatch(receiveAllGuesses(guesses)))
         .catch(err => console.log(err))
@@ -27,4 +27,9 @@ export const requestGuess = guessObj => dispatch => {
     return GuessesApiUtils.fetchGuess(guessObj)
         .then(guess => dispatch(receiveGuess(guess)))
         .catch(err => console.log(err))
+}
+
+export const createGuess = guess => dispatch => {
+    return GuessesApiUtils.createGuess(guess)
+        .then(guess => dispatch(receiveGuess(guess)))
 }
