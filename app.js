@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
-const aws = require('./aws');
 const users = require("./routes/api/users");
 const rooms = require("./routes/api/rooms");
 const prompts = require("./routes/api/prompts");
 const drawings = require("./routes/api/drawings");
 const guesses = require("./routes/api/guesses");
 const games = require("./routes/api/games");
-
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
@@ -98,10 +97,13 @@ app.use("/api/drawings", drawings);
 app.use("/api/guesses", guesses);
 app.use("/api/games", games);
 
-app.get('/awsUrl', (req, res) => {
-    const url = await aws.generateUploadUrl()
-    res.send({ url });
-})
+app.use(cors());
+
+// app.get('/awsUrl', (req, res) => {
+//     debugger
+//     const url = aws.generateUploadUrl()
+//     res.send(url);
+// })
 
 // const port = process.env.PORT || 4000;
 

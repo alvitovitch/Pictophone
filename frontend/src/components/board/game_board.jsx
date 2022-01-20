@@ -1,6 +1,7 @@
 import React from 'react';
 import AWS from 'aws-sdk';
 
+
 class GameBoard extends React.Component {
     constructor(props) {
         super(props);
@@ -9,11 +10,14 @@ class GameBoard extends React.Component {
             size: 5
         }
         // this.timer = setTimeout(() => this.getCanvas, 30000);
-
+       
+        
         AWS.config.update({
-            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+            apiVersion: 'latest',
+            accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
         });
+       
 
         this.bucket = new AWS.S3({
             params: { Bucket: 'pictophone-uploads' },
@@ -27,6 +31,8 @@ class GameBoard extends React.Component {
         this.getCanvas = this.getCanvas.bind(this);
     }
 
+    // this is where we get and upload the canvas... will set the name on line 38 based on the turn and player possibly, to be stored/fetched at https://pictophone-uploads.s3.amazonaws.com/${blob-name}
+    
     getCanvas() {
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
@@ -39,7 +45,6 @@ class GameBoard extends React.Component {
 
     uploadFile = (file) => {
         const params = {
-            ACL: 'public-read',
             Key: file.name,
             ContentType: file.type,
             Body: file,
