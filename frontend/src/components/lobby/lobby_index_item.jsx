@@ -8,13 +8,18 @@ const LobbyIndexItem = (props) => {
     const { room, users, currentUser } = props;
     const join = (e) => {
         e.preventDefault();
-        if(room.size > room.players.length) {
-            props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
-                .then( () => props.history.push(`/rooms/${room._id}`))
-        } else {
-            props.roomFullError(props.room._id);
-            console.log(e.currentTarget.className)
-        }
+        props.requestAllRooms()
+            .then(
+                () => {
+                    if(room.size > room.players.length) {
+                        props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
+                            .then( () => props.history.push(`/rooms/${room._id}`))
+                    } else {
+                        props.roomFullError(props.room._id);
+                        console.log(e.currentTarget.className)
+                    }
+                }
+            )
     }
 
 
