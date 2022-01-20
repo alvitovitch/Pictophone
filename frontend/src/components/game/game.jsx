@@ -135,9 +135,7 @@ class Game extends React.Component {
 
     handleSubmit() {
         const nextChainId = this.state.chainId + 11
-        debugger
         if (nextChainId > (this.state.players.length + 1) * 10) {
-            debugger
             this.setState({ chainId: nextChainId - (this.state.players.length * 10) })
             
         } else {
