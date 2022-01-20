@@ -4,7 +4,7 @@ import img from '../../images/drawing.jpeg'
 class GuessForm extends React.Component {
 
     render(){
-        {console.log(this.props)}
+        // {console.log(this.props)}
         return <div className="guess-form">
             <div className="img-container">
                 <img src={img}/>

@@ -10,7 +10,7 @@ class Game extends React.Component {
         } 
         this.state = {
             players: this.props.room.players, // Array of playerIds
-            chainId: (((this.state.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
+            chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
             prevChainId: this.state.chainId-10,
             turn: 0,
             gameover: false,
@@ -115,6 +115,7 @@ class Game extends React.Component {
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
                         {/* GUESS */}
+                        <GuessFormContainer />
                 </div>
             </div>
             )
