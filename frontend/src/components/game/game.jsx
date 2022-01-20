@@ -1,17 +1,16 @@
 import React from "react";
+import GameBoard from "../board/game_board";
 import GuessFormContainer from "./guess_form_container";
-
+import { socket } from "../../util/socket_util";
 
 class Game extends React.Component {
     constructor(props) {    
         super(props)
-        this.state = {
-            turn: 1
-        } 
+      
         this.state = {
             players: this.props.room.players, // Array of playerIds
-            chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
-            prevChainId: this.state.chainId-10,
+            chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser.id))+1)*10)+1,
+            //prevChainId: this.state.chainId-10,
             turn: 0,
             gameover: false,
         }
@@ -46,6 +45,7 @@ class Game extends React.Component {
     /// socket timeout when turn starts 30 to draw then 15sec to guess
 
     componentDidMount() {
+        debugger
         setTimeout(() => {
             this.setState({ chainId: this.state.chainId + 11 });
             if (this.state.chainId > (this.state.players.length+1)*10) {
@@ -106,7 +106,7 @@ class Game extends React.Component {
             <div className="game-modal">
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
-
+                    <GameBoard chainId={this.state.chainId} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing}/>
                         {/* DRAW */}
                 </div>
             </div>
