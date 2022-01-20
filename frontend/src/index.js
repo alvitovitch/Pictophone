@@ -6,7 +6,7 @@ import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
-import { handleUpload } from './util/drawing_util';
+
 
 import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
@@ -50,6 +50,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAllGuesses = requestAllGuesses;
   window.requestGuess = requestGuess;
   window.createGuess = createGuess;
-
-  window.uploadImage = uploadImage;
 })
