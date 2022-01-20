@@ -1,5 +1,6 @@
 import React from 'react';
 import AWS from 'aws-sdk';
+import { socket } from "../../util/socket_util";
 
 
 class GameBoard extends React.Component {
@@ -9,6 +10,7 @@ class GameBoard extends React.Component {
             color: 'black',
             size: 5
         }
+        this.socket = socket
         // this.timer = setTimeout(() => this.getCanvas, 30000);
         
         AWS.config.update({
@@ -36,10 +38,11 @@ class GameBoard extends React.Component {
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
             blob.name = `drawing${this.props.roomId}${this.props.chainId}`
-            console.log('upload');
-            console.log(blob)
-            this.uploadFile(blob);
-        })
+           
+            this.uploadFile(blob)
+
+              
+        }).then(() =>  this.props.handleSubmit())
     }
 
     uploadFile = (file) => {
@@ -58,11 +61,11 @@ class GameBoard extends React.Component {
             }
             that.props.createDrawing(newDrawing);
             //chainId, roomId, userId => post to backend
-            console.log(data);
             console.log(`File uploaded successfully. ${data.Location}`);
         }, function (err) {
             console.error("Upload failed", err);
         })
+        .then(() => this.socket.emit('submit-chain', this.props.roomId))
        
     }
     
@@ -130,7 +133,6 @@ class GameBoard extends React.Component {
     }
 
     updateColor(color) {
-        console.log(color);
         this.setState({ color: color });
     }
 

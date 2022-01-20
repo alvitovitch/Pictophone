@@ -6,120 +6,159 @@ import { socket } from "../../util/socket_util";
 class Game extends React.Component {
     constructor(props) {    
         super(props)
-      
+        this.socket = socket;
+        
+        this.socket.on('chain-received', () => {
+            this.chainCount()
+        })
+        this.count = 0
         this.state = {
-            players: this.props.room.players, // Array of playerIds
+            players: this.props.room.players,
             chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser.id))+1)*10)+1,
-            //prevChainId: this.state.chainId-10,
+            chainIds: [],
+            fetchChainIds: [],
             turn: 0,
             gameover: false,
+            //prevChainId: this.state.chainId-10,
+            // nextId: '',
         }
-        // finds index of player in playerIds array and then adds 1 to compensate for idx 0
-        // multiplies that by 10 and then adds 1
-        // so the player's chain ids in a four player game should be as follows: 11, 21, 31, 41 
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.draw = this.draw.bind(this);
+        this.socket.on('increased-turn', () => {
+            // this.nextId()
+            this.setState({turn: this.state.turn + 1})
+        })
 
-        // after a turn occurs, we would want to mutate each player's chainId by adding 11
-        // for the first player, their id would start at 11, indicating they are the 1st person in the 1st chain
-        // after a turn, their id would become 22, indicating they are the 2nd person in the 2nd chain
-        // after another turn, their id would become 33, indicating they are the 3rd person in the 3rd chain
-        // for the final turn, their id would become 44, indicating they are the 4th person in the 4th chain
-
-        // to account for players who are not the first element in the player's array:
-        // i.e. the 4th player's 1st chainId would start at 41, but after a turn their 2nd chainId would become 52 when it should be 12.
-        // to solve this, after we have mutated a chainId, we should check to see if the chain id is larger than the player's array length+1 * 10 (in this case 50).
-        // if we mutate the chainId and it excedes this number, then we should conditionally subtract the player's array length * 10 (in this case 40), so their chainId would not excede this boundary and become 12 instead of 52.
-        // with this logic, the 4th player begins as the 1st player in the 4th chain, but after a turn, they become the 2nd player in the 1st chain
-
-        // for each player's chainId, if it is odd, then it is a draw round, while if it is even, then it is a guess round, letting our internal state change and dictate what modal each player gets
-        // finally, after each turn, we should also set the turn state by adding 1; when the turn state equals the player's state length, the game is over.
-
-        // on the backend, we now have drawings and guesses with the following chain Ids:
-        // 11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43, 14, 24, 34, 44
-        // if you sort these drawings and guesses by chainId you get:
-        // 11, 12, 13, 14 (first chain in order)
-        // 21, 22, 23, 24 (second chain in order)
-        // 31, 32, 33, 34 (third chain in order)
-        // 41, 42, 43, 44 (fourth chain in order)
     }
-
-    /// socket timeout when turn starts 30 to draw then 15sec to guess
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({ chainId: this.state.chainId + 11 });
-            if (this.state.chainId > (this.state.players.length+1)*10) {
-                this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
-            };
-            this.setState({ turn: this.state.turn + 1 });
-        }, 30000);
+        let chainIds = [this.state.chainId];
+        for (let i=0; i<this.props.room.size-1; i++) {
+            let nextChainId = chainIds[chainIds.length-1] + 11;
+            if (nextChainId > (this.state.players.length + 1) * 10) {
+                nextChainId -= (this.state.players.length * 10);
+            }
+
+            chainIds.push(nextChainId);
+        }
+        let fetchChainIds = chainIds.map(id => id-1);
+        this.setState({ chainIds: chainIds });
+        this.setState({ fetchChainIds: fetchChainIds });
+        this.draw();
     }
 
-    componentDidUpdate() {
-        if (this.state.gameover) {
-            // end the game? or unmount the component?
-        }   else if (this.state.chainId % 2 === 0) {
-            setTimeout(() => {
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 15000);
+    // nextId() {
+    //     let nextId = this.state.chainId + 10 
+    //     if (nextId > (this.state.players.length + 1) * 10) {
+    //             nextId -= (this.state.players.length * 10)
+    //         }
+    //     this.setState({nextId: nextId})
+    //     }
+
+    chainCount() {
+        if (this.props.room.host === this.props.currentUser.id) {
+            this.count++
+        }
+        if (this.count >= this.props.room.size) { 
+            this.socket.emit('increase-turn', this.props.room._id)
+            this.count = 0;
+        }
+    }
+
+    // componentDidMount() {
+    // //     setTimeout(() => {
+    // //         this.setState({ chainId: this.state.chainId + 11 });
+    // //         if (this.state.chainId > (this.state.players.length+1)*10) {
+    // //             this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
+    // //         };
+    // //         //this.setState({ turn: this.state.turn + 1 });
+    // //     }, 30000);
+    // }
+
+    // componentDidUpdate() {
+    //     if (this.state.gameover) {
+    //         // end the game? or unmount the component?
+    //     }   else if (this.state.chainId % 2 === 0) {
+    //         setTimeout(() => {
+    //             this.setState({ chainId: this.state.chainId + 11 });
+    //             if (this.state.chainId > (this.state.players.length + 1) * 10) {
+    //                 this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+    //             };
+    //            // this.setState({ turn: this.state.turn + 1 });
+    //         }, 15000);
+    //     } else {
+    //         setTimeout(() => {
+    //             this.setState({ chainId: this.state.chainId + 11 });
+    //             if (this.state.chainId > (this.state.players.length + 1) * 10) {
+    //                 this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+    //             };
+    //             //this.setState({ turn: this.state.turn + 1 });
+    //         }, 30000);
+    //     }
+    // }
+
+    handleSubmit() {
+        const nextChainId = this.state.chainId + 11
+        if (nextChainId > (this.state.players.length + 1) * 10) {
+            this.setState({ chainId: nextChainId - (this.state.players.length * 10) })
+            
         } else {
-            setTimeout(() => {
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 30000);
+            this.setState({ chainId: this.state.chainId + 11 });
+
         }
     }
 
 
-    /// [0,1,2,3]
-    // 1    
-    // your index + turn % 4
-
-
-    // turn(type) {
-    //     if (type === 'DRAW') {
-
-    //     }
-    //     // get input
-    //     // draw picture
-    //     // pass to next person
-    //     else {
-
-    //     }
-    //     // get drawing
-    //     // make guess
-    //     // pass to next person
-    // }
-
+    draw() {
+        // on a drawing turn
+        // want to fetch the prompt on first turn
+        // else fetch the previous chain guess
+        let prompt = ''
+        if (this.state.turn === 0) {
+            prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
+        } else {
+            this.props.requestGuess({ roomId: this.props.room.id, chainId: this.state.prevChainId })
+                .then(() => prompt = this.props.chain)
+        }
+        const promptDiv = document.createElement('div')
+        promptDiv.innerText = prompt.word
+        document.getElementById('draw-modal').appendChild(promptDiv)
+    }
 
 
     render() {
-        return (
-            (this.state.chainId % 2 !== 0 ?
-            <div className="game-modal">
-                <div className="game-container">
-                    <button onClick={this.props.closeModal}>Close</button>
-                    <GameBoard chainId={this.state.chainId} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing}/>
+        if (this.state.turn === 0) {
+            return (
+                <div id="draw-modal" className="game-modal">
+
+                    <div className="game-container">
+                        <button onClick={this.props.closeModal}>Close</button>
+                        <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                         {/* DRAW */}
+                    </div>
                 </div>
-            </div>
-            :
-            <div className="game-modal">
-                <div className="game-container">
-                    <button onClick={this.props.closeModal}>Close</button>
-                        {/* GUESS */}
-                        <GuessFormContainer roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainId -1 }/>
-                </div>
-            </div>
             )
-            
-        )
+        } else if (this.state.turn > 0) {
+            return (
+                (this.state.turn % 2 === 0 ?
+                    <div className="game-modal">
+                        <div className="game-container">
+                            <button onClick={this.props.closeModal}>Close</button>
+                            <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                            {/* DRAW */}
+                        </div>
+                    </div>
+                    :
+                    <div className="game-modal">
+                        <div className="game-container">
+                            <button onClick={this.props.closeModal}>Close</button>
+                            {/* GUESS */}
+                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                        </div>
+                    </div>
+                )
+            )
+        }
     }
 }
 
@@ -182,3 +221,52 @@ export default Game
 
 
 // }
+
+        // finds index of player in playerIds array and then adds 1 to compensate for idx 0
+        // multiplies that by 10 and then adds 1
+        // so the player's chain ids in a four player game should be as follows: 11, 21, 31, 41
+
+        // after a turn occurs, we would want to mutate each player's chainId by adding 11
+        // for the first player, their id would start at 11, indicating they are the 1st person in the 1st chain
+        // after a turn, their id would become 22, indicating they are the 2nd person in the 2nd chain
+        // after another turn, their id would become 33, indicating they are the 3rd person in the 3rd chain
+        // for the final turn, their id would become 44, indicating they are the 4th person in the 4th chain
+
+        // to account for players who are not the first element in the player's array:
+        // i.e. the 4th player's 1st chainId would start at 41, but after a turn their 2nd chainId would become 52 when it should be 12.
+        // to solve this, after we have mutated a chainId, we should check to see if the chain id is larger than the player's array length+1 * 10 (in this case 50).
+        // if we mutate the chainId and it excedes this number, then we should conditionally subtract the player's array length * 10 (in this case 40), so their chainId would not excede this boundary and become 12 instead of 52.
+        // with this logic, the 4th player begins as the 1st player in the 4th chain, but after a turn, they become the 2nd player in the 1st chain
+
+        // for each player's chainId, if it is odd, then it is a draw round, while if it is even, then it is a guess round, letting our internal state change and dictate what modal each player gets
+        // finally, after each turn, we should also set the turn state by adding 1; when the turn state equals the player's state length, the game is over.
+
+        // on the backend, we now have drawings and guesses with the following chain Ids:
+        // 11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43, 14, 24, 34, 44
+        // if you sort these drawings and guesses by chainId you get:
+        // 11, 12, 13, 14 (first chain in order)
+        // 21, 22, 23, 24 (second chain in order)
+        // 31, 32, 33, 34 (third chain in order)
+        // 41, 42, 43, 44 (fourth chain in order)
+
+
+
+    /// [0,1,2,3]
+    // 1
+    // your index + turn % 4
+
+
+    // turn(type) {
+    //     if (type === 'DRAW') {
+
+    //     }
+    //     // get input
+    //     // draw picture
+    //     // pass to next person
+    //     else {
+
+    //     }
+    //     // get drawing
+    //     // make guess
+    //     // pass to next person
+    // }

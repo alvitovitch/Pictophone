@@ -3,7 +3,9 @@ import Room from './room';
 import { randomPrompts } from '../../reducers/selectors';
 import { requestAllUsers } from '../../actions/users_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions'
+import { requestAllPrompts } from '../../actions/prompts_actions';
 import { openModal } from '../../actions/modal_actions';
+
 
 const mSTP = (state, ownProps) => {
     return{
@@ -11,7 +13,8 @@ const mSTP = (state, ownProps) => {
         roomId: ownProps.match.params.roomId,
         room: state.entities.rooms[ownProps.match.params.roomId],
         modal: state.ui.modal,
-        users: state.entities.users
+        users: state.entities.users,
+        prompts: state.entities.prompts
     }
     
 }
@@ -23,7 +26,7 @@ const mDTP = dispatch => {
         openModal: modal => dispatch(openModal(modal)),
         requestAllUsers: () => dispatch(requestAllUsers())
         // randomPrompts: (roomSize, state)
-
+        requestAllPrompts: () => dispatch(requestAllPrompts()),
         // update board
     }
 }
