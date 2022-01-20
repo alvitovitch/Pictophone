@@ -7,7 +7,7 @@ class GuessForm extends React.Component {
         // {console.log(this.props)}
         return <div className="guess-form">
             <div className="img-container">
-                <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}11`} alt="" />
+                <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.chainId}`} alt="" />
             </div>
             <form>
                 <h2>Your Guess:</h2>

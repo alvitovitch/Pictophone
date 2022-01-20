@@ -6,14 +6,29 @@ import { socket } from "../../util/socket_util";
 class Game extends React.Component {
     constructor(props) {    
         super(props)
-      
+        this.socket = socket;
+        
+        this.socket.on('chain-received', () => {
+            this.chainCount()
+        })
+        this.count = 0
         this.state = {
             players: this.props.room.players, // Array of playerIds
             chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser.id))+1)*10)+1,
             //prevChainId: this.state.chainId-10,
-            turn: 0,
+            nextId: '',
+            turn: 1,
             gameover: false,
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.socket.on('increased-turn', () => {
+            this.nextId()
+            this.setState({turn: this.state.turn + 1})
+        })
+
+
+       
+
         // finds index of player in playerIds array and then adds 1 to compensate for idx 0
         // multiplies that by 10 and then adds 1
         // so the player's chain ids in a four player game should be as follows: 11, 21, 31, 41 
@@ -42,39 +57,58 @@ class Game extends React.Component {
         // 41, 42, 43, 44 (fourth chain in order)
     }
 
+    nextId() {
+        let nextId = this.state.chainId + 10 
+        if (nextId > (this.state.players.length + 1) * 10) {
+                nextId -= (this.state.players.length * 10)
+            }
+        this.setState({nextId: nextId})
+        }
     /// socket timeout when turn starts 30 to draw then 15sec to guess
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({ chainId: this.state.chainId + 11 });
-            if (this.state.chainId > (this.state.players.length+1)*10) {
-                this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
-            };
-            this.setState({ turn: this.state.turn + 1 });
-        }, 30000);
-    }
-
-    componentDidUpdate() {
-        if (this.state.gameover) {
-            // end the game? or unmount the component?
-        }   else if (this.state.chainId % 2 === 0) {
-            setTimeout(() => {
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 15000);
-        } else {
-            setTimeout(() => {
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 30000);
+    chainCount() {
+       
+        console.log(this.state.chainId)
+        if (this.props.room.host === this.props.currentUser.id) {
+            this.count++
+        }
+        if (this.count >= this.props.room.size) { 
+            this.socket.emit('increase-turn', this.props.room._id)
         }
     }
+    // componentDidMount() {
+    // //     setTimeout(() => {
+    // //         this.setState({ chainId: this.state.chainId + 11 });
+    // //         if (this.state.chainId > (this.state.players.length+1)*10) {
+    // //             this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
+    // //         };
+    // //         //this.setState({ turn: this.state.turn + 1 });
+    // //     }, 30000);
+    // }
+
+    componentDidUpdate() {
+    }
+
+    // componentDidUpdate() {
+    //     if (this.state.gameover) {
+    //         // end the game? or unmount the component?
+    //     }   else if (this.state.chainId % 2 === 0) {
+    //         setTimeout(() => {
+    //             this.setState({ chainId: this.state.chainId + 11 });
+    //             if (this.state.chainId > (this.state.players.length + 1) * 10) {
+    //                 this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+    //             };
+    //            // this.setState({ turn: this.state.turn + 1 });
+    //         }, 15000);
+    //     } else {
+    //         setTimeout(() => {
+    //             this.setState({ chainId: this.state.chainId + 11 });
+    //             if (this.state.chainId > (this.state.players.length + 1) * 10) {
+    //                 this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+    //             };
+    //             //this.setState({ turn: this.state.turn + 1 });
+    //         }, 30000);
+    //     }
+    // }
 
 
     /// [0,1,2,3]
@@ -97,15 +131,29 @@ class Game extends React.Component {
     //     // pass to next person
     // }
 
+   
+
+    handleSubmit() {
+        const nextChainId = this.state.chainId + 11
+        debugger
+        if (nextChainId > (this.state.players.length + 1) * 10) {
+            debugger
+            this.setState({ chainId: nextChainId - (this.state.players.length * 10) })
+            
+        } else {
+            this.setState({ chainId: this.state.chainId + 11 });
+
+        }
+    }
 
 
     render() {
         return (
-            (this.state.chainId % 2 !== 0 ?
+            (this.state.turn % 2 !== 0 ?
             <div className="game-modal">
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
-                    <GameBoard chainId={this.state.chainId} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing}/>
+                    <GameBoard handleSubmit={this.handleSubmit} chainId={this.state.chainId} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing}/>
                         {/* DRAW */}
                 </div>
             </div>
@@ -114,7 +162,7 @@ class Game extends React.Component {
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
                         {/* GUESS */}
-                        <GuessFormContainer roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainId -1 }/>
+                        <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.nextId}/>
                 </div>
             </div>
             )
