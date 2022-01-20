@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import GuessForm from './guess_form'
+import { requestDrawing } from '../../actions/drawings_actions'
 
 const mSTP = state => {
     return {
@@ -9,7 +10,8 @@ const mSTP = state => {
 
 const mDTP = dispatch => {
     return {
-
+        requestDrawing: drawObj => dispatch(requestDrawing(drawObj)),
+        // submitGuess: guessObj => dispatch(submitGuess(guessObj))
     }
 }
 

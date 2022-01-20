@@ -9,6 +9,7 @@ import { logout } from './actions/session_actions'
 
 import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
+import { createDrawing, requestAllDrawings, requestDrawing } from './actions/drawings_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,4 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateRoom = updateRoom;
   window.deleteRoom = deleteRoom;
   window.getState = store.getState;
+  window.requestAllDrawings = requestAllDrawings;
+  window.requestDrawing = requestDrawing;
+  window.createDrawing = createDrawing;
 })
