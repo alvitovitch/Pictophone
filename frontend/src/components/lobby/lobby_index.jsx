@@ -1,6 +1,10 @@
 import React from "react";
 import LobbyIndexItem from "./lobby_index_item";
 import Modal from "../modal/modal";
+import img1 from '../../images/lobby-img/img1.png'
+import img2 from '../../images/lobby-img/img2.png'
+import img3 from '../../images/lobby-img/img3.png'
+import img4 from '../../images/lobby-img/img4.png'
 
 class LobbyIndex extends React.Component {
 
@@ -16,6 +20,17 @@ class LobbyIndex extends React.Component {
 
             <div className="lobby-page">
                 <Modal />
+                <aside className="image-feed">
+                    <div className="feed-img-box">
+                        <img src={img1}/>
+                    </div>
+                    <div className="feed-img-box">
+                        <img src={img2} />
+                    </div>
+                    {/* <div className="feed-img-box">
+                        <img src={img3} />
+                    </div> */}
+                </aside>
                 <section className="rooms-container">
                     <div className="rooms-container-header">
                         <h1>CURRENT GAMES</h1>
@@ -33,9 +48,12 @@ class LobbyIndex extends React.Component {
                                     {rooms.map((room, i) => (
                                         <LobbyIndexItem
                                             key={i}
+                                            errors={this.props.errors}
+                                            roomFullError={this.props.roomFullError}
                                             currentUser={currentUser}
                                             updateRoom={this.props.updateRoom}
                                             deleteRoom={this.props.deleteRoom}
+                                            requestAllRooms={this.props.requestAllRooms}
                                             users={users}
                                             room={room} />
                                     ))}
@@ -43,6 +61,16 @@ class LobbyIndex extends React.Component {
                             )}
                     </div>
                 </section>
+                <aside className="image-feed">
+                    <div className="feed-img-box">
+                        <img src={img3} />
+                    </div>
+                    <div className="feed-img-box">
+                        <img src={img4} />
+                    </div>
+                    {/* <div className="feed-img-box">
+                    </div> */}
+                </aside>
             </div>
         )
     }

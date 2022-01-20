@@ -5,6 +5,7 @@ export const RECEIVE_ROOM = "RECEIVE_ROOM"
 export const REMOVE_ROOM = "REMOVE_ROOM"
 export const RECEIVE_ROOM_ERRORS = "RECEIVE_ROOM_ERRORS"
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+export const ROOM_FULL_ERROR = 'ROOM_FULL_ERROR'
 
 const receiveAllRooms = rooms => {
     return {
@@ -31,6 +32,13 @@ const receiveErrors = errors => {
     return {
         type: RECEIVE_ROOM_ERRORS,
         errors
+    }
+}
+
+export const roomFullError = (roomId) => {
+    return {
+        type: ROOM_FULL_ERROR,
+        roomId
     }
 }
 
