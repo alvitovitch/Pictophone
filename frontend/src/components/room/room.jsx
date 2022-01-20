@@ -96,7 +96,8 @@ class Room extends React.Component {
                 <div key={idx} className='player-list-item'>
                     <img src={`/images/avatars/avatar${idx + 1}.png`} alt="" />
                     <p>{sub[0].username}</p>
-                  )  
+                </div>
+                  ))
           return (
                 <div className='room-main'>
                     <div className='left-container'>
@@ -124,7 +125,8 @@ class Room extends React.Component {
                 </div>
 
             )
+          }
     }
 }
 
-export default Room
+export default Room;
