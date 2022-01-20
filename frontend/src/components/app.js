@@ -8,6 +8,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import RoomContainer from "./room/roomContainer";
 import LobbyContainer from './lobby/lobby_container';
+import GameBoard from "./board/game_board";
 
 
 
@@ -19,6 +20,7 @@ const App = () => (
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
             <AuthRoute exact path='/' component={Splash} />
 
+            <ProtectedRoute path='/test' component={GameBoard} />
             <ProtectedRoute path='/rooms/:roomId' component={RoomContainer}/> 
             <ProtectedRoute path='/lobby' component={LobbyContainer}/>
         </Switch>
