@@ -63,7 +63,7 @@ router.post("/",
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
-
+    console.log(req.body)
     Drawing.findOne({ assetUrl: req.body.assetUrl })
       .then(drawing => {
         if (drawing) {

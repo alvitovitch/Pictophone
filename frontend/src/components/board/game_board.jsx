@@ -10,7 +10,6 @@ class GameBoard extends React.Component {
             size: 5
         }
         // this.timer = setTimeout(() => this.getCanvas, 30000);
-       
         
         AWS.config.update({
             apiVersion: 'latest',
@@ -36,8 +35,7 @@ class GameBoard extends React.Component {
     getCanvas() {
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
-            debugger
-            blob.name = `testBlob123`
+            blob.name = `drawing${this.props.roomId}${this.props.chainId}`
             console.log('upload');
             console.log(blob)
             this.uploadFile(blob);
@@ -50,15 +48,15 @@ class GameBoard extends React.Component {
             ContentType: file.type,
             Body: file,
         }
-
+        const that = this
         this.bucket.upload(params).promise().then(function (data) {
             let newDrawing = {
                 assetUrl: data.Location,
-                roomId: this.props.rooomId,
-                userId: this.props.userId,
-                chainId: this.props.chainId
+                roomId: that.props.roomId,
+                userId: that.props.userId,
+                chainId: that.props.chainId
             }
-            this.props.createDrawing(newDrawing);
+            that.props.createDrawing(newDrawing);
             //chainId, roomId, userId => post to backend
             console.log(data);
             console.log(`File uploaded successfully. ${data.Location}`);
