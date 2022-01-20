@@ -10,6 +10,8 @@ import { handleUpload } from './util/drawing_util';
 
 import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
+import { createDrawing, requestAllDrawings, requestDrawing } from './actions/drawings_actions';
+import { requestAllGuesses, requestGuess, createGuess } from './actions/guesses_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,5 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateRoom = updateRoom;
   window.deleteRoom = deleteRoom;
   window.getState = store.getState;
-  window.handleUpload = handleUpload;
+
+  window.requestAllDrawings = requestAllDrawings;
+  window.requestDrawing = requestDrawing;
+  window.createDrawing = createDrawing;
+  window.requestAllGuesses = requestAllGuesses;
+  window.requestGuess = requestGuess;
+  window.createGuess = createGuess;
+
+  window.uploadImage = uploadImage;
 })

@@ -19,29 +19,36 @@ router.get("/",
       .catch(err => res.status(404).json({ nodrawingsfound: 'No drawings found' }))
 })
 
+// axios.get("/:drawingId", {roomId, chainId}
+
 // GET individual drawings backend route
 // Conditional on whether the req body is passed a drawingId wildcard or a chainId/roomId
 router.get("/:drawingId",
   passport.authenticate('jwt', { session: false }),
- 
+  
   (req, res) => {
-    if (!req.body.chainId) { 
-    // If no chaindId is passed in the request body, this will return the single drawing with that drawingId that is passed in instead via params
-    Drawing.findById(req.params.drawingId) //potentially change this to drawingId passed in body?
-      .then(drawing => res.json(drawing))
-      .catch(err => 
-        res.status(404).json({ nodrawingfound: 'No drawing found with that ID' }))
-    } else {
+    console.log(req.params.drawingId.split(','));
+    const roomId= req.params.drawingId.split(',')[0]; 
+    const chainId= req.params.drawingId.split(',')[1]; 
+    // if (!req.body.chainId) { 
+    // // If no chaindId is passed in the request body, this will return the single drawing with that drawingId that is passed in instead via params
+    // Drawing.findById(req.params.drawingId) //potentially change this to drawingId passed in body?
+    //   .then(drawing => res.json(drawing))
+    //   .then(() => console.log("first"))
+    //   .catch(err => 
+    //     res.status(404).json({ nodrawingfound: 'No drawing found with that ID' }))
+    // } else {
     // Else it will look for drawings with that chainId and then filter out the single drawing that belongs to the roomId passed in the request body as well
-    Drawing.find({ chainId: req.body.chainId })
+    Drawing.find({ chainId: chainId })
       .then(drawings => {
-        let roomId = req.body.roomId;
+        // let roomId = roomId;
 
         let drawing = drawings.filter(drawing => drawing.roomId === roomId);
         res.json(...drawing);
       })
+      .then(() => console.log("second"))
       .catch(err => res.status(404).json({ nodrawingfound: 'No drawing with that chainId and roomId found' }))
-    }
+    // }
   }
 )
 

@@ -1,0 +1,15 @@
+.guess-form {
+    border:3px solid blue;
+    width: 300px;
+    height: 400px;
+    align-self: center;
+    margin-top: 50px;
+}
+
+.img-container {
+    width: 100%;
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
