@@ -64,6 +64,7 @@ class Room extends React.Component {
     componentWillUnmount() {
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
         this.props.updateRoom(object);
+        this.props.closeModal();
     }
 
     leaveRoom(e) {

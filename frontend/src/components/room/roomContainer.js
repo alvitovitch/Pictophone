@@ -4,6 +4,7 @@ import { requestAllPrompts } from '../../actions/prompts_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions';
 import { openModal } from '../../actions/modal_actions';
 
+
 const mSTP = (state, ownProps) => {
     return{
         currentUser: state.session.user,
@@ -21,6 +22,7 @@ const mDTP = dispatch => {
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal)),
         requestAllPrompts: () => dispatch(requestAllPrompts()),
+
 
         // update board
     }

@@ -46,6 +46,8 @@
     .username-input-container, .password-input-container {
       width: fit-content;
       height: fit-content;
+      display: flex;
+      align-items:center;
 
       input {
         width:18vw;
@@ -65,4 +67,11 @@
       margin: 2px 2px;
     }
   }
+}
+
+.session-error {
+  color: red;
+  font-family: 'Noticia Text', serif;
+  font-size: 20px;
+  margin-left: 20px;
 }

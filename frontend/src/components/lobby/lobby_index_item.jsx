@@ -8,12 +8,18 @@ const LobbyIndexItem = (props) => {
     const { room, users, currentUser } = props;
     const join = (e) => {
         e.preventDefault();
-        if(room.size > room.players.length) {
-            props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
-                .then( () => props.history.push(`/rooms/${room._id}`))
-        } else {
-            console.log("Room is full")
-        }
+        props.requestAllRooms()
+            .then(
+                () => {
+                    if(room.size > room.players.length) {
+                        props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
+                            .then( () => props.history.push(`/rooms/${room._id}`))
+                    } else {
+                        props.roomFullError(props.room._id);
+                        console.log(e.currentTarget.className)
+                    }
+                }
+            )
     }
 
 
@@ -29,10 +35,11 @@ const LobbyIndexItem = (props) => {
                     <button onClick={e => join(e)}>Join</button>
                     {currentUser.id === room.host ? 
                         (
-                            <button onClick={e=>props.deleteRoom(room._id)}>Delete</button>
+                            <button className="r" onClick={e=>props.deleteRoom(room._id)}>Delete</button>
                         ) : ("")}
                 </div>
             </div>
+            <p className="room-item-error">{props.errors.full && props.errors.full.id === room._id ? "This room is full" : ""}</p>
         </div>
     )
 }
