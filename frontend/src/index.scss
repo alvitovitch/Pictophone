@@ -14,7 +14,6 @@ code {
 
 
 @use './stylesheets/reset.scss';
-
 @use './stylesheets/splash.scss';
 @use './stylesheets/lobby.scss';
 @use './stylesheets/navbar.scss';
@@ -23,3 +22,4 @@ code {
 @use './stylesheets/create_form.scss';
 @use './stylesheets/auth.scss';
 @use './stylesheets/game.scss';
+@use './stylesheets/guess_form.scss';

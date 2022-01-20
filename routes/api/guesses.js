@@ -50,7 +50,7 @@ router.post("/",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    const { errors, isValid } = ValidateGuessInput(req.body)
+    const { errors, isValid } = validateGuessInput(req.body)
 
     if (!isValid) {
       return res.status(400).json(errors);
