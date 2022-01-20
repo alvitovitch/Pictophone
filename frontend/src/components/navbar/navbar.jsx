@@ -4,6 +4,20 @@ import logo from "../../images/transparent_phone.png";
 
 class NavBar extends React.Component {
 
+    handleLogout = (e) => {
+        e.preventDefault();
+        const location = this.props.location.pathname;
+        console.log(location.slice(0,6))
+        console.log(location.slice(7))
+        if (location.slice(0,6) === "/rooms") {
+            let object = { 'roomId': location.slice(7), 'playerId': this.props.currentUser.id };
+            this.props.updateRoom(object)
+                .then(() => this.props.logout())
+        } else {
+            this.props.logout();
+        }
+    }
+
     render() {
         if (!this.props.loggedIn) {
             return (
@@ -37,7 +51,7 @@ class NavBar extends React.Component {
                     <div id='navButtons'>
                         <button className="navButton">Profile</button>
                         <button className="navButton">Settings</button>
-                        <button className="navButton" onClick={this.props.logout}>Logout</button>
+                        <button className="navButton" onClick={this.handleLogout}>Logout</button>
                     </div>
                 </div>
             )

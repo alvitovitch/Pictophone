@@ -51,5 +51,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestGuess = requestGuess;
   window.createGuess = createGuess;
 
-  window.uploadImage = uploadImage;
+  // window.uploadImage = uploadImage;
 })
