@@ -19,16 +19,15 @@ class Room extends React.Component {
         this.socket.on('start-game', () => {
             this.props.openModal('game') })
         
-        this.leaveRoom = this.leaveRoom.bind(this)
-        this.startGame = this.startGame.bind(this)
+        this.leaveRoom = this.leaveRoom.bind(this);
+        this.startGame = this.startGame.bind(this);
+        this.prompts = [];
+
     }
 
     // if player is the room leader maintain a count of images/prompts submitted
     // when the count each turn === roomsize then go to next round
     // 
-
-    
-
 
     startGame() {
         this.socket.emit('start-game', this.props.roomId)
@@ -38,15 +37,31 @@ class Room extends React.Component {
 
     componentDidMount(){
         this.props.requestRoom(this.props.roomId)
-            .then(()=>{
+            .then(() => {
                 if(!this.props.room.players.includes(this.props.currentUser.id)){
                     let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
                     this.props.updateRoom(object);
                 }
             })
+            .then(() => {
+                this.props.requestAllPrompts().then(
+                    () => {
+                        this.fillPrompts()
+                    }
+            )})
     }
 
-    componentWillUnmount(){
+    fillPrompts() {
+        while (this.prompts.length < this.props.room.size) {
+            const randomPrompt = Object.values(this.props.prompts)[Math.floor(Math.random() * Object.values(this.props.prompts).length)]
+            if (!this.prompts.includes(randomPrompt)) {
+                this.prompts.push(randomPrompt)
+            }
+        }
+    }
+    
+
+    componentWillUnmount() {
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
         this.props.updateRoom(object);
     }
@@ -67,7 +82,7 @@ class Room extends React.Component {
             <div className='players-container'>
                 <button onClick={this.startGame}>Start</button>
       
-                {this.props.modal === "game" ? <Game_container room={this.props.room}/> : ""}
+                {this.props.modal === "game" ? <Game_container prompts={this.prompts} room={this.props.room}/> : ""}
                 <img src={avatar1} alt="" />
                 <p></p>
             </div>

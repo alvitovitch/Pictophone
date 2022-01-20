@@ -42,9 +42,7 @@ class GameBoard extends React.Component {
             this.uploadFile(blob)
 
               
-        }).then(
-            () =>  this.props.handleSubmit()
-        )
+        }).then(() =>  this.props.handleSubmit())
     }
 
     uploadFile = (file) => {

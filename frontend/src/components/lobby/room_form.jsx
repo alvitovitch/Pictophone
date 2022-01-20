@@ -18,8 +18,8 @@ class RoomForm extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevState.name != this.state.name){
-            if (this.props.errors.length != 0)this.props.clearErrors()
+        if(prevState.name !== this.state.name){
+            if (this.props.errors.length !== 0)this.props.clearErrors()
         }
     }
             
