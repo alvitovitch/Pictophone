@@ -35,6 +35,7 @@ class GameBoard extends React.Component {
     // this is where we get and upload the canvas... will set the name based on the turn and player possibly, to be stored/fetched at https://pictophone-uploads.s3.amazonaws.com/${blob-name}
     
     getCanvas() {
+        debugger
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
             blob.name = `drawing${this.props.roomId}${this.props.chainId}`
@@ -42,7 +43,7 @@ class GameBoard extends React.Component {
             this.uploadFile(blob)
 
               
-        }).then(() =>  this.props.handleSubmit())
+        }).then(() =>  this.props.handleSubmit())   
     }
 
     uploadFile = (file) => {

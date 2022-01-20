@@ -4,7 +4,10 @@ import { randomPrompts } from '../../reducers/selectors';
 import { requestAllUsers } from '../../actions/users_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions'
 import { requestAllPrompts } from '../../actions/prompts_actions';
-import { openModal } from '../../actions/modal_actions';
+
+import { requestRoom, updateRoom } from '../../actions/rooms_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
+
 
 
 const mSTP = (state, ownProps) => {
@@ -24,7 +27,10 @@ const mDTP = dispatch => {
         requestRoom: roomId => dispatch(requestRoom(roomId)),
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal()),
+
         requestAllUsers: () => dispatch(requestAllUsers()),
+
         requestAllPrompts: () => dispatch(requestAllPrompts()),
         // update board
     }
