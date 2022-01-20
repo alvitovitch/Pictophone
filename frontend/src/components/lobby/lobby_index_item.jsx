@@ -12,7 +12,6 @@ const LobbyIndexItem = (props) => {
             props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
                 .then( () => props.history.push(`/rooms/${room._id}`))
         } else {
-            debugger
             props.roomFullError(props.room._id);
             console.log(e.currentTarget.className)
         }
