@@ -33,6 +33,8 @@ class LobbyIndex extends React.Component {
                                     {rooms.map((room, i) => (
                                         <LobbyIndexItem
                                             key={i}
+                                            errors={this.props.errors}
+                                            roomFullError={this.props.roomFullError}
                                             currentUser={currentUser}
                                             updateRoom={this.props.updateRoom}
                                             deleteRoom={this.props.deleteRoom}

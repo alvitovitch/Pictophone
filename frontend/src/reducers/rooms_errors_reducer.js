@@ -1,6 +1,7 @@
 import { 
     CLEAR_ERRORS,
-    RECEIVE_ROOM_ERRORS
+    RECEIVE_ROOM_ERRORS,
+    ROOM_FULL_ERROR
 } from '../actions/rooms_actions';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 
@@ -12,6 +13,8 @@ const RoomsErrorsReducer = (state = [], action) => {
             return [];
         case CLEAR_ERRORS:
             return [];
+        case ROOM_FULL_ERROR:
+            return { full: {msg: "Room is full", id: action.roomId}}
         default:
             return state
     }
