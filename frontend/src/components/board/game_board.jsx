@@ -31,12 +31,13 @@ class GameBoard extends React.Component {
         this.getCanvas = this.getCanvas.bind(this);
     }
 
-    // this is where we get and upload the canvas... will set the name on line 38 based on the turn and player possibly, to be stored/fetched at https://pictophone-uploads.s3.amazonaws.com/${blob-name}
+    // this is where we get and upload the canvas... will set the name based on the turn and player possibly, to be stored/fetched at https://pictophone-uploads.s3.amazonaws.com/${blob-name}
     
     getCanvas() {
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
-            blob.name = 'blob1'
+            debugger
+            blob.name = `testBlob123`
             console.log('upload');
             console.log(blob)
             this.uploadFile(blob);
@@ -51,21 +52,20 @@ class GameBoard extends React.Component {
         }
 
         this.bucket.upload(params).promise().then(function (data) {
+            let newDrawing = {
+                assetUrl: data.Location,
+                roomId: this.props.rooomId,
+                userId: this.props.userId,
+                chainId: this.props.chainId
+            }
+            this.props.createDrawing(newDrawing);
+            //chainId, roomId, userId => post to backend
+            console.log(data);
             console.log(`File uploaded successfully. ${data.Location}`);
         }, function (err) {
             console.error("Upload failed", err);
         })
-        // this.bucket.putObject(params)
-        //     .on('httpUploadProgress', (e) => {
-        //         this.setState({
-        //             progress: Math.round((e.loaded / e.total) * 100),
-        //         })
-        //     })
-        //     .send((err) => {
-        //         if (err) {
-
-        //         }
-        //     })
+       
     }
     
 
@@ -227,3 +227,4 @@ class GameBoard extends React.Component {
 }
 
 export default GameBoard;
+
