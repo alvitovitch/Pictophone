@@ -61,7 +61,8 @@ io.on('connection', socket => {
         socket.to(room).emit('receive-message', message)
     })
     socket.on('join-room', (room) => {
-        console.log('joined')
+
+        console.log('joined'
         socket.join(room)
     })
     // socket.on('start-game', room => {
