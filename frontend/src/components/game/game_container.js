@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { randomPrompts } from '../../reducers/selectors';
-
+import { requestGuess } from '../../actions/guesses_actions';
 import { fetchRoom } from '../../actions/rooms_actions';
 import Game from './game'
 import { closeModal } from '../../actions/modal_actions';
@@ -8,6 +8,7 @@ import { closeModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => {
     return {
+        currentUser: state.session.user
     }
 }
 
@@ -18,7 +19,8 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => {
     return {
-        closeModal: () => dispatch(closeModal())
+        closeModal: () => dispatch(closeModal()),
+        requestGuess: guessObject => dispatch(requestGuess(guessObject))
     }
 }
 

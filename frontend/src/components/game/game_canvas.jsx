@@ -17,7 +17,6 @@ class GameCanvas extends React.Component {
     }
 
     createCanvas() {
-        debugger
         this.canvas = document.querySelector('.game-board');
         this.ctx = this.canvas.getContext('2d');
         this.canvas.width = 600;
@@ -68,7 +67,7 @@ class GameCanvas extends React.Component {
 
 
         const drawLine = function () {
-            
+
             that.ctx.beginPath();
             that.ctx.moveTo(prevPos.x, prevPos.y);
             that.ctx.lineTo(currentPos.x, currentPos.y);

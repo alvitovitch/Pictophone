@@ -1,24 +1,23 @@
 import React from "react";
 import GuessFormContainer from "./guess_form_container";
 import { socket } from "../../util/socket_util";
+import GameCanvas from "./game_canvas";
 
 
 class Game extends React.Component {
     constructor(props) {    
         super(props)
-        this.state = {
-            turn: 1
-        } 
         this.socket = socket
         this.state = {
             players: this.props.room.players, // Array of playerIds
             chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
-            turn: 0,
+            turn: 1,
             gameover: false,
         }
-        this.state = {
-            prevChainId: this.state.chainId-1
-        }
+        
+        // this.state = {
+        //     prevChainId: this.state.chainId-1
+        // }
         // finds index of player in playerIds array and then adds 1 to compensate for idx 0
         // multiplies that by 10 and then adds 1
         // so the player's chain ids in a four player game should be as follows: 11, 21, 31, 41 
@@ -64,53 +63,58 @@ class Game extends React.Component {
         // on a drawing turn
         // want to fetch the prompt on first turn
         // else fetch the previous chain guess
+        let prompt = ''
         if (this.state.turn === 1) {
-            const prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser)]
+            prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
         } else {
-            this.props.fetchChain()
+            this.props.requestGuess({roomId: this.props.room.id, chainId: this.state.prevChainId})
+            .then(() => prompt = this.props.chain)
         }
+        const promptDiv = document.createElement('div')
+        promptDiv.innerText = prompt.word
+        document.getElementById('drawModal').appendChild(promptDiv) 
     }
 
 
     componentDidMount() {
-        setTimeout(() => {
+        //setTimeout(() => {
             // set the current chainId
-            this.setState({ chainId: this.state.chainId + 11 });
+            this.setState({ chainId: this.state.chainId + 10 });
             // if the chain id is greater than the 10* the length of the players
-            if (this.state.chainId > (this.state.players.length+1)*10) {
+            if (this.state.chainId > ((this.state.players.length)+1) *10) {
               // set the chainId to be less than the players * 10: 5 player, 61 - 50 = 11
                 this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
             
             };
-            // increaset the turn count
-            this.setState({ turn: this.state.turn + 1 });
-            
+            // increaset twhe turn count
+            //this.setState({ turn: this.state.turn + 1 });
+            this.draw()
             // send the drawing to the backend
-            this.socket.emit('send-drawing', testMessage, this.props.room.id)
-        }, 3000);
+           // this.socket.emit('send-drawing', testMessage, this.props.room.id)
+        //}, 3000);
     }
 
     componentDidUpdate() {
-        if (this.state.gameover) {
-            // end the game? or unmount the component?
-        }   else if (this.state.chainId % 2 === 0) {
-            setTimeout(() => {
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 1500);
-        } else {
-            setTimeout(() => {
-                debugger
-                this.setState({ chainId: this.state.chainId + 11 });
-                if (this.state.chainId > (this.state.players.length + 1) * 10) {
-                    this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
-                };
-                this.setState({ turn: this.state.turn + 1 });
-            }, 3000);
-        }
+        // if (this.state.gameover) {
+        //     // end the game? or unmount the component?
+        // }   else if (this.state.chainId % 2 === 0) {
+        //     setTimeout(() => {
+        //         this.setState({ chainId: this.state.chainId + 11 });
+        //         if (this.state.chainId > (this.state.players.length + 1) * 10) {
+        //             this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+        //         };
+        //         this.setState({ turn: this.state.turn + 1 });
+        //     }, 1500);
+        // } else {
+        //     setTimeout(() => {
+        //         debugger
+        //         this.setState({ chainId: this.state.chainId + 11 });
+        //         if (this.state.chainId > (this.state.players.length + 1) * 10) {
+        //             this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
+        //         };
+        //         this.setState({ turn: this.state.turn + 1 });
+        //     }, 3000);
+        // }
     }
 
 
@@ -140,17 +144,19 @@ class Game extends React.Component {
         return (
             (this.state.chainId % 2 !== 0 ?
             <div className="game-modal">
-                <div className="game-container">
+                <div id='drawModal' className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
-
+                    <GameCanvas />
                         {/* DRAW */}
                 </div>
             </div>
             :
             <div className="game-modal">
-                <div className="game-container">
+                <div id='guessModal' className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
                         {/* GUESS */}
+
+
                 </div>
             </div>
             )

@@ -16,8 +16,10 @@ class Room extends React.Component {
         super(props)
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId);
-        
+        this.prompts = []
         this.leaveRoom = this.leaveRoom.bind(this)
+        
+
     }
 
     componentDidMount(){
@@ -28,6 +30,23 @@ class Room extends React.Component {
                     this.props.updateRoom(object);
                 }
             })
+            .then( () =>
+        this.props.requestAllPrompts().then(
+                () => 
+                {
+                    this.fillPrompts()
+                }
+                    ))
+    }
+
+    fillPrompts(){
+        
+        while(this.prompts.length < this.props.room.size) {
+            const randomPrompt = Object.values(this.props.prompts)[Math.floor(Math.random() * Object.values(this.props.prompts).length)]
+            if (!this.prompts.includes(randomPrompt)) {
+                this.prompts.push(randomPrompt)
+            }
+        }
     }
 
     componentWillUnmount(){
@@ -49,7 +68,7 @@ class Room extends React.Component {
         <div className='room-main'>
             <div className='players-container'>
                 <button onClick={e => this.props.openModal('game')}>Start</button>
-                {this.props.modal === "game" ? <Game_container room={this.props.room} socket={this.socket} /> : ""}
+                {this.props.modal === "game" ? <Game_container prompts={this.prompts} room={this.props.room} socket={this.socket} /> : ""}
                 <img src={avatar1} alt="" />
                 <p></p>
             </div>
