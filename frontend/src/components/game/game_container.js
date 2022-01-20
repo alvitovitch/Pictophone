@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { randomPrompts } from '../../reducers/selectors';
+import { withRouter } from 'react-router-dom'
 
 import { fetchRoom } from '../../actions/rooms_actions';
 import Game from './game'
@@ -7,7 +8,9 @@ import { closeModal } from '../../actions/modal_actions';
 
 
 const mSTP = (state, ownProps) => {
+    // debugger
     return {
+        room: ownProps.room
     }
 }
 
@@ -23,4 +26,4 @@ const mDTP = dispatch => {
 }
 
 
-export default connect(mSTP, mDTP)(Game)
+export default withRouter(connect(mSTP, mDTP)(Game))

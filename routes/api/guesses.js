@@ -25,23 +25,25 @@ router.get("/:guessId",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    if (!req.body.chainId) {
-    // If no chainId is passed in the request body, this will return the single guess with that guessId that is passed in instead via params
-    Guess.findById(req.params.guessId) //potentially change this to guessId passed in body?
-      .then(guess => res.json(guess))
-      .catch(err => 
-        res.status(404).json({ noguessfound: 'No guess found with that ID' }))
-    } else {
+    const roomId = req.params.guessId.split(',')[0];
+    const chainId = req.params.guessId.split(',')[1]; 
+    // if (!req.body.chainId) {
+    // // If no chainId is passed in the request body, this will return the single guess with that guessId that is passed in instead via params
+    // Guess.findById(req.params.guessId) //potentially change this to guessId passed in body?
+    //   .then(guess => res.json(guess))
+    //   .catch(err => 
+    //     res.status(404).json({ noguessfound: 'No guess found with that ID' }))
+    // } else {
     // Else it will look for guesses with that chain Id and then filter out the single guess that belongs to the roomId passed in the request body as well
-    Guess.find({ chainId: req.body.chainId })
+    Guess.find({ chainId: chainId })
       .then(guesses => {
-        let roomId = req.body.roomId;
+        // let roomId = req.body.roomId;
 
         let guess = guesses.filter(guess => guess.roomId === roomId);
         res.json(...guess);
       })
       .catch(err => res.status(404).json({ noguessfound: 'No guess with that chainId and roomId found' }))
-    }
+    // }
   }
 )
 
