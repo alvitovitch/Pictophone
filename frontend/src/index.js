@@ -50,4 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAllGuesses = requestAllGuesses;
   window.requestGuess = requestGuess;
   window.createGuess = createGuess;
+
 })
