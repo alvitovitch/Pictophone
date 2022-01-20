@@ -5,7 +5,8 @@ import Root from './components/root';
 import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
-import { logout } from './actions/session_actions'
+import { logout } from './actions/session_actions';
+import { uploadImage} from './util/drawing_util';
 
 import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
@@ -42,10 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateRoom = updateRoom;
   window.deleteRoom = deleteRoom;
   window.getState = store.getState;
+
   window.requestAllDrawings = requestAllDrawings;
   window.requestDrawing = requestDrawing;
   window.createDrawing = createDrawing;
   window.requestAllGuesses = requestAllGuesses;
   window.requestGuess = requestGuess;
   window.createGuess = createGuess;
+
+  window.uploadImage = uploadImage;
+
 })
