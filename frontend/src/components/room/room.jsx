@@ -16,7 +16,7 @@ class Room extends React.Component {
         super(props)
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId);
-
+        
         this.leaveRoom = this.leaveRoom.bind(this)
     }
 
@@ -49,7 +49,7 @@ class Room extends React.Component {
         <div className='room-main'>
             <div className='players-container'>
                 <button onClick={e => this.props.openModal('game')}>Start</button>
-                {this.props.modal === "game" ? <Game_container /> : ""}
+                {this.props.modal === "game" ? <Game_container room={this.props.room} socket={this.socket} /> : ""}
                 <img src={avatar1} alt="" />
                 <p></p>
             </div>

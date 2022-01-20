@@ -61,12 +61,14 @@ io.on('connection', socket => {
         socket.to(room).emit('receive-message', message)
     })
     socket.on('join-room', room => {
+        console.log(room)
         socket.join(room)
     })
     socket.on('leave-room', room => {
         socket.leave(room)
     })
     socket.on('send-drawing', (drawing, room) => {
+        console.log('received-drawing')
         socket.to(room).emit('receive-drawing', drawing)
     })
     socket.on("connect_error", (err) => {

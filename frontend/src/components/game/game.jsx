@@ -1,5 +1,6 @@
 import React from "react";
 import GuessFormContainer from "./guess_form_container";
+import { socket } from "../../util/socket_util";
 
 
 class Game extends React.Component {
@@ -8,12 +9,15 @@ class Game extends React.Component {
         this.state = {
             turn: 1
         } 
+        this.socket = socket
         this.state = {
             players: this.props.room.players, // Array of playerIds
-            chainId: (((this.state.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
-            prevChainId: this.state.chainId-10,
+            chainId: (((this.props.room.players.findIndex(id => id === this.props.currentUser))+1)*10)+1,
             turn: 0,
             gameover: false,
+        }
+        this.state = {
+            prevChainId: this.state.chainId-1
         }
         // finds index of player in playerIds array and then adds 1 to compensate for idx 0
         // multiplies that by 10 and then adds 1
@@ -41,18 +45,49 @@ class Game extends React.Component {
         // 21, 22, 23, 24 (second chain in order)
         // 31, 32, 33, 34 (third chain in order)
         // 41, 42, 43, 44 (fourth chain in order)
+        /// testing out socket logic 
+        this.socket.emit('join-room', this.props.room.id);
+        this.socket.on('receive-drawing', chain => {
+            //if (chain.id === (this.state.chainId - 11)) {
+                console.log('this is mine!')
+            //}
+        })
+        this.socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+          });
     }
 
+    
     /// socket timeout when turn starts 30 to draw then 15sec to guess
+
+    draw() {
+        // on a drawing turn
+        // want to fetch the prompt on first turn
+        // else fetch the previous chain guess
+        if (this.state.turn === 1) {
+            const prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser)]
+        } else {
+            this.props.fetchChain()
+        }
+    }
+
 
     componentDidMount() {
         setTimeout(() => {
+            // set the current chainId
             this.setState({ chainId: this.state.chainId + 11 });
+            // if the chain id is greater than the 10* the length of the players
             if (this.state.chainId > (this.state.players.length+1)*10) {
+              // set the chainId to be less than the players * 10: 5 player, 61 - 50 = 11
                 this.setState({ chainId: this.state.chainId - (this.state.players.length*10)})
+            
             };
+            // increaset the turn count
             this.setState({ turn: this.state.turn + 1 });
-        }, 30000);
+            
+            // send the drawing to the backend
+            this.socket.emit('send-drawing', testMessage, this.props.room.id)
+        }, 3000);
     }
 
     componentDidUpdate() {
@@ -65,15 +100,16 @@ class Game extends React.Component {
                     this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
                 };
                 this.setState({ turn: this.state.turn + 1 });
-            }, 15000);
+            }, 1500);
         } else {
             setTimeout(() => {
+                debugger
                 this.setState({ chainId: this.state.chainId + 11 });
                 if (this.state.chainId > (this.state.players.length + 1) * 10) {
                     this.setState({ chainId: this.state.chainId - (this.state.players.length * 10) })
                 };
                 this.setState({ turn: this.state.turn + 1 });
-            }, 30000);
+            }, 3000);
         }
     }
 
