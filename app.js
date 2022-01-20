@@ -60,9 +60,15 @@ io.on('connection', socket => {
     socket.on('send-message',  (message, room) => {
         socket.to(room).emit('receive-message', message)
     })
-    socket.on('join-room', room => {
+    socket.on('join-room', (room) => {
+
+        console.log('joined'
         socket.join(room)
     })
+    // socket.on('start-game', room => {
+    //     console.log(room)
+    //     socket.to(room).emit('start-game', 'hi')
+    // })
     socket.on('leave-room', room => {
         socket.leave(room)
     })
