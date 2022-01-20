@@ -45,7 +45,6 @@ class Game extends React.Component {
     /// socket timeout when turn starts 30 to draw then 15sec to guess
 
     componentDidMount() {
-        debugger
         setTimeout(() => {
             this.setState({ chainId: this.state.chainId + 11 });
             if (this.state.chainId > (this.state.players.length+1)*10) {
@@ -115,7 +114,7 @@ class Game extends React.Component {
                 <div className="game-container">
                     <button onClick={this.props.closeModal}>Close</button>
                         {/* GUESS */}
-                        <GuessFormContainer />
+                        <GuessFormContainer roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainId -1 }/>
                 </div>
             </div>
             )

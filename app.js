@@ -63,6 +63,9 @@ io.on('connection', socket => {
     socket.on('join-room', room => {
         socket.join(room)
     })
+    socket.on('start-game', room => {
+        socket.to(room).emit('start-game')
+    })
     socket.on('leave-room', room => {
         socket.leave(room)
     })
