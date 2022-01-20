@@ -16,9 +16,9 @@ class Room extends React.Component {
         super(props)
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId);
-        this.socket.on('start-game', () => {
-            debugger
-            this.props.openModal('game') })
+        // this.socket.on('start-game', () => {
+        //     debugger
+        //     this.props.openModal('game') })
         this.leaveRoom = this.leaveRoom.bind(this)
         this.startGame = this.startGame.bind(this)
     }

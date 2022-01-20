@@ -80,7 +80,7 @@ router.patch("/:room_id",
         // else splice out the request body playerId from the room's player array
         room.players.splice(room.players.findIndex(id => id === req.body.playerId), 1);
         // save the updated room and render it as json
-        room.save().then(res.json(room));
+        room.save({players: room.players}).then(res.json(room));
       })
       .catch(err => 
         res.status(404).json({ noroomfound: 'No room found with that ID' }))
