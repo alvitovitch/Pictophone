@@ -5,6 +5,7 @@ import { socket } from "../../util/socket_util";
 
 class Game extends React.Component {
     constructor(props) {    
+        debugger
         super(props)
         this.socket = socket;
         

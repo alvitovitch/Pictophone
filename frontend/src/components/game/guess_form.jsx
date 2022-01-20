@@ -4,11 +4,14 @@ import { socket } from '../../util/socket_util';
 
 class GuessForm extends React.Component {
     constructor(props) {
+        debugger
         super(props)
         // this.submit = this.submit.bind(this)
         this.state = {
             guess: "",
         }
+        this.socket = socket
+        this.submitGuess = this.submitGuess.bind(this)
         this.updateGuess = this.updateGuess.bind(this);
     }
 
@@ -17,7 +20,8 @@ class GuessForm extends React.Component {
     //     this.props.handleSubmit()
     // }
 
-    submitGuess(e) {
+    submitGuess = (e) => {
+        e.preventDefault()
         let guess = {};
         guess['word'] = this.state.guess;
         guess['roomId'] = this.props.roomId;
@@ -36,16 +40,17 @@ class GuessForm extends React.Component {
 
     render(){
         // {console.log(this.props)}
-        return <div className="guess-form">
+        return( <div className="guess-form">
             <div className="img-container">
                 <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
-            <form>
+            <form onSubmit={this.submitGuess}>
                 <h2>Your Guess:</h2>
                 <input type="text" value={this.state.guess} onChange={this.updateGuess}/>
                 <input type="submit" value="submit" />
             </form>
         </div>
+        )
     }
 }
 

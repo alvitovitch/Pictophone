@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Room from './room';
 import { requestAllPrompts } from '../../actions/prompts_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions';
-import { openModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 
 const mSTP = (state, ownProps) => {
@@ -21,6 +21,7 @@ const mDTP = dispatch => {
         requestRoom: roomId => dispatch(requestRoom(roomId)),
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal()),
         requestAllPrompts: () => dispatch(requestAllPrompts()),
 
 
