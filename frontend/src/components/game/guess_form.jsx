@@ -5,7 +5,6 @@ class GuessForm extends React.Component {
 
     render(){
         // {console.log(this.props)}
-        debugger
         return <div className="guess-form">
             <div className="img-container">
                 <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}11`} alt="" />

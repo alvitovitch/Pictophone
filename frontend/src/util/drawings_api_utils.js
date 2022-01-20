@@ -9,7 +9,6 @@ export const fetchDrawing = (drawingObj) => {
 }
 
 export const createDrawing = (drawing) => {
-    debugger
     return axios.post('/api/drawings', drawing)
 }
 

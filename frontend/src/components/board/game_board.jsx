@@ -10,7 +10,6 @@ class GameBoard extends React.Component {
             size: 5
         }
         // this.timer = setTimeout(() => this.getCanvas, 30000);
-       debugger
         
         AWS.config.update({
             apiVersion: 'latest',
@@ -51,7 +50,6 @@ class GameBoard extends React.Component {
         }
         const that = this
         this.bucket.upload(params).promise().then(function (data) {
-            debugger
             let newDrawing = {
                 assetUrl: data.Location,
                 roomId: that.props.roomId,

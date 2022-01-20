@@ -8,7 +8,6 @@ import { closeModal } from '../../actions/modal_actions';
 
 
 const mSTP = (state, ownProps) => {
-    // debugger
     return {
         room: ownProps.room,
         currentUser: state.session.user
