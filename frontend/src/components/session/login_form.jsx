@@ -10,6 +10,10 @@ class LoginForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillUnmount(){
+        this.props.clearErrors();
+    }
+
     handleSubmit(e){
         e.preventDefault();
         const user = Object.assign({}, this.state);
@@ -34,11 +38,13 @@ class LoginForm extends React.Component {
                         <input
                             type="text"
                             onChange={this.update('username')} placeholder="Username"/>
+                        {this.props.errors.username ? this.props.errors.username : ""}
                     </div>
                     <div className='password-input-container'>
                         <input
                             type="password"
                             onChange={this.update('password')} placeholder="Password"/>
+                            {this.props.errors.password ? this.props.errors.password : ""}
                     </div>
                     <button>Sign In</button>
                 </form>
