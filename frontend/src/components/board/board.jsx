@@ -110,7 +110,6 @@ class Board extends React.Component {
     }
 
     updateColor(color) {
-        console.log(color);
         this.setState({color: color});
     }
 

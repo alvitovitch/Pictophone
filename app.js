@@ -56,19 +56,21 @@ if (process.env.NODE_ENV === 'production') {
 // socket.io connection
 
 io.on('connection', socket => {
-    console.log(socket.id)
     socket.on('send-message',  (message, room) => {
         socket.to(room).emit('receive-message', message)
     })
     socket.on('join-room', (room) => {
-
-        console.log('joined'
         socket.join(room)
     })
-    // socket.on('start-game', room => {
-    //     console.log(room)
-    //     socket.to(room).emit('start-game', 'hi')
-    // })
+    socket.on('submit-chain', (room) => {
+        io.in(room).emit('chain-received')
+    })
+    socket.on('increase-turn', (room) => {
+        io.in(room).emit('increased-turn')
+    })
+    socket.on('start-game', room => {
+        socket.to(room).emit('start-game', 'hi')
+    })
     socket.on('leave-room', room => {
         socket.leave(room)
     })

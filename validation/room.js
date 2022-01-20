@@ -6,7 +6,7 @@ module.exports = function validateRoomInput(data) {
   let errors = {};
 
   data.name = validText(data.name) ? data.name : '';
-  data.size = validNum(parseInt(data.size)) ? parseInt(data.size) : 4;
+  data.size = validNum(parseInt(data.size)) ? parseInt(data.size) : 2;
   data.host_id = validText(data.host_id) ? data.host_id : '';
 
   if (Validator.isEmpty(data.name)) {
