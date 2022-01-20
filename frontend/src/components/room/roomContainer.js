@@ -3,7 +3,7 @@ import Room from './room';
 import { randomPrompts } from '../../reducers/selectors';
 
 import { requestRoom, updateRoom } from '../../actions/rooms_actions'
-import { openModal } from '../../actions/modal_actions';
+import { closeModal, openModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => {
     return{
@@ -19,7 +19,8 @@ const mDTP = dispatch => {
     return{
         requestRoom: roomId => dispatch(requestRoom(roomId)),
         updateRoom: roomId => dispatch(updateRoom(roomId)),
-        openModal: modal => dispatch(openModal(modal))
+        openModal: modal => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal())
         // randomPrompts: (roomSize, state)
 
         // update board
