@@ -12,7 +12,7 @@ const mSTP = (state, ownProps) => {
     return {
         room: ownProps.room,
         currentUser: state.session.user,
-        guess: state.entities.guesses
+        guesses: state.entities.guesses
     }
 }
 
