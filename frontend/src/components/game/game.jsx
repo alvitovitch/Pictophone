@@ -130,10 +130,11 @@ class Game extends React.Component {
         } else if (this.state.turn % 2 === 0 ) {
                 debugger
                 this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
-                .then(guess => console.log(guess))
-                    // document.getElementById('prompt-div').innerText = guess.data.word)
-            //const guesses = Object.values(this.props.guesses)
-            //document.getElementById('prompt-div').innerText = guesses[guesses.length-1]
+                
+            const guesses = Object.values(this.props.guesses)
+            const guess = guesses.filter(guess => guess.chainId == this.state.fetchChainIds[this.state.turn-1])
+            console.log(guess)
+            document.getElementById('prompt-div').innerText = guess[0].word
         } 
         
     }
