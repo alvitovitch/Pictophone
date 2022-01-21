@@ -3,6 +3,8 @@ import GameBoard from "../board/game_board";
 import GuessFormContainer from "./guess_form_container";
 import { socket } from "../../util/socket_util";
 
+import axios from "axios";
+
 class Game extends React.Component {
     constructor(props) {    
         super(props)
@@ -129,12 +131,17 @@ class Game extends React.Component {
             document.getElementById('draw-modal').appendChild(promptDiv)
         } else if (this.state.turn % 2 === 0 ) {
                 debugger
-                this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
+            //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
                 
-            const guesses = Object.values(this.props.guesses)
-            const guess = guesses.filter(guess => guess.chainId == this.state.fetchChainIds[this.state.turn-1])
-            console.log(guess)
-            document.getElementById('prompt-div').innerText = guess[0].word
+            // const guesses = Object.values(this.props.guesses)
+            // const guess = guesses.filter(guess => guess.chainId == this.state.fetchChainIds[this.state.turn-1])
+            axios.get(`/api/guesses/${this.props.room._id},${this.state.fetchChainIds[this.state.turn-1]}`)
+            .then( 
+                guess => {
+                    console.log(guess)
+                    document.getElementById('prompt-div').innerText = guess.data.word
+                }
+            )
         } 
         
     }
