@@ -30,6 +30,9 @@ export const requestDrawing = (drawingObj) => dispatch => {
 }
 
 export const createDrawing = drawing => dispatch => {
+
+
+    console.log(drawing)
     return DrawingsApiUtils.createDrawing(drawing)
         .then(drawing => dispatch(receiveDrawing(drawing)))
         .catch(err => console.log(err))
