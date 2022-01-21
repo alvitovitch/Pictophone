@@ -36,17 +36,18 @@ class Game extends React.Component {
         let chainIds = [this.state.chainId];
         for (let i=0; i<this.props.room.size-1; i++) {
             let nextChainId = chainIds[chainIds.length-1] + 11;
-            if (nextChainId > (this.state.players.length + 1) * 10) {
-                nextChainId -= (this.state.players.length * 10);
+            if (nextChainId > (this.props.room.size + 1) * 10) {
+                nextChainId -= (this.props.room.size * 10);
             }
 
             chainIds.push(nextChainId);
         }
         let fetchChainIds = chainIds.map(id => id-1);
+        fetchChainIds.shift()
         this.setState({ chainIds: chainIds });
         this.setState({ fetchChainIds: fetchChainIds });
-        console.log(this.state.chainIds)
-        console.log(this.state.fetchChainIds)
+        console.log(chainIds)
+        console.log(fetchChainIds)
         this.draw();
     }
 
