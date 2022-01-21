@@ -20,18 +20,17 @@ class GuessForm extends React.Component {
     //     this.props.handleSubmit()
     // }
 
-    submitGuess = (e) => {
+    async submitGuess(e) {
         e.preventDefault()
         let guess = {};
         guess['word'] = this.state.guess;
         guess['roomId'] = this.props.roomId;
         guess['userId'] = this.props.userId;
         guess['chainId'] = this.props.chainId;
-        this.props.createGuess(guess)
-            .then(() => this.socket.emit('submit-chain', this.props.roomId))
-            .then(() => {
-                this.props.handleSubmit()
-            });
+        await this.props.createGuess(guess)
+            
+        this.socket.emit('submit-chain', this.props.roomId)
+        this.props.handleSubmit()
     }
 
     updateGuess(e) {

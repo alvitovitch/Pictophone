@@ -5,7 +5,6 @@ import { socket } from "../../util/socket_util";
 
 class Game extends React.Component {
     constructor(props) {    
-        debugger
         super(props)
         this.socket = socket;
         
@@ -48,7 +47,7 @@ class Game extends React.Component {
         this.setState({ fetchChainIds: fetchChainIds });
         console.log(chainIds)
         console.log(fetchChainIds)
-        this.draw();
+       // this.draw();
     }
 
     // nextId() {
@@ -104,6 +103,7 @@ class Game extends React.Component {
     //     }
     // }
 
+
     handleSubmit() {
         const nextChainId = this.state.chainId + 11
         if (nextChainId > (this.state.players.length + 1) * 10) {
@@ -121,26 +121,36 @@ class Game extends React.Component {
         // want to fetch the prompt on first turn
         // else fetch the previous chain guess
         let prompt = ''
+        const promptDiv = document.createElement('div')
+        promptDiv.id = 'prompt-div'
         if (this.state.turn === 0) {
             prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
-        } else {
-            this.props.requestGuess({ roomId: this.props.room.id, chainId: this.state.prevChainId })
-                .then(() => prompt = this.props.chain)
-        }
-        const promptDiv = document.createElement('div')
-        promptDiv.innerText = prompt.word
-        document.getElementById('draw-modal').appendChild(promptDiv)
+            promptDiv.innerText = prompt.word
+            document.getElementById('draw-modal').appendChild(promptDiv)
+        } else if (this.state.turn % 2 === 0 ) {
+                debugger
+                this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
+                
+            
+            document.getElementById('prompt-div').innerText = this.props.guess.word
+        } 
+        
     }
 
 
     render() {
+        if (this.state.turn === this.props.room.size) {
+            return(
+                <div>YAAAAY YOU ARE DONE!!!! WHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+            )
+        }
         if (this.state.turn === 0) {
             return (
                 <div id="draw-modal" className="game-modal">
 
                     <div className="game-container">
                         <button onClick={this.props.closeModal}>Close</button>
-                        <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                        <GameBoard draw={this.draw} handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                         {/* DRAW */}
                     </div>
                 </div>
@@ -151,7 +161,7 @@ class Game extends React.Component {
                     <div className="game-modal">
                         <div className="game-container">
                             <button onClick={this.props.closeModal}>Close</button>
-                            <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                            <GameBoard draw={this.draw}  handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                             {/* DRAW */}
                         </div>
                     </div>
