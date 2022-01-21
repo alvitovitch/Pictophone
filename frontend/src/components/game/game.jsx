@@ -139,6 +139,11 @@ class Game extends React.Component {
 
 
     render() {
+        if (this.state.turn === this.props.room.size) {
+            return(
+                <div>YAAAAY YOU ARE DONE!!!! WHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+            )
+        }
         if (this.state.turn === 0) {
             return (
                 <div id="draw-modal" className="game-modal">
