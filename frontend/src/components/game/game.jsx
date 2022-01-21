@@ -63,8 +63,10 @@ class Game extends React.Component {
             this.count++
         }
         if (this.count >= this.props.room.size) { 
-            this.socket.emit('increase-turn', this.props.room._id)
-            this.count = 0;
+            setTimeout(() => {
+                this.socket.emit('increase-turn', this.props.room._id)
+                this.count = 0;
+            }, 1000)
         }
     }
 
