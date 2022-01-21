@@ -4,8 +4,6 @@ import { randomPrompts } from '../../reducers/selectors';
 import { requestAllUsers } from '../../actions/users_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions'
 import { requestAllPrompts } from '../../actions/prompts_actions';
-
-import { requestRoom, updateRoom } from '../../actions/rooms_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 
