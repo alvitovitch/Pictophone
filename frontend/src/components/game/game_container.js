@@ -11,7 +11,8 @@ import { requestGuess } from '../../actions/guesses_actions';
 const mSTP = (state, ownProps) => {
     return {
         room: ownProps.room,
-        currentUser: state.session.user
+        currentUser: state.session.user,
+        guess: state.entities.guesses
     }
 }
 

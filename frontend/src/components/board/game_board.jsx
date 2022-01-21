@@ -11,6 +11,7 @@ class GameBoard extends React.Component {
             size: 5
         }
         this.socket = socket
+        debugger
         // this.timer = setTimeout(() => this.getCanvas, 30000);
         
         // AWS.config.update({
@@ -86,6 +87,7 @@ class GameBoard extends React.Component {
 
 
     componentDidMount() {
+        this.props.draw()
         this.createCanvas();
         this.drawSketch();
     }
