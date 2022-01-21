@@ -62,6 +62,7 @@ io.on('connection', socket => {
     socket.on('join-room', (room) => {
         socket.join(room)
     })
+
     socket.on('submit-chain', (room) => {
         io.in(room).emit('chain-received')
     })
@@ -69,6 +70,7 @@ io.on('connection', socket => {
         io.in(room).emit('increased-turn')
     })
     socket.on('start-game', room => {
+
         socket.to(room).emit('start-game', 'hi')
     })
     socket.on('leave-room', room => {
