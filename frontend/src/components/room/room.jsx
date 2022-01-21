@@ -106,7 +106,7 @@ class Room extends React.Component {
                         </div>
                         
                         <button className='start-button' onClick={this.startGame}>Start</button>
-                        {this.props.modal === "game" ? <Game_container room={this.props.room} /> : ""}
+                        {this.props.modal === "game" ? <Game_container prompts={this.prompts} room={this.props.room} /> : ""}
                         
                     </div>
                     <div id='draw-container'>
