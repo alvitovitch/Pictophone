@@ -158,7 +158,7 @@ class Game extends React.Component {
                 <div id="draw-modal" className="game-modal">
 
                     <div className="game-container">
-                        <button onClick={this.props.closeModal}>Close</button>
+                        <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
                         <GameBoard draw={this.draw} handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                         {/* DRAW */}
                     </div>
@@ -169,7 +169,7 @@ class Game extends React.Component {
                 (this.state.turn % 2 === 0 ?
                     <div className="game-modal">
                         <div className="game-container">
-                            <button onClick={this.props.closeModal}>Close</button>
+                            <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
                             <GameBoard draw={this.draw}  handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                             {/* DRAW */}
                         </div>
@@ -177,7 +177,7 @@ class Game extends React.Component {
                     :
                     <div className="game-modal">
                         <div className="game-container">
-                            <button onClick={this.props.closeModal}>Close</button>
+                            <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
                             {/* GUESS */}
                             <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn-1]} />
                         </div>
