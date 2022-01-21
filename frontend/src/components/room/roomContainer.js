@@ -1,8 +1,11 @@
 import { connect } from 'react-redux';
 import Room from './room';
+import { randomPrompts } from '../../reducers/selectors';
+import { requestAllUsers } from '../../actions/users_actions';
+import { requestRoom, updateRoom } from '../../actions/rooms_actions'
 import { requestAllPrompts } from '../../actions/prompts_actions';
-import { requestRoom, updateRoom } from '../../actions/rooms_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
+
 
 
 const mSTP = (state, ownProps) => {
@@ -11,7 +14,8 @@ const mSTP = (state, ownProps) => {
         roomId: ownProps.match.params.roomId,
         room: state.entities.rooms[ownProps.match.params.roomId],
         modal: state.ui.modal,
-        prompts: state.entities.prompts,
+        users: state.entities.users,
+        prompts: state.entities.prompts
     }
     
 }
@@ -22,9 +26,10 @@ const mDTP = dispatch => {
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
+
+        requestAllUsers: () => dispatch(requestAllUsers()),
+
         requestAllPrompts: () => dispatch(requestAllPrompts()),
-
-
         // update board
     }
 }
