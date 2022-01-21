@@ -84,7 +84,7 @@ class Room extends React.Component {
             <div className='players-container'>
                 <button onClick={this.startGame}>Start</button>
       
-                {this.props.modal === "game" ? <Game_container room={this.props.room} prompts={this.prompts} /> : ""}
+                {this.props.modal === "game" ? <Game_container prompts={this.prompts} room={this.props.room} /> : ""}
                 <img src={avatar1} alt="" />
                 <p></p>
             </div>
