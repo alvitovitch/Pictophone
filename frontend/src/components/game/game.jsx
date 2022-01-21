@@ -160,7 +160,7 @@ class Game extends React.Component {
                         <div className="game-container">
                             <button onClick={this.props.closeModal}>Close</button>
                             {/* GUESS */}
-                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn-1]} />
                         </div>
                     </div>
                 )
