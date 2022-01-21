@@ -58,6 +58,7 @@ class Room extends React.Component {
                 this.prompts.push(randomPrompt)
             }
         }
+        debugger
     }
     
 
