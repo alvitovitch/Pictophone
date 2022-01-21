@@ -45,6 +45,8 @@ class Game extends React.Component {
         let fetchChainIds = chainIds.map(id => id-1);
         this.setState({ chainIds: chainIds });
         this.setState({ fetchChainIds: fetchChainIds });
+        console.log(this.state.chainIds)
+        console.log(this.state.fetchChainIds)
         this.draw();
     }
 
@@ -66,6 +68,7 @@ class Game extends React.Component {
         }
     }
 
+    
     // componentDidMount() {
     // //     setTimeout(() => {
     // //         this.setState({ chainId: this.state.chainId + 11 });
