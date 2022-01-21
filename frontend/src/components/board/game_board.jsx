@@ -48,7 +48,7 @@ class GameBoard extends React.Component {
             this.uploadFile(blob)
 
               
-        }).then(() =>  this.props.handleSubmit())   
+        })   
     }
 
     uploadFile = (file) => {
@@ -72,7 +72,7 @@ class GameBoard extends React.Component {
             console.error("Upload failed", err);
         })
         .then(() => this.socket.emit('submit-chain', this.props.roomId))
-       
+        .then(() =>  this.props.handleSubmit())
     }
     
 
