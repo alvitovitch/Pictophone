@@ -1,5 +1,4 @@
 import React from "react";
-import img from '../../images/drawing.jpeg'
 import { socket } from '../../util/socket_util';
 
 class GuessForm extends React.Component {
@@ -14,11 +13,6 @@ class GuessForm extends React.Component {
         this.submitGuess = this.submitGuess.bind(this)
         this.updateGuess = this.updateGuess.bind(this);
     }
-
-    // submit(e) {
-    //     e.preventDefault()
-    //     this.props.handleSubmit()
-    // }
 
     async submitGuess(e) {
         e.preventDefault()
@@ -38,7 +32,6 @@ class GuessForm extends React.Component {
     }
 
     render(){
-        // {console.log(this.props)}
         return( <div className="guess-form">
             <div className="img-container">
                 <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />

@@ -5,7 +5,6 @@ export const fetchAllGuesses = () => {
 }
 
 export const fetchGuess = (guessObj) => {
-    debugger
     return axios.get(`/api/guesses/${guessObj.roomId},${guessObj.chainId}`);
 }
 

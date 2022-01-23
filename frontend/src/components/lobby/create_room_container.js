@@ -6,7 +6,7 @@ import RoomForm from "./room_form"
 const mSTP = state => ({
     room: {
         name: '',
-        size: 0,
+        size: 4,
         host_id: state.session.user.id
     },
     errors: state.errors.rooms 

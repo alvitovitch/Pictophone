@@ -40,11 +40,12 @@ class RoomForm extends React.Component {
                         onChange={e=>this.setState({name: e.currentTarget.value})}/>
                     <h3>Room Size: </h3>
                     <select
+                        defaultValue={4}
                         onChange={e=>this.setState({size: e.currentTarget.value})}>
-                        <option value="2">2</option>
                         <option value="4">4</option>
                         <option value="6">6</option>
                         <option value="8">8</option>
+                        <option value="10">10</option>
                     </select>
                     <input type="submit" value="Submit" />
                 </form>
