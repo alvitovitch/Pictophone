@@ -26,11 +26,8 @@ const mDTP = dispatch => {
         updateRoom: roomId => dispatch(updateRoom(roomId)),
         openModal: modal => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
-
         requestAllUsers: () => dispatch(requestAllUsers()),
-
         requestAllPrompts: () => dispatch(requestAllPrompts()),
-        // update board
     }
 }
 

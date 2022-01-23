@@ -13,9 +13,7 @@ class Room extends React.Component {
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId);
         this.socket.on('start-game', () => {
-
         this.props.openModal('game') })
-        
         this.leaveRoom = this.leaveRoom.bind(this);
         this.startGame = this.startGame.bind(this);
         this.prompts = [];
@@ -114,7 +112,7 @@ class Room extends React.Component {
                             <MessageBoxContainer roomId={this.props.roomId} />
                         </div>
                     </div>
-                
+
                 </div>
 
             )
