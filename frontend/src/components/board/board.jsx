@@ -11,9 +11,6 @@ class Board extends React.Component {
             size: 5
         }
         this.timeout = undefined;
-    
-        // this.socket = io.connect("https://pictophone.herokuapp.com:4040");
-        // this.socket = io.connect("http://localhost:4040");
 
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId)
@@ -35,10 +32,7 @@ class Board extends React.Component {
             }, 200)
         
         })
-    // this.canvas = document.querySelector('.board');
-    // this.ctx = this.canvas.getContext('2d');
-    // this.canvas.width = 600;
-    // this.canvas.height = 600;
+
     this.updateColor = this.updateColor.bind(this);
     this.updateSize = this.updateSize.bind(this);
     this.updateErase = this.updateErase.bind(this);
@@ -63,10 +57,6 @@ class Board extends React.Component {
     }
 
     drawSketch() {
-        // const canvas = document.querySelector('.board');
-        // const ctx = canvas.getContext('2d');
-        // canvas.width = 600;
-        // canvas.height = 600;
 
         const currentPos = { x: 0, y: 0 };
         const prevPos = { x: 0, y: 0 };
