@@ -136,6 +136,7 @@ class Game extends React.Component {
             initialPrompt['userId'] = this.props.userId;
             initialPrompt['chainId'] = this.props.chainId-1;
             this.props.createGuess(initialPrompt);
+            // NEED TO PATCH GAME DB with chain Id here...
         } else if (this.state.turn % 2 === 0 ) {
                 debugger
             //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
