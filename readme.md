@@ -28,9 +28,68 @@ ___
 After signing up or logging in, users will be taken to Pictophone's main lobby and greeted by previously created rooms. Players are free to join those rooms or create a new one as a host. If players try to join a room, our full stack structure checks to see if that user has already joined the room or if that room is full. If it is not full and the player has not joined, their unique identifier is persisted to the backend and the frontend will route them to that unique room:
 
 Frontend-
-````
-Frontend code needed here
-````
+`````
+
+// Joining existing rooms
+
+const join = (e) => {
+    e.preventDefault();
+    props.requestAllRooms()
+        .then(
+            () => {
+                if(room.size > room.players.length) {
+                    props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
+                        .then( () => props.history.push(`/rooms/${room._id}`))
+                } else {
+                    props.roomFullError(props.room._id);
+                }
+            }
+        )
+}
+
+
+//Room creation and error handling
+
+handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.formAction(this.state)
+            .then(() => {
+                if(this.props.errors.length === 0){
+                    this.props.closeModal()
+                }
+            }
+        )
+    }
+
+componentDidUpdate(prevProps, prevState){
+    if(prevState.name !== this.state.name){
+        if (this.props.errors.length !== 0)this.props.clearErrors()
+    }
+}
+
+// Create Room Modal
+
+const Modal = ({modal, closeModal}) => {
+    if(!modal) return null;
+    let component;
+    switch (modal) {
+        case "createRoom":
+            component = <CreateRoomContainer />
+            break;
+        default:
+            return null;
+    }
+
+    return (
+        <div className='modal-background' onClick={closeModal}>
+            <div className='modal-child' onClick={(e => e.stopPropagation())}>
+                {component}
+            </div>
+        </div>
+    )
+}
+
+`````
 Backend-
 ````
 router.post("/", 
@@ -81,7 +140,17 @@ After all players have joined a room and a game begins, each player is given a r
 
 Frontend-
 ````
-Frontend code needed here
+
+// Start Game
+
+<button className='start-button' onClick={this.startGame}>Start</button>
+{this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} /> : ""}
+
+startGame() {
+    this.socket.emit('start-game', this.props.roomId)
+    this.props.openModal('game')
+}
+                        
 ````
 
 Backend-

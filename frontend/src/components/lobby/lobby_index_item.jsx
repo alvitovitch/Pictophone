@@ -14,7 +14,6 @@ const LobbyIndexItem = (props) => {
                             .then( () => props.history.push(`/rooms/${room._id}`))
                     } else {
                         props.roomFullError(props.room._id);
-                        console.log(e.currentTarget.className)
                     }
                 }
             )
