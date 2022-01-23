@@ -24,7 +24,7 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            {/* <img id='logoPic' src={logo} />     */}
+                            <img id='logoPic' src={logo} />    
                         </div>
                         <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
