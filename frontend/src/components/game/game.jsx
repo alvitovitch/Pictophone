@@ -129,6 +129,13 @@ class Game extends React.Component {
             prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
             promptDiv.innerText = prompt.word
             document.getElementById('draw-modal').appendChild(promptDiv)
+            //take the initial randomized prompt and add it to our database as a "guess" with the current roomId, userId, and chainId minus 1 (yielding four guess chainIds for each respective user's initial chainId: 10(for 11), 20(for 21), 30(for 31), 40(for 41))
+            let initialPrompt = {};
+            initialPrompt['word'] = prompt.word
+            initialPrompt['roomId'] = this.props.roomId;
+            initialPrompt['userId'] = this.props.userId;
+            initialPrompt['chainId'] = this.props.chainId-1;
+            this.props.createGuess(initialPrompt);
         } else if (this.state.turn % 2 === 0 ) {
                 debugger
             //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })

@@ -6,6 +6,7 @@ import { fetchRoom } from '../../actions/rooms_actions';
 import Game from './game'
 import { closeModal } from '../../actions/modal_actions';
 import { requestGuess } from '../../actions/guesses_actions';
+import { createGuess } from '../../actions/guesses_actions'
 
 
 const mSTP = (state, ownProps) => {
@@ -21,6 +22,7 @@ const mDTP = dispatch => {
         closeModal: () => dispatch(closeModal()),
         createDrawing: drawObject => dispatch(createDrawing(drawObject)),
         requestGuess: (guessObj) => dispatch(requestGuess(guessObj)),
+        createGuess: guessObj => dispatch(createGuess(guessObj)),
     }
 }
 
