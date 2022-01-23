@@ -11,13 +11,7 @@ class GameBoard extends React.Component {
             size: 5
         }
         this.socket = socket
-        // this.timer = setTimeout(() => this.getCanvas, 30000);
-        
-        // AWS.config.update({
-        //     apiVersion: 'latest',
-        //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        // });
+       
         AWS.config.update({
             apiVersion: 'latest',
             accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
@@ -35,38 +29,32 @@ class GameBoard extends React.Component {
         this.updateErase = this.updateErase.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.getCanvas = this.getCanvas.bind(this);
-    }
-
-    // this is where we get and upload the canvas... will set the name based on the turn and player possibly, to be stored/fetched at https://pictophone-uploads.s3.amazonaws.com/${blob-name}
+    };
     
     getCanvas() {
         debugger
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
-            blob.name = `drawing${this.props.roomId}${this.props.chainId}`
-           
-            this.uploadFile(blob)
-
-              
+            blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+            this.uploadFile(blob);  
         })   
-    }
+    };
 
     uploadFile = (file) => {
         const params = {
             Key: file.name,
             ContentType: file.type,
             Body: file,
-        }
-        const that = this
+        };
+        const that = this;
         this.bucket.upload(params).promise().then(function (data) {
             let newDrawing = {
                 assetUrl: data.Location,
                 roomId: that.props.roomId,
                 userId: that.props.userId,
                 chainId: that.props.chainId
-            }
+            };
             that.props.createDrawing(newDrawing);
-            //chainId, roomId, userId => post to backend
             console.log(`File uploaded successfully. ${data.Location}`);
         }, function (err) {
             console.error("Upload failed", err);
@@ -82,8 +70,6 @@ class GameBoard extends React.Component {
         this.canvas.width = 600;
         this.canvas.height = 600;
     }
-
-
 
     componentDidMount() {
         this.createCanvas();
@@ -129,12 +115,6 @@ class GameBoard extends React.Component {
             that.ctx.lineTo(currentPos.x, currentPos.y);
             that.ctx.closePath();
             that.ctx.stroke();
-
-            // if (that.timeout !== undefined) clearTimeout(that.timeout);
-            // that.timeout = setTimeout(function () {
-            //     const drawingData = that.canvas.toDataURL("image/png");
-            //     that.socket.emit("send-drawing", drawingData, that.props.roomId);
-            // }, 1000)
         };
     }
 
@@ -147,7 +127,7 @@ class GameBoard extends React.Component {
     }
 
     updateErase(size) {
-        this.setState({ size: size, color: 'wheat' })
+        this.setState({ size: size, color: 'wheat' });
     }
 
     handleClear(){
