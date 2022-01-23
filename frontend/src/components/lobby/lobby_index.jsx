@@ -1,10 +1,6 @@
 import React from "react";
 import LobbyIndexItem from "./lobby_index_item";
 import Modal from "../modal/modal";
-import img1 from '../../images/lobby-img/img1.png'
-import img2 from '../../images/lobby-img/img2.png'
-import img3 from '../../images/lobby-img/img3.png'
-import img4 from '../../images/lobby-img/img4.png'
 
 class LobbyIndex extends React.Component {
 
@@ -22,10 +18,10 @@ class LobbyIndex extends React.Component {
                 <Modal />
                 <aside className="image-feed">
                     <div className="feed-img-box">
-                        <img src={img1}/>
+                        <img src="/images/lobby-img/img1.png"/>
                     </div>
                     <div className="feed-img-box">
-                        <img src={img2} />
+                        <img src="/images/lobby-img/img2.png" />
                     </div>
                     {/* <div className="feed-img-box">
                         <img src={img3} />
@@ -63,10 +59,10 @@ class LobbyIndex extends React.Component {
                 </section>
                 <aside className="image-feed">
                     <div className="feed-img-box">
-                        <img src={img3} />
+                        <img src="/images/lobby-img/img3.png" />
                     </div>
                     <div className="feed-img-box">
-                        <img src={img4} />
+                        <img src="/images/lobby-img/img4.png" />
                     </div>
                     {/* <div className="feed-img-box">
                     </div> */}

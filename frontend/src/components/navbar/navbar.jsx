@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import logo from "../../images/transparent_phone.png";
 
 class NavBar extends React.Component {
 
@@ -24,7 +23,7 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            <img id='logoPic' src={logo} />    
+                            <img id='logoPic' src="/images/transparent_phone.png" />    
                         </div>
                         <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
@@ -44,7 +43,7 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            <img id='logoPic' src={logo} />    
+                            <img id='logoPic' src="/images/transparent_phone.png" />    
                         </div>
                         <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
