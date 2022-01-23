@@ -14,9 +14,7 @@ class Room extends React.Component {
         this.socket = socket;
         this.socket.emit('join-room', this.props.roomId);
         this.socket.on('start-game', () => {
-
         this.props.openModal('game') })
-        
         this.leaveRoom = this.leaveRoom.bind(this);
         this.startGame = this.startGame.bind(this);
         this.prompts = [];
@@ -71,8 +69,6 @@ class Room extends React.Component {
 
     leaveRoom(e) {
         e.preventDefault();
-        // let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id};
-        // this.props.updateRoom(object);
         this.socket.emit('leave-room', this.props.roomId);
         this.props.history.push('/lobby');
     }
@@ -121,7 +117,6 @@ class Room extends React.Component {
                             <MessageBoxContainer roomId={this.props.roomId} />
                         </div>
                     </div>
-                    {/* <Game_container room={this.props.room}/> */}
                 </div>
 
             )

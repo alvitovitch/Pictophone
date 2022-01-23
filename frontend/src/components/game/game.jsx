@@ -3,9 +3,10 @@ import GameBoard from "../board/game_board";
 import GuessFormContainer from "./guess_form_container";
 import { socket } from "../../util/socket_util";
 
+import axios from "axios";
+
 class Game extends React.Component {
     constructor(props) {    
-        debugger
         super(props)
         this.socket = socket;
         
@@ -36,16 +37,19 @@ class Game extends React.Component {
         let chainIds = [this.state.chainId];
         for (let i=0; i<this.props.room.size-1; i++) {
             let nextChainId = chainIds[chainIds.length-1] + 11;
-            if (nextChainId > (this.state.players.length + 1) * 10) {
-                nextChainId -= (this.state.players.length * 10);
+            if (nextChainId > (this.props.room.size + 1) * 10) {
+                nextChainId -= (this.props.room.size * 10);
             }
 
             chainIds.push(nextChainId);
         }
         let fetchChainIds = chainIds.map(id => id-1);
+        fetchChainIds.shift()
         this.setState({ chainIds: chainIds });
         this.setState({ fetchChainIds: fetchChainIds });
-        this.draw();
+        console.log(chainIds)
+        console.log(fetchChainIds)
+       // this.draw();
     }
 
     // nextId() {
@@ -61,11 +65,14 @@ class Game extends React.Component {
             this.count++
         }
         if (this.count >= this.props.room.size) { 
-            this.socket.emit('increase-turn', this.props.room._id)
-            this.count = 0;
+            setTimeout(() => {
+                this.socket.emit('increase-turn', this.props.room._id)
+                this.count = 0;
+            }, 1000)
         }
     }
 
+    
     // componentDidMount() {
     // //     setTimeout(() => {
     // //         this.setState({ chainId: this.state.chainId + 11 });
@@ -98,6 +105,7 @@ class Game extends React.Component {
     //     }
     // }
 
+
     handleSubmit() {
         const nextChainId = this.state.chainId + 11
         if (nextChainId > (this.state.players.length + 1) * 10) {
@@ -115,26 +123,44 @@ class Game extends React.Component {
         // want to fetch the prompt on first turn
         // else fetch the previous chain guess
         let prompt = ''
+        const promptDiv = document.createElement('div')
+        promptDiv.id = 'prompt-div'
         if (this.state.turn === 0) {
             prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
-        } else {
-            this.props.requestGuess({ roomId: this.props.room.id, chainId: this.state.prevChainId })
-                .then(() => prompt = this.props.chain)
-        }
-        const promptDiv = document.createElement('div')
-        promptDiv.innerText = prompt.word
-        document.getElementById('draw-modal').appendChild(promptDiv)
+            promptDiv.innerText = prompt.word
+            document.getElementById('draw-modal').appendChild(promptDiv)
+        } else if (this.state.turn % 2 === 0 ) {
+                debugger
+            //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
+                
+            // const guesses = Object.values(this.props.guesses)
+            // const guess = guesses.filter(guess => guess.chainId == this.state.fetchChainIds[this.state.turn-1])
+            axios.get(`/api/guesses/${this.props.room._id},${this.state.fetchChainIds[this.state.turn-1]}`)
+            .then( 
+                guess => {
+                    console.log(guess)
+                    document.getElementById('prompt-div').innerText = guess.data.word
+                }
+            )
+        } 
+        
     }
 
 
     render() {
+        if (this.state.turn === this.props.room.size) {
+            return(
+                <div>YAAAAY YOU ARE DONE!!!! WHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+            )
+        }
         if (this.state.turn === 0) {
             return (
                 <div id="draw-modal" className="game-modal">
 
                     <div className="game-container">
                         <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
-                        <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+
+                        <GameBoard draw={this.draw} handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                         {/* DRAW */}
                     </div>
                 </div>
@@ -145,16 +171,18 @@ class Game extends React.Component {
                     <div className="game-modal">
                         <div className="game-container">
                             <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
-                            <GameBoard handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+
+                            <GameBoard draw={this.draw}  handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                             {/* DRAW */}
                         </div>
                     </div>
                     :
                     <div className="game-modal">
                         <div className="game-container">
-                            <button className="close-guessform-button" onClick={this.props.closeModal}>Close</button>
+
+                            <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
                             {/* GUESS */}
-                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn-1]} />
                         </div>
                     </div>
                 )
