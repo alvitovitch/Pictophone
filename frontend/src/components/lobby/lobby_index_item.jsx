@@ -3,8 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 const LobbyIndexItem = (props) => {
     
-    
-
     const { room, users, currentUser } = props;
     const join = (e) => {
         e.preventDefault();
