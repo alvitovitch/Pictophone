@@ -1,5 +1,4 @@
 import React from "react";
-import img from '../../images/drawing.jpeg'
 import { socket } from '../../util/socket_util';
 
 class GuessForm extends React.Component {
