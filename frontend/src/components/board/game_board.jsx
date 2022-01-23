@@ -11,7 +11,7 @@ class GameBoard extends React.Component {
             size: 5
         }
         this.socket = socket
-       
+        
         AWS.config.update({
             apiVersion: 'latest',
             accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
@@ -72,6 +72,7 @@ class GameBoard extends React.Component {
     }
 
     componentDidMount() {
+        this.props.draw()
         this.createCanvas();
         this.drawSketch();
     }
@@ -139,8 +140,8 @@ class GameBoard extends React.Component {
         return (
             <div className="game-board-container" >
                 <canvas className="game-board" ></canvas>
-                <button width='50px' height='50px' onClick={this.getCanvas}></button>
-                <div className='game-draw-controls'>
+                <button id='submit' onClick={this.getCanvas}>Submit</button>
+                {/* <div className='game-draw-controls'>
                     <div className='game-colors-dropdown'>
 
                         <button className='color-btn'>color</button>
@@ -204,7 +205,7 @@ class GameBoard extends React.Component {
                     <button
                         className='clear-btn'
                         onClick={() => this.handleClear()}>clear</button>
-                </div>
+                </div> */}
 
 
             </div>

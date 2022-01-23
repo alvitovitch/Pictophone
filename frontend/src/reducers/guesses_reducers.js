@@ -6,7 +6,7 @@ import {
 const GuessesReducer = (state = {}, action) => {
     Object.freeze(state);
     const nextState = Object.assign({}, state);
-
+    debugger
     switch (action.type) {
         case RECEIVE_ALL_GUESSES:
             action.guesses.data.forEach(guess => nextState[guess._id] = guess);
