@@ -5,9 +5,6 @@ const Room = require('../../models/Room');
 const validateRoomInput = require('../../validation/room');
 const passport = require('passport');
 
-// Test route for rooms
-router.get("/test", (req, res) => res.json({ msg: "This is the rooms route" }));
-
 // GET all rooms backend route
 router.get("/",
   passport.authenticate('jwt', { session: false }),
@@ -28,11 +25,6 @@ router.get("/:room_id",
       .then(room => res.json(room))
       .catch(err => 
         res.status(404).json({ noroomfound: 'No room found with that ID'}))
-    // This didn't work
-    // Room.findOne({id: req.params.room_id})
-    //   .then(room => res.json(room))
-    //   .catch(err =>
-    //     res.status(404).json({ noroomfound: 'No room found with that ID' }))
   }
 )
 
@@ -66,20 +58,16 @@ router.post("/",
 )
 
 // PATCH a room backend route
-
 router.patch("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
     Room.findById(req.params.room_id)
       .then(room => {
-        // if the room does not include the player passed into the reqeust body and there is still open space in the room
         !room.players.includes(req.body.playerId) && room.players.length < room.size ?
-        // then add the request body playerId into the room's players array in the backend
         room.players.push(req.body.playerId) : 
-        // else splice out the request body playerId from the room's player array
         room.players.splice(room.players.findIndex(id => id === req.body.playerId), 1);
-        // save the updated room and render it as json
+        
         room.save({players: room.players}).then(res.json(room));
       })
       .catch(err => 

@@ -5,9 +5,6 @@ const Prompt = require('../../models/Prompt');
 const validatePromptInput = require('../../validation/prompt');
 const passport = require('passport');
 
-// ßTest route for prompts
-router.get("/test", (req, res) => res.json({ msg: "This is the prompts route"}));
-
 // GET all prompts backend route
 router.get("/", 
   passport.authenticate('jwt', { session: false }),

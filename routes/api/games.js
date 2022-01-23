@@ -3,9 +3,6 @@ const router = express.Router();
 const Game = require('../../models/Game');
 const passport = require('passport');
 
-// Test route for games
-router.get("/test", (req, res) => res.json({ msg: "This is the games route" }));
-
 // GET an individual game backend route
 router.get("/:gameId",
   passport.authenticate('jwt', { session: false }),
@@ -21,8 +18,6 @@ router.post("/",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
-    //Validations?
-
     const newGame = new Game({
       roomId: req.body.roomId
     })
@@ -32,7 +27,6 @@ router.post("/",
 )
 
 // PATCH a game backend route
-// ADD CHAIN IDS to a game's chains array
 router.patch("/:gameId",
   passport.authenticate('jwt', { session: false }),
 
@@ -45,7 +39,5 @@ router.patch("/:gameId",
       .catch(err => 
         res.status(404).json({ nogamefound: 'No game found with that ID' }))
 })
-
-// DELETE a game backend route (MAYBE on ROOM DELETE)
 
 module.exports = router;
