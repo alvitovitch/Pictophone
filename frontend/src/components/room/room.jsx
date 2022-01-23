@@ -2,9 +2,8 @@ import React from "react";
 import { io } from 'socket.io-client';
 import { socket } from '../../util/socket_util';
 import MessageBoxContainer from "../messages/messageBoxContainer";
-// import DrawingBoard from '../board/drawing_board';
 import Board from '../board/board';
-import Game_container from "../game/game_container";
+import GameContainer from "../game/game_container";
 import Modal from "../modal/modal";
 
 
@@ -21,10 +20,6 @@ class Room extends React.Component {
 
 
     }
-
-    // if player is the room leader maintain a count of images/prompts submitted
-    // when the count each turn === roomsize then go to next round
-    // 
 
     startGame() {
         this.socket.emit('start-game', this.props.roomId)
@@ -102,7 +97,7 @@ class Room extends React.Component {
                         </div>
                         
                         <button className='start-button' onClick={this.startGame}>Start</button>
-                        {this.props.modal === "game" ? <Game_container prompts={this.prompts} room={this.props.room} /> : ""}
+                        {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} /> : ""}
                         
                     </div>
                     <div id='draw-container'>
@@ -117,6 +112,7 @@ class Room extends React.Component {
                             <MessageBoxContainer roomId={this.props.roomId} />
                         </div>
                     </div>
+
                 </div>
 
             )

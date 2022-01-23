@@ -16,11 +16,6 @@ const mSTP = (state, ownProps) => {
     }
 }
 
-// selector is random prompts. func that takes in state.entities.prompts.values
-// return array that samples those values for each player depending on the room size
-// while array is less than room size continue to sample 
-
-
 const mDTP = dispatch => {
     return {
         closeModal: () => dispatch(closeModal()),
