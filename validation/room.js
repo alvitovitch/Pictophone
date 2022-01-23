@@ -13,10 +13,6 @@ module.exports = function validateRoomInput(data) {
     errors.name = 'Room name field is required';
   }
 
-  // if (Validator.isNumeric(data.size)) {
-  //   errors.size = 'Room size field is required';
-  // }
-
   if (Validator.isEmpty(data.host_id)) {
     errors.host = 'Host field is required';
   }

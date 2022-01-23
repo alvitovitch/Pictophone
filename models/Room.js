@@ -9,18 +9,15 @@ const RoomSchema = new Schema({
   size: {
     type: Number,
     required: true,
-    min: [2, 'A room needs at least 2 players'],
+    min: [4, 'A room needs at least 4 players'],
     max: [8, 'A room can only have up to 8 players'],
-    // potentially needs a even number constraint
   },
   host: {
     type: Schema.ObjectId,
     ref: 'User',
     required: true
   },
-  // Single subdocument of host player's id
   players: Array
-  // Array of subdocument players
 },{
   timestamps: true
 })
