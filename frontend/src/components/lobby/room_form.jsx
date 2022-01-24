@@ -1,4 +1,5 @@
 import React from "react";
+import { socket } from '../../util/socket_util'
 
 class RoomForm extends React.Component {
     constructor(props){
@@ -11,6 +12,7 @@ class RoomForm extends React.Component {
         this.props.formAction(this.state)
             .then(() => {
                 if(this.props.errors.length === 0){
+                    socket.emit("update-count")
                     this.props.closeModal()
                 }
             }
