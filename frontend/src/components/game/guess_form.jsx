@@ -22,6 +22,7 @@ class GuessForm extends React.Component {
         guess['userId'] = this.props.userId;
         guess['chainId'] = this.props.chainId;
         await this.props.createGuess(guess)
+        // NEED TO PATCH GAME DB with chainId here...
             
         this.socket.emit('submit-chain', this.props.roomId)
         this.props.handleSubmit()

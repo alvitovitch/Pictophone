@@ -55,6 +55,7 @@ class GameBoard extends React.Component {
                 chainId: that.props.chainId
             };
             that.props.createDrawing(newDrawing);
+            // NEED TO PATCH GAME DB with chainId here...
             console.log(`File uploaded successfully. ${data.Location}`);
         }, function (err) {
             console.error("Upload failed", err);
