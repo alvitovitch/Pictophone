@@ -1,8 +1,19 @@
 import React from "react";
 import LobbyIndexItem from "./lobby_index_item";
 import Modal from "../modal/modal";
+import { socket } from '../../util/socket_util'
 
 class LobbyIndex extends React.Component {
+    constructor(props){
+        super(props)
+        this.socket = socket
+        this.socket.emit("join-room", "lobby")
+        this.socket.on("update-index", () => 
+        {
+            console.log("receive update index")
+            this.props.requestAllRooms()
+        })
+    }
 
     componentDidMount() {
         this.props.requestAllUsers()

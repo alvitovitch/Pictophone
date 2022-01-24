@@ -40,7 +40,9 @@ io.on('connection', socket => {
     socket.on('join-room', (room) => {
         socket.join(room)
     })
-
+    socket.on('update-count', () => {
+        socket.to("lobby").emit("update-index")
+    })
     socket.on('submit-chain', (room) => {
         io.in(room).emit('chain-received')
     })

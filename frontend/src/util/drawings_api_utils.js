@@ -11,6 +11,3 @@ export const fetchDrawing = (drawingObj) => {
 export const createDrawing = (drawing) => {
     return axios.post('/api/drawings', drawing)
 }
-
-
-//roomId=${drawingObj.roomId}&chainId=${drawingObj.chainId}

@@ -1,5 +1,6 @@
 import { React } from "react";
 import { withRouter } from 'react-router-dom'
+import { socket } from '../../util/socket_util'
 
 const LobbyIndexItem = (props) => {
     
@@ -11,10 +12,12 @@ const LobbyIndexItem = (props) => {
                 () => {
                     if(room.size > room.players.length) {
                         props.updateRoom({ 'roomId': room._id, 'playerId': currentUser.id})
-                            .then( () => props.history.push(`/rooms/${room._id}`))
+                        .then( () => {
+                            socket.emit('update-count')
+                            props.history.push(`/rooms/${room._id}`)
+                        })
                     } else {
                         props.roomFullError(props.room._id);
-                        console.log(e.currentTarget.className)
                     }
                 }
             )
