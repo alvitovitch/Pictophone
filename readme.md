@@ -210,7 +210,56 @@ ___
 Prior to starting a game, users are also able to engage in a live chat with other players also occupying the same room. In order to accomplish this functionality, we needed to write additional websocket events and actions that listened for user message input. After this occurs, their message input is relayed via our websocket emit to our base connection and sent out to all other user's socket connections in that specific room. This allows users to communicate with each other, but again, only in their respective rooms and not globally.
 
 ````
-Socket and message DOM manipulation code needed here
+// Backend Chat Setup
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        transports: ["websocket", "polling"]
+
+    }
+})
+    
+io.on('connection', socket => {
+    socket.on('send-message',  (message, room) => {
+        socket.to(room).emit('receive-message', message)
+    })
+    socket.on('join-room', (room) => {
+        socket.join(room)
+    })
+
+// Frontend Setup
+
+ this.socket = socket;
+        this.socket.on('receive-message', message => {
+    
+            this.createMessage(message)
+        })
+
+  createMessage(message) {
+        const text = message.message
+        const user = message.user
+        const newMessage = document.createElement('div')
+        
+        newMessage.innerText = `${user}: ${text}`
+        
+        document.getElementById('chatMessages').appendChild(newMessage)
+        
+
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        const message = this.state.message
+        const user = this.props.user.username
+        const messageDiv = document.createElement('div')
+        messageDiv.innerText = `${user}: ${message}`
+        document.getElementById('chatMessages').appendChild(messageDiv)
+        
+
+        this.socket.emit('send-message', {user, message}, this.props.roomId)
+        this.setState({message: ''})
+    }
 ````
 
 # Our Team
