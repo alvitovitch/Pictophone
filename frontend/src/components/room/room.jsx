@@ -58,7 +58,8 @@ class Room extends React.Component {
 
     componentWillUnmount() {
         let object = { 'roomId': this.props.roomId, 'playerId': this.props.currentUser.id };
-        this.props.updateRoom(object);
+        this.props.updateRoom(object)
+            .then(() => this.socket.emit("update-count"))
         this.props.closeModal();
     }
 
