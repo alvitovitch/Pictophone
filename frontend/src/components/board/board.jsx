@@ -42,8 +42,11 @@ class Board extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.board');
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = 600;
-        this.canvas.height = 600;
+        const wt = this.canvas.parentElement.offsetWidth - 18;
+        const ht = this.canvas.parentElement.offsetHeight - 18;
+        debugger
+        this.canvas.width = wt;
+        this.canvas.height = ht;
     }
 
     componentDidMount() {
@@ -111,10 +114,11 @@ class Board extends React.Component {
         this.setState({size: size, color: 'wheat'})
     }
 
-    handleClear(){
-        this.createCanvas();
-        this.drawSketch();
+    handleClear() {
+        this.ctx.fillStyle = 'wheat';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
+
     render() {
         return (
             <div className="board-container" >

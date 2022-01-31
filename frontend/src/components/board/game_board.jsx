@@ -133,8 +133,11 @@ class GameBoard extends React.Component {
     }
 
     handleClear(){
-        this.createCanvas();
-        this.drawSketch();
+        this.ctx.beginPath();
+        this.ctx.lineWidth = "6";
+        this.ctx.strokeStyle = "red";
+        this.ctx.rect(0, 0, this.ctx.getWidth(), this.ctx.getHeight());
+        this.ctx.stroke();
     }
 
     render() {

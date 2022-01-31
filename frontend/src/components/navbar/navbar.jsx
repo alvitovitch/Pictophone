@@ -48,8 +48,8 @@ class NavBar extends React.Component {
                         <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
                     <div id='navButtons'>
-                        <button className="navButton">Profile</button>
-                        <button className="navButton">Settings</button>
+                        {/* <button className="navButton">Profile</button> */}
+                        {/* <button className="navButton">Settings</button> */}
                         <button className="navButton" onClick={this.handleLogout}>Logout</button>
                     </div>
                 </div>
