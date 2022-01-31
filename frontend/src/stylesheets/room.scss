@@ -11,18 +11,28 @@
     margin-bottom: 10px;
     width: 70vw;
     min-height: calc(95vh - 280px);
-    // border: 3px dotted black;
     display: flex;
     background-image: url('../../public/images/paper_texture.png');
 }
 
 #freeDrawSpace {
     width: 70%;
+    min-width: 600px;
     background-color: wheat;
     border: 3px solid black;
     outline: 2px solid black;
     outline-offset: -9px;
 
+}
+
+.board-container {
+    width: 100%;
+    height: 100%;
+}
+
+.board {
+    padding: 9px;
+    padding-bottom: 20px;
 }
 
 #chat-container {
@@ -31,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: wheat;
-    width: 25vw;
+    min-width: 25vw;
     margin-left: 10px;
     border: 3px solid black;
     outline: 2px solid black;
@@ -41,8 +51,6 @@
 
 #leaveRoom {
    border: 2px solid rgb(31,28,18);
-    // border-right: 4px solid rgb(31, 28, 18);
-    // border-bottom: 4px solid rgb(31, 28, 18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
     background-color: transparent;
     text-decoration: none;
@@ -155,12 +163,12 @@
 
 .draw-controls {
     width: fit-content;
+    height: fit-content;
     position: relative;
     margin: 0 auto;
-    bottom: 20px;
+    bottom: 15px;
     display: flex;
     justify-content: space-around;
-
 }
 
 .draw-controls button {
