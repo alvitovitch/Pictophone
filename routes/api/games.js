@@ -36,7 +36,7 @@ router.patch("/:roomId",
     Game.findOne({ roomId: req.params.roomId })
       .then(game => {
         game.chains.push(req.body);
-        game.save().then(res.json(game));
+        game.save({chains: game.chains}).then(res.json(game));
       })
       .catch(err => 
         res.status(404).json({ nogamefound: 'No game found with that ID' }))
