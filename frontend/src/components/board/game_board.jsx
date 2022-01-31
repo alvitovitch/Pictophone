@@ -155,9 +155,9 @@ class GameBoard extends React.Component {
         return (
             <div className="game-board-container" >
                 <div id='game-errors'>
-                    <h2>
+
                         You need to draw something before submitting
-                    </h2>
+
                 </div>
                 <canvas className="game-board" ></canvas>
                 <button id='submit' onClick={this.getCanvas}>Submit</button>
