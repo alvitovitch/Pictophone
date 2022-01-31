@@ -132,11 +132,17 @@ class Game extends React.Component {
             //take the initial randomized prompt and add it to our database as a "guess" with the current roomId, userId, and chainId minus 1 (yielding four guess chainIds for each respective user's initial chainId: 10(for 11), 20(for 21), 30(for 31), 40(for 41))
             let initialPrompt = {};
             initialPrompt['word'] = prompt.word
-            initialPrompt['roomId'] = this.props.roomId;
+            initialPrompt['roomId'] = this.props.room._id; //changed from roomId
             initialPrompt['userId'] = this.props.userId;
             initialPrompt['chainId'] = this.state.chainId-1;
             this.props.createGuess(initialPrompt);
-            // NEED TO PATCH GAME DB with chain Id here...
+
+            let chain = {};
+            chain[this.state.chainId-1] = prompt.word;
+            this.props.updateGame({roomId: this.props.room._id,chainObj: chain})
+            // Initial prompt is patched to backend game with respective players
+            // chain IDs
+
         } else if (this.state.turn % 2 === 0 ) {
                 debugger
             //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
@@ -168,7 +174,14 @@ class Game extends React.Component {
                     <div className="game-container">
                         <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
 
-                        <GameBoard draw={this.draw} handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                        <GameBoard updateGame={this.props.updateGame} 
+                            draw={this.draw} 
+                            handleSubmit={this.handleSubmit} 
+                            userId={this.props.currentUser.id} 
+                            roomId={this.props.room._id} 
+                            createDrawing={this.props.createDrawing} 
+                            chainId={this.state.chainIds[this.state.turn]} 
+                            fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                         {/* DRAW */}
                     </div>
                 </div>
@@ -180,7 +193,14 @@ class Game extends React.Component {
                         <div className="game-container">
                             <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
 
-                            <GameBoard draw={this.draw}  handleSubmit={this.handleSubmit} userId={this.props.currentUser.id} roomId={this.props.room._id} createDrawing={this.props.createDrawing} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn]} />
+                            <GameBoard updateGame={this.props.updateGame} 
+                            draw={this.draw}  
+                            handleSubmit={this.handleSubmit} 
+                            userId={this.props.currentUser.id} 
+                            roomId={this.props.room._id} 
+                            createDrawing={this.props.createDrawing} 
+                            chainId={this.state.chainIds[this.state.turn]} 
+                            fetchChainId={this.state.fetchChainIds[this.state.turn]} />
                             {/* DRAW */}
                         </div>
                     </div>
@@ -190,7 +210,11 @@ class Game extends React.Component {
 
                             <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
                             {/* GUESS */}
-                            <GuessFormContainer handleSubmit={this.handleSubmit} roomId={this.props.room._id} userId={this.props.currentUser.id} chainId={this.state.chainIds[this.state.turn]} fetchChainId={this.state.fetchChainIds[this.state.turn-1]} />
+                            <GuessFormContainer handleSubmit={this.handleSubmit} 
+                                roomId={this.props.room._id} 
+                                userId={this.props.currentUser.id} 
+                                chainId={this.state.chainIds[this.state.turn]} 
+                                fetchChainId={this.state.fetchChainIds[this.state.turn-1]} />
                         </div>
                     </div>
                 )

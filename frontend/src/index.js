@@ -12,6 +12,7 @@ import './index.scss'
 import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
 import { createDrawing, requestAllDrawings, requestDrawing } from './actions/drawings_actions';
 import { requestAllGuesses, requestGuess, createGuess } from './actions/guesses_actions';
+import { createGame, requestGame, updateGame } from './actions/games_actions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,5 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAllGuesses = requestAllGuesses;
   window.requestGuess = requestGuess;
   window.createGuess = createGuess;
+
+
+  window.requestGame = requestGame;
+  window.createGame = createGame;
+  window.updateGame = updateGame;
 
 })

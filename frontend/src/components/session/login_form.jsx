@@ -38,16 +38,18 @@ class LoginForm extends React.Component {
                         <input
                             type="text"
                             onChange={this.update('username')} placeholder="Username"/>
-                        {this.props.errors.username ? 
-                            <p className="session-error">{this.props.errors.username}</p> : ""}
                     </div>
+                    {this.props.errors.username ? 
+                        <p className="session-error">{this.props.errors.username}</p> : ""}
                     <div className='password-input-container'>
                         <input
                             type="password"
                             onChange={this.update('password')} placeholder="Password"/>
-                            {this.props.errors.password ? 
-                            <p className="session-error">{this.props.errors.password}</p> : ""}
                     </div>
+                    {this.props.errors.password ? 
+                        <p className="session-error">{this.props.errors.password}</p> : ""}
+                    {this.props.errors.handle ? 
+                        <p className="session-error">{this.props.errors.handle}</p> : ""}
                     <button>Sign In</button>
                 </form>
 

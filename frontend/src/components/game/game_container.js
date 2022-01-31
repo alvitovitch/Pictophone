@@ -7,6 +7,7 @@ import Game from './game'
 import { closeModal } from '../../actions/modal_actions';
 import { requestGuess } from '../../actions/guesses_actions';
 import { createGuess } from '../../actions/guesses_actions'
+import { updateGame } from '../../actions/games_actions';
 
 
 const mSTP = (state, ownProps) => {
@@ -23,6 +24,7 @@ const mDTP = dispatch => {
         createDrawing: drawObject => dispatch(createDrawing(drawObject)),
         requestGuess: (guessObj) => dispatch(requestGuess(guessObj)),
         createGuess: guessObj => dispatch(createGuess(guessObj)),
+        updateGame: (gameObj) => dispatch(updateGame(gameObj))
     }
 }
 
