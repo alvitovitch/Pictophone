@@ -9,7 +9,7 @@ const GameReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_GAME:
-            nextState[action.game.data._id] = action.game.data;
+            nextState[action.game.data.roomId] = action.game.data;
             return nextState;
         default:
             return state;

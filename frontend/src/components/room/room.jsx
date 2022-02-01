@@ -35,7 +35,12 @@ class Room extends React.Component {
     }
 
     handleGameOver() {
-        this.setState({ gameOver: true })
+        // Testing
+        this.props.createGame({ roomId: this.props.roomId }).then(
+           () => this.setState({ gameOver: true })
+        )
+        //
+        // this.setState({ gameOver: true })
     }
 
     componentDidMount(){
@@ -115,7 +120,7 @@ class Room extends React.Component {
                     </div>
                     <div id='draw-container'>
                         <div id='freeDrawSpace'>
-                            {this.state.gameOver ? <GameOver /> : <Board roomId={this.props.roomId}></Board>}
+                            {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
                         </div>
                         <div id='chat-container'>
                             <button onClick={this.leaveRoom}
