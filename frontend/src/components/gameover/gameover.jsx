@@ -22,7 +22,7 @@ class GameOver extends React.Component {
       <div className='presentation-container'>
           {this.props.room.players.map(((player,idx) => {
             return(
-              <div key={idx}>
+              <div className='chain' key={idx}>
                 <h2>{this.props.users[player].username}</h2>
                 <ul>{
                   this.props.presentaionObj[player].map((chain,i) => {

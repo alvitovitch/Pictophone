@@ -48,7 +48,7 @@ class LobbyIndex extends React.Component {
                         {(rooms.length === 0 || Object.values(users).length === 0) ?
                             ("") : (
                                 <ul>
-                                    {rooms.map((room, i) => (
+                                    {rooms.reverse().map((room, i) => (
                                         <LobbyIndexItem
                                             key={i}
                                             errors={this.props.errors}
