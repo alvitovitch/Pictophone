@@ -14,9 +14,9 @@ const receiveErrors = errors => ({
     errors
 })
 
-const removeUser = userId => ({
+const removeUser = user => ({
     type: REMOVE_USER,
-    userId
+    user
 })
 
 export const requestAllUsers = () => dispatch => {
@@ -25,8 +25,8 @@ export const requestAllUsers = () => dispatch => {
             errors => dispatch(receiveErrors(errors.response.data))))
 }
 
-export const delteUser = userId => dispatch => {
-    return UsersApiUtils.deleteUser(userId)
-        .then(() => dispatch(removeUser(userId)))
+export const deleteUser = user => dispatch => {
+    return UsersApiUtils.deleteUser(user)
+        .then(() => dispatch(removeUser(user)))
         .catch(err => dispatch(receiveErrors(err.response.data)))
 }

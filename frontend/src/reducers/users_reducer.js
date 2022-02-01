@@ -12,7 +12,7 @@ const UsersReducer = (state={}, action) => {
             action.users.data.forEach(user => nextState[user._id] = user)
             return nextState;
         case REMOVE_USER:
-            delete nextState[action.userId];
+            delete nextState[action.user.id];
             return nextState;
         default:
             return state;
