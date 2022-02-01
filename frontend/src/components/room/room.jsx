@@ -22,9 +22,8 @@ class Room extends React.Component {
     }
 
     startGame() {
-        this.socket.emit('start-game', this.props.roomId)
-        this.props.openModal('game')
-
+        this.socket.emit('start-game', this.props.roomId);
+        this.props.openModal('game');
     }
 
     componentDidMount(){

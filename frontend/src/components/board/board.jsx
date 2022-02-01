@@ -44,7 +44,6 @@ class Board extends React.Component {
         this.ctx = this.canvas.getContext('2d');
         const wt = this.canvas.parentElement.offsetWidth - 18;
         const ht = this.canvas.parentElement.offsetHeight - 18;
-        debugger
         this.canvas.width = wt;
         this.canvas.height = ht;
     }

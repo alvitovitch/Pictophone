@@ -32,7 +32,7 @@ class GameBoard extends React.Component {
     };
     
     getCanvas() {
-        debugger
+        
         const drawing = document.querySelector('.game-board');
         drawing.toBlob(blob => {
             blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
@@ -68,8 +68,10 @@ class GameBoard extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.game-board');
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = 600;
-        this.canvas.height = 600;
+        const wt = this.canvas.parentElement.offsetWidth - 20;
+        const ht = this.canvas.parentElement.offsetHeight - 140;
+        this.canvas.width = wt;
+        this.canvas.height = ht;
     }
 
     componentDidMount() {
@@ -132,21 +134,18 @@ class GameBoard extends React.Component {
         this.setState({ size: size, color: 'wheat' });
     }
 
-    handleClear(){
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "6";
-        this.ctx.strokeStyle = "red";
-        this.ctx.rect(0, 0, this.ctx.getWidth(), this.ctx.getHeight());
-        this.ctx.stroke();
+    handleClear() {
+        this.ctx.fillStyle = 'wheat';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     render() {
         return (
             <div className="game-board-container" >
-                <canvas className="game-board" ></canvas>
                 <button id='submit' onClick={this.getCanvas}>Submit</button>
-                {/* <div className='game-draw-controls'>
-                    <div className='game-colors-dropdown'>
+                <canvas className="game-board" ></canvas>
+                <div className='game-draw-controls'>
+                    <div className='colors-dropdown'>
 
                         <button className='color-btn'>color</button>
 
@@ -209,7 +208,7 @@ class GameBoard extends React.Component {
                     <button
                         className='clear-btn'
                         onClick={() => this.handleClear()}>clear</button>
-                </div> */}
+                </div>
 
 
             </div>
