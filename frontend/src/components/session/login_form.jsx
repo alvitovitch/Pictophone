@@ -24,6 +24,14 @@ class LoginForm extends React.Component {
         return e => this.setState({[field]: e.currentTarget.value});
     }
 
+    handleDemoUser = e => {
+        e.preventDefault();
+        const demoUser = { 
+            username: `DemoUser${Math.floor(Math.random() * 1000000000)}`, 
+            password: "hunter12"}
+        this.props.signup(demoUser);
+    }
+
     render() {
 
         return(
@@ -50,7 +58,10 @@ class LoginForm extends React.Component {
                         <p className="session-error">{this.props.errors.password}</p> : ""}
                     {this.props.errors.handle ? 
                         <p className="session-error">{this.props.errors.handle}</p> : ""}
-                    <button>Sign In</button>
+                    <div className="login-buttons">
+                        <button className="navButton">Sign In</button>
+                        <button className="navButton" onClick={this.handleDemoUser}>Demo User</button>
+                    </div>
                 </form>
 
             </div>

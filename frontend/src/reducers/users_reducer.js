@@ -1,5 +1,6 @@
 import { 
-    RECEIVE_ALL_USERS
+    RECEIVE_ALL_USERS,
+    REMOVE_USER
 } from '../actions/users_actions'
 
 const UsersReducer = (state={}, action) => {
@@ -9,6 +10,9 @@ const UsersReducer = (state={}, action) => {
     switch( action.type ) {
         case RECEIVE_ALL_USERS:
             action.users.data.forEach(user => nextState[user._id] = user)
+            return nextState;
+        case REMOVE_USER:
+            delete nextState[action.userId];
             return nextState;
         default:
             return state;

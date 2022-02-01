@@ -38,17 +38,17 @@ class SignupForm extends React.Component {
                         <input
                             type="text"
                             onChange={this.update('username')} placeholder="Username"/>
-                        {this.props.errors.username ? 
-                            <p className="session-error">{this.props.errors.username}</p> : ""}
                     </div>
+                    {this.props.errors.username ? 
+                        <p className="session-error">{this.props.errors.username}</p> : ""}
                     <div className='password-input-container'>
                         <input
                             type="password"
                             onChange={this.update('password')} placeholder="Password"/>
-                        {this.props.errors.password ? 
-                            <p className="session-error">{this.props.errors.password}</p> : ""}
                     </div>
-                    <button>Sign Up</button>
+                    {this.props.errors.password ? 
+                        <p className="session-error">{this.props.errors.password}</p> : ""}
+                    <button className="navButton">Sign Up</button>
                 </form>
 
             </div>

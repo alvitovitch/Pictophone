@@ -3,6 +3,7 @@ import NavBar from './navbar';
 import { logout } from '../../actions/session_actions';
 import { withRouter } from "react-router-dom";
 import { updateRoom } from '../../actions/rooms_actions';
+import { delteUser } from '../../actions/users_actions';
 
 const mSTP = state => {
     return{
@@ -14,7 +15,8 @@ const mSTP = state => {
 const mDTP = dispatch => {
     return{
         logout: () => dispatch(logout()),
-        updateRoom: (roomObj) => dispatch(updateRoom(roomObj))
+        updateRoom: (roomObj) => dispatch(updateRoom(roomObj)),
+        deleteUser: userId => dispatch(delteUser(userId))
     }
 }
 

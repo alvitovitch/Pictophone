@@ -13,6 +13,9 @@
     height: fit-content;
     font-family: 'Noticia Text', serif;
     border: 5px solid rgb(31,28,18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .login-header, .signup-header {
       background-color: rgb(31,28,18);
@@ -44,13 +47,17 @@
     }
 
     .username-input-container, .password-input-container {
-      width: fit-content;
+      // width: fit-content;
+      width: 95%;
+      margin-top: 10px;
       height: fit-content;
       display: flex;
       align-items:center;
+      justify-content: center;
 
       input {
-        width:18vw;
+        // width:18vw;
+        width: 100%;
         min-width: 18vw;
         font-family: 'Noticia Text', serif;
         font-size: 25px;
@@ -60,11 +67,12 @@
     }
 
     button {
-      width: 19vw;
+      // width: 19vw;
+      // width: 95%;
       font-family: 'Noticia Text', serif;
       padding: 4px 5px;
       font-size: 25px;
-      margin: 2px 2px;
+      margin: 20px 10px;
     }
   }
 }
