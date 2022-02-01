@@ -1,15 +1,16 @@
 #navBar {
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
     justify-content: space-between;
     border-bottom: 5px double rgb(31, 28, 18);
     font-family: 'Noticia Text', serif;
     // background-color: rgb(240,219,192);
     // background-color: rgb(252,217,156);
-    background-image: url("../../public/images/paper_texture.png");
+    background-image: url('../../public/images/paper.jpg');
     background-repeat: repeat;
     color: rgb(31,28,18);
+    align-items: center;
 }
 
 #logoTitle {
@@ -82,9 +83,9 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100vw;
+    width: 100%;
     border-top: 5px double rgb(31, 28, 18);
-    background-image: url("../../public/images/paper_texture.png");
+    background-image: url('../../public/images/paper.jpg');
 }
 
 
@@ -134,3 +135,7 @@ a {
 }
 
 
+.pictophone {
+    height: 8em;
+    padding-left: 20%;
+}
