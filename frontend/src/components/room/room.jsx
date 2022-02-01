@@ -27,6 +27,7 @@ class Room extends React.Component {
     }
 
     startGame() {
+
         this.props.createGame({roomId: this.props.roomId})
         .then(() => {
             this.socket.emit('start-game', this.props.roomId);
@@ -36,6 +37,7 @@ class Room extends React.Component {
 
     handleGameOver() {
         this.setState({ gameOver: true })
+
     }
 
     componentDidMount(){

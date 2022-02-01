@@ -161,7 +161,7 @@
 }
  
 
-.draw-controls {
+.draw-controls, .game-draw-controls {
     width: fit-content;
     height: fit-content;
     position: relative;
@@ -171,7 +171,7 @@
     justify-content: space-around;
 }
 
-.draw-controls button {
+.draw-controls button, .game-draw-controls button {
     border: 2px solid rgb(31,28,18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
     background-color: transparent;
@@ -273,4 +273,8 @@
     font-family: 'Noticia Text', serif;
     font-size: 18px;
     cursor: pointer;
+}
+
+.fade {
+    filter: brightness(0.25)
 }
