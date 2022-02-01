@@ -6,14 +6,18 @@ class NavBar extends React.Component {
     handleLogout = (e) => {
         e.preventDefault();
         const location = this.props.location.pathname;
-        console.log(location.slice(0,6))
-        console.log(location.slice(7))
+        // console.log(location.slice(0,6))
+        // console.log(location.slice(7))
         if (location.slice(0,6) === "/rooms") {
             let object = { 'roomId': location.slice(7), 'playerId': this.props.currentUser.id };
             this.props.updateRoom(object)
                 .then(() => this.props.logout())
         } else {
-            this.props.logout();
+            const currentUser = this.props.currentUser
+            this.props.logout()
+            if (currentUser.username.slice(0, 8) === "DemoUser"){
+                this.props.deleteUser(currentUser)
+            }
         }
     }
 

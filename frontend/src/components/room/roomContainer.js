@@ -5,7 +5,7 @@ import { requestAllUsers } from '../../actions/users_actions';
 import { requestRoom, updateRoom } from '../../actions/rooms_actions'
 import { requestAllPrompts } from '../../actions/prompts_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
-
+import { createGame } from '../../actions/games_actions';
 
 
 const mSTP = (state, ownProps) => {
@@ -28,6 +28,7 @@ const mDTP = dispatch => {
         closeModal: () => dispatch(closeModal()),
         requestAllUsers: () => dispatch(requestAllUsers()),
         requestAllPrompts: () => dispatch(requestAllPrompts()),
+        createGame: (game) => dispatch(createGame(game))
     }
 }
 

@@ -16,16 +16,27 @@ class GuessForm extends React.Component {
 
     async submitGuess(e) {
         e.preventDefault()
-        let guess = {};
-        guess['word'] = this.state.guess;
-        guess['roomId'] = this.props.roomId;
-        guess['userId'] = this.props.userId;
-        guess['chainId'] = this.props.chainId;
-        await this.props.createGuess(guess)
-        // NEED TO PATCH GAME DB with chainId here...
-            
-        this.socket.emit('submit-chain', this.props.roomId)
-        this.props.handleSubmit()
+
+        if (this.state.guess.length > 0){
+            let guess = {}; 
+            guess['word'] = this.state.guess;
+            guess['roomId'] = this.props.roomId;
+            guess['userId'] = this.props.userId;
+            guess['chainId'] = this.props.chainId;
+            await this.props.createGuess(guess)
+            .catch(error => console.log(error))
+            // Guesses are patched to backend game with respective players
+            // chain IDs
+        let chain = {};
+        chain[this.props.chainId] = this.state.guess;
+        this.props.updateGame({ roomId: this.props.roomId, chainObj: chain })
+                
+            this.socket.emit('submit-chain', this.props.roomId)
+            this.props.handleSubmit()
+            let button = document.getElementById('submit')
+            button.innerText = 'Waiting for other players'
+            button.style.pointerEvents = 'none'
+        }
     }
 
     updateGuess(e) {
@@ -40,8 +51,11 @@ class GuessForm extends React.Component {
             <form onSubmit={this.submitGuess}>
                 <h2>Your Guess:</h2>
                 <input type="text" value={this.state.guess} onChange={this.updateGuess}/>
-                <input type="submit" value="submit" />
+                <input id='submit' type="submit" value="submit">Submit</input >
             </form>
+            <div id='game-errors'>
+                You need to enter a guess before submitting
+            </div>
         </div>
         )
     }

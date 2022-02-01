@@ -34,10 +34,24 @@ class GameBoard extends React.Component {
     getCanvas() {
         
         const drawing = document.querySelector('.game-board');
-        drawing.toBlob(blob => {
-            blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
-            this.uploadFile(blob);  
-        })   
+         if (drawing.getContext('2d').getImageData(0,0,drawing.width, drawing.height).data.some(channel => channel !== 0)){
+             drawing.toBlob(blob => {
+                 blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+                 this.uploadFile(blob);  
+             })
+             let button = document.getElementById('submit')
+             button.innerText = 'Waiting for other players'
+             button.style.pointerEvents = 'none'
+         } else {
+             const errors = document.getElementById('game-errors')
+             errors.style.background = 'rgba(255, 0, 0, .56)'
+             errors.style.color = 'rgba(255, 255, 255, 1)'
+            
+             setTimeout(() => {errors.style.background = 'rgba(255, 0, 0, 0)';
+                errors.style.color = 'rgba(255, 255, 255, 0)';
+            }, 3000)
+         }
+        
     };
 
     uploadFile = (file) => {
@@ -55,7 +69,12 @@ class GameBoard extends React.Component {
                 chainId: that.props.chainId
             };
             that.props.createDrawing(newDrawing);
-            // NEED TO PATCH GAME DB with chainId here...
+            // Drawings are patched to backend game with respective players
+            // chain IDs
+            let chain = {};
+            chain[that.props.chainId] = data.Location;
+            that.props.updateGame({ roomId: that.props.roomId, chainObj: chain })
+
             console.log(`File uploaded successfully. ${data.Location}`);
         }, function (err) {
             console.error("Upload failed", err);
@@ -142,6 +161,14 @@ class GameBoard extends React.Component {
     render() {
         return (
             <div className="game-board-container" >
+
+                <div id='game-errors'>
+
+                        You need to draw something before submitting
+
+                </div>
+                <canvas className="game-board" ></canvas>
+
                 <button id='submit' onClick={this.getCanvas}>Submit</button>
                 <canvas className="game-board" ></canvas>
                 <div className='game-draw-controls'>

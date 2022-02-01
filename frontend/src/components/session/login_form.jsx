@@ -24,6 +24,14 @@ class LoginForm extends React.Component {
         return e => this.setState({[field]: e.currentTarget.value});
     }
 
+    handleDemoUser = e => {
+        e.preventDefault();
+        const demoUser = { 
+            username: `DemoUser${Math.floor(Math.random() * 1000000000)}`, 
+            password: "hunter12"}
+        this.props.signup(demoUser);
+    }
+
     render() {
 
         return(
@@ -38,17 +46,22 @@ class LoginForm extends React.Component {
                         <input
                             type="text"
                             onChange={this.update('username')} placeholder="Username"/>
-                        {this.props.errors.username ? 
-                            <p className="session-error">{this.props.errors.username}</p> : ""}
                     </div>
+                    {this.props.errors.username ? 
+                        <p className="session-error">{this.props.errors.username}</p> : ""}
                     <div className='password-input-container'>
                         <input
                             type="password"
                             onChange={this.update('password')} placeholder="Password"/>
-                            {this.props.errors.password ? 
-                            <p className="session-error">{this.props.errors.password}</p> : ""}
                     </div>
-                    <button>Sign In</button>
+                    {this.props.errors.password ? 
+                        <p className="session-error">{this.props.errors.password}</p> : ""}
+                    {this.props.errors.handle ? 
+                        <p className="session-error">{this.props.errors.handle}</p> : ""}
+                    <div className="login-buttons">
+                        <button className="navButton">Sign In</button>
+                        <button className="navButton" onClick={this.handleDemoUser}>Demo User</button>
+                    </div>
                 </form>
 
             </div>

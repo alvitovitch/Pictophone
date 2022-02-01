@@ -122,4 +122,19 @@ router.get("/",
       .catch(err => res.status(404).json({ nousersfound: 'No users found' }))
 })
 
+// DELETE a user backend route
+router.delete("/:userId",
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    console.log(req.params);
+    User.findOne({ _id: req.params.userId })
+      .then(user => {
+        console.log(user);
+        user.delete().then(user => res.json(user));
+      })
+      .catch(err => 
+        res.status(404).json({ nouserfound: 'No user found with that ID' }))
+  }
+)
+
 module.exports = router;
