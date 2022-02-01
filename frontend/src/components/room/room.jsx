@@ -5,6 +5,7 @@ import MessageBoxContainer from "../messages/messageBoxContainer";
 import Board from '../board/board';
 import GameContainer from "../game/game_container";
 import Modal from "../modal/modal";
+import GameOver from "../gameover/gameover";
 
 
 class Room extends React.Component {
@@ -20,6 +21,7 @@ class Room extends React.Component {
         this.state = {
             gameOver: false
         }
+        this.handleGameOver = this.handleGameOver.bind(this);
 
 
     }
@@ -30,6 +32,10 @@ class Room extends React.Component {
             this.socket.emit('start-game', this.props.roomId);
             this.props.openModal('game');
         })
+    }
+
+    handleGameOver() {
+        this.setState({ gameOver: true })
     }
 
     componentDidMount(){
@@ -102,13 +108,14 @@ class Room extends React.Component {
                             {playersList}
                         </div>
                         
-                        <button className='start-button' onClick={this.startGame}>Start</button>
-                        {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} /> : ""}
+                        {/* <button className='start-button' onClick={this.startGame}>Start</button> */}
+                        <button className='start-button' onClick={this.handleGameOver}>Start</button>
+                        {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
                         
                     </div>
                     <div id='draw-container'>
                         <div id='freeDrawSpace'>
-                            {this.state.gameOver ? "" : <Board roomId={this.props.roomId}></Board>}
+                            {this.state.gameOver ? <GameOver /> : <Board roomId={this.props.roomId}></Board>}
                         </div>
                         <div id='chat-container'>
                             <button onClick={this.leaveRoom}
