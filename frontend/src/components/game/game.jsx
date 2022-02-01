@@ -163,10 +163,7 @@ class Game extends React.Component {
 
     render() {
         if (this.state.turn === this.props.room.size) {
-            this.props.requestGame(this.props.room._id);
-            return(
-                <div>YAAAAY YOU ARE DONE!!!! WHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
-            )
+            this.props.handleGameOver();
         }
         if (this.state.turn === 0) {
             return (
