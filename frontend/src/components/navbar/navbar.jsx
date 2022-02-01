@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             const currentUser = this.props.currentUser
             this.props.logout()
             if (currentUser.username.slice(0, 8) === "DemoUser"){
-                // this.props.deleteUser(currentUser.id)
+                this.props.deleteUser(currentUser)
             }
         }
     }
