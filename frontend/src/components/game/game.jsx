@@ -133,8 +133,9 @@ class Game extends React.Component {
             let initialPrompt = {};
             initialPrompt['word'] = prompt.word
             initialPrompt['roomId'] = this.props.room._id; //changed from roomId
-            initialPrompt['userId'] = this.props.userId;
+            initialPrompt['userId'] = this.props.currentUser.id;
             initialPrompt['chainId'] = this.state.chainId-1;
+            debugger
             this.props.createGuess(initialPrompt);
 
             let chain = {};
