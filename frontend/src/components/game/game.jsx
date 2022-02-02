@@ -170,7 +170,7 @@ class Game extends React.Component {
                 <div id="draw-modal" className="game-modal">
 
                     <div className="game-container">
-                        <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
+                        {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
 
                         <GameBoard updateGame={this.props.updateGame} 
                             draw={this.draw} 
@@ -189,7 +189,7 @@ class Game extends React.Component {
                 (this.state.turn % 2 === 0 ?
                     <div className="game-modal">
                         <div className="game-container">
-                            <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
+                            {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
 
                             <GameBoard updateGame={this.props.updateGame} 
                             draw={this.draw}  
@@ -206,7 +206,7 @@ class Game extends React.Component {
                     <div className="game-modal">
                         <div className="game-container">
 
-                            <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button>
+                            {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
                             {/* GUESS */}
                             <GuessFormContainer handleSubmit={this.handleSubmit} 
                                 roomId={this.props.room._id} 

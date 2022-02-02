@@ -29,8 +29,8 @@ class NavBar extends React.Component {
                         <div id='Logo'>
                             <img id='logoPic' src="/images/transparent_phone.png" />    
                         </div>
-                        <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
+                        <Link to={'/'}> <img className="pictophone" src="/images/Pictophone.png" alt="" /> </Link>
                     <div id='navButtons'>
                         <button className="navButton">
                             <Link to={'/login'}>LOGIN</Link>
@@ -49,8 +49,8 @@ class NavBar extends React.Component {
                         <div id='Logo'>
                             <img id='logoPic' src="/images/transparent_phone.png" />    
                         </div>
-                        <Link to={'/'}><h1>PICTOPHONE</h1></Link>
                     </div>
+                        <Link to={'/'}> <img className="pictophone" src="/images/Pictophone.png" alt="" /> </Link>
                     <div id='navButtons'>
                         {/* <button className="navButton">Profile</button> */}
                         {/* <button className="navButton">Settings</button> */}

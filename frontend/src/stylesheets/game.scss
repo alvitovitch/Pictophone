@@ -14,23 +14,26 @@
     border:3px solid red;
     width: fit-content;
     height: fit-content;
+    height: fit-content;
     background-color: wheat;
     border: 3px solid #000;
     outline: 2px solid #000;
     outline-offset: -9px;
     display: flex;
     flex-direction: column;
+     
 
     .close-gameboard-button {
         width: fit-content;
         height: fit-content;
         background-color: wheat;
-        border: 3px solid #000;
+        border: 2px solid #000;
         box-shadow: 3px 3px 0 #000;
         font-family: 'Noticia Text', serif;
         font-size: 18px;
-        left: 1%;
-        top: 2%;
+        position: relative;
+        left: 3%;
+        top: 10px;
         cursor: pointer;
     }
 
@@ -42,25 +45,41 @@
 
 }
 
+.game-board-container {
+    width: 700px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
 #prompt-div {
     position: absolute;
     top: 10%;
-    font-size: 24px;
+    font-size: 36px;
     background-color: wheat;
     color: black;
+    padding: 10px;
     font-family: 'Noticia Text', serif;
+    box-shadow: 8px 8px 15px #4e4d4d;
+
 }
 
 #submit {
     width: fit-content;
     height: fit-content;
     background-color: wheat;
-    border: 3px solid #000;
+    border: 2px solid #000;
     box-shadow: 3px 3px 0 #000;
     font-family: 'Noticia Text', serif;
     font-size: 18px;
-    left: 1%;
-    top: 2%;
+    position: relative;
+    left: 40%;
     cursor: pointer;
 }
 
