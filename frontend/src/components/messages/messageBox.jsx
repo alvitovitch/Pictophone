@@ -9,7 +9,10 @@ class MessageBox extends React.Component {
             message: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
-       
+
+        this.ding = new Audio('audio/ding.mp3')
+        this.keystroke = new Audio('audio/keystroke.mp3')
+
         this.socket = socket;
         this.socket.on('receive-message', message => {
     
@@ -31,16 +34,19 @@ class MessageBox extends React.Component {
 
         this.socket.emit('send-message', {user, message}, this.props.roomId)
         this.setState({message: ''})
+        this.ding.currentTime = 0
+        this.ding.play()
     }
     
     createMessage(message) {
         const text = message.message
         const user = message.user
         const newMessage = document.createElement('div')
-        
         newMessage.innerText = `${user}: ${text}`
         if (document.getElementById('chatMessages').firstChild.innerText !== newMessage.innerText)
         {
+            this.ding.currentTime = 0
+            this.ding.play()
             document.getElementById('chatMessages').prepend(newMessage)
         }
         
@@ -48,6 +54,9 @@ class MessageBox extends React.Component {
     }
 
     handleUpdate(field) {
+        this.keystroke.currentTime = 0
+        this.keystroke.play()
+
         return e => this.setState({[field]: e.currentTarget.value })
     }
 
