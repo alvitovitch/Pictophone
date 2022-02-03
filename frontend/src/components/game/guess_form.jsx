@@ -3,7 +3,6 @@ import { socket } from '../../util/socket_util';
 
 class GuessForm extends React.Component {
     constructor(props) {
-        debugger
         super(props)
         // this.submit = this.submit.bind(this)
         this.state = {
@@ -29,12 +28,13 @@ class GuessForm extends React.Component {
             // chain IDs
         let chain = {};
         chain[this.props.chainId] = this.state.guess;
+
         this.props.updateGame({ roomId: this.props.roomId, chainObj: chain })
                 
             this.socket.emit('submit-chain', this.props.roomId)
             this.props.handleSubmit()
-            let button = document.getElementById('submit')
-            button.innerText = 'Waiting for other players'
+            let button = document.getElementById('submit-one')
+            button.style.display = 'none' 
             button.style.pointerEvents = 'none'
         }
     }
@@ -51,7 +51,7 @@ class GuessForm extends React.Component {
             <form onSubmit={this.submitGuess}>
                 <h2>Your Guess:</h2>
                 <input type="text" value={this.state.guess} onChange={this.updateGuess}/>
-                <input id='submit' type="submit" value="submit">Submit</input >
+                <input id='submit-one' type="submit" value="submit"/>
             </form>
             <div id='game-errors'>
                 You need to enter a guess before submitting

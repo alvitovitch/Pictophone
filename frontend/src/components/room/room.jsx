@@ -36,7 +36,10 @@ class Room extends React.Component {
     }
 
     handleGameOver() {
-        this.setState({ gameOver: true })
+        this.props.requestGame(this.props.roomId)
+        .then(
+            () => this.setState({ gameOver: true })
+        )
 
     }
 
@@ -110,14 +113,14 @@ class Room extends React.Component {
                             {playersList}
                         </div>
                         
-                        {/* <button className='start-button' onClick={this.startGame}>Start</button> */}
-                        <button className='start-button' onClick={this.handleGameOver}>Start</button>
+                        <button className='start-button' onClick={this.startGame}>Start</button>
+                        {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
                         {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
                         
                     </div>
                     <div id='draw-container'>
                         <div id='freeDrawSpace'>
-                            {this.state.gameOver ? <GameOver /> : <Board roomId={this.props.roomId}></Board>}
+                            {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
                         </div>
                         <div id='chat-container'>
                             <button onClick={this.leaveRoom}

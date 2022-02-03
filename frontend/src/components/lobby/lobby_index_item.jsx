@@ -26,20 +26,26 @@ const LobbyIndexItem = (props) => {
 
     return(
         <div className="index-room">
-            <div className="top-row">
-                <h2>Room: {room.name}</h2>
-                <h2>{room.players.length}/{room.size}</h2>
+            <div className='star'>
+                <img src="../../../images/star.png" />
             </div>
-            <div className="bottom-row">
-                <h2>{users[room.host].username}</h2>
-                <div className="button-box">
-                    <button onClick={e => join(e)}>Join</button>
-                    {currentUser.id === room.host ? 
-                        (
-                            <button className="r" onClick={e=>props.deleteRoom(room._id)}>Delete</button>
-                        ) : ("")}
+            <div className='room-details'>
+                <div className="top-row">
+                    <h2>room: {room.name}</h2>
+                    <h2>{room.players.length}/{room.size}</h2>
+                </div>
+                <div className="bottom-row">
+                    <h2>host: {users[room.host].username}</h2>
+                    <div className="button-box">
+                        <button className='join' onClick={e => join(e)}>Join</button>
+                        {currentUser.id === room.host ?
+                            (
+                                <button className="delete" onClick={e => props.deleteRoom(room._id)}>Delete</button>
+                            ) : ("")}
+                    </div>
                 </div>
             </div>
+            
             <p className="room-item-error">{props.errors.full && props.errors.full.id === room._id ? "This room is full" : ""}</p>
         </div>
     )
