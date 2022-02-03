@@ -105,3 +105,17 @@
     user-select: none;
     justify-content: space-evenly;
 }
+
+
+.wait {
+    position: relative;
+    left: -140px;
+    visibility: visible;
+    font-size: 36px;
+    color: black;
+}
+
+.hidden {
+    position: absolute;
+    visibility: hidden;
+}

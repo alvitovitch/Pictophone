@@ -46,9 +46,13 @@ class GameBoard extends React.Component {
                  }
                  this.uploadFile(blob);  
              })
-             let button = document.getElementById('submit')
-             button.innerText = 'Waiting for other players'
-             button.style.pointerEvents = 'none'
+             let button = document.getElementById('submit');
+             button.classList.add('hidden');
+             document.querySelector('.colors-dropdown').classList.add('hidden');
+             document.querySelector('.size-dropdown').classList.add('hidden');
+             document.querySelector('.erase-dropdown').classList.add('hidden');
+             document.querySelector('.clear-btn').classList.add('hidden');
+             document.querySelector('.wait').classList.remove('hidden');
          } else {
              const errors = document.getElementById('game-errors')
              errors.style.background = 'rgba(255, 0, 0, .56)'
@@ -192,8 +196,6 @@ class GameBoard extends React.Component {
                         You need to draw something before submitting
 
                 </div>
-
-                
                 
                 <div className='game-draw-controls'>
                     <div className='colors-dropdown'>
@@ -260,7 +262,8 @@ class GameBoard extends React.Component {
                         className='clear-btn'
                         onClick={() => this.handleClear()}>clear</button>
 
-                    <button id='submit' onClick={this.getCanvas}>Submit</button>
+                    <button id='submit' onClick={this.getCanvas}>submit</button>
+                    <p className="wait hidden">waiting for other players...</p>
                 </div>
 
             </div>
