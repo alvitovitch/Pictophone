@@ -16,26 +16,30 @@ class GuessForm extends React.Component {
     async submitGuess(e) {
         e.preventDefault()
 
-        if (this.state.guess.length > 0){
-            let guess = {}; 
-            guess['word'] = this.state.guess;
-            guess['roomId'] = this.props.roomId;
-            guess['userId'] = this.props.userId;
-            guess['chainId'] = this.props.chainId;
-            await this.props.createGuess(guess)
-            .catch(error => console.log(error))
-            // Guesses are patched to backend game with respective players
-            // chain IDs
-        let chain = {};
-        chain[this.props.chainId] = this.state.guess;
+        if (this.state.guess.length > 0) {
+            if (this.props.demoBoard) {
+                this.props.acceptInput(this.state.guess);
+            } else {
+                let guess = {}; 
+                guess['word'] = this.state.guess;
+                guess['roomId'] = this.props.roomId;
+                guess['userId'] = this.props.userId;
+                guess['chainId'] = this.props.chainId;
+                await this.props.createGuess(guess)
+                .catch(error => console.log(error))
+                // Guesses are patched to backend game with respective players
+                // chain IDs
+                let chain = {};
+                chain[this.props.chainId] = this.state.guess;
 
-        this.props.updateGame({ roomId: this.props.roomId, chainObj: chain })
-                
-            this.socket.emit('submit-chain', this.props.roomId)
-            this.props.handleSubmit()
-            let button = document.getElementById('submit-one')
-            button.style.display = 'none' 
-            button.style.pointerEvents = 'none'
+                this.props.updateGame({ roomId: this.props.roomId, chainObj: chain })
+                    
+                this.socket.emit('submit-chain', this.props.roomId)
+                this.props.handleSubmit()
+                let button = document.getElementById('submit-one')
+                button.style.display = 'none' 
+                button.style.pointerEvents = 'none'
+            }
         }
     }
 
@@ -46,7 +50,7 @@ class GuessForm extends React.Component {
     render(){
         return( <div className="guess-form">
             <div className="img-container">
-                <img src={`https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
+                <img src={this.props.demoBoard ? this.props.url : `https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
             <form onSubmit={this.submitGuess}>
                 <h2>Your Guess:</h2>

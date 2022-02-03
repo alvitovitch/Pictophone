@@ -5,6 +5,7 @@ import MessageBoxContainer from "../messages/messageBoxContainer";
 import Board from '../board/board';
 import GameContainer from "../game/game_container";
 import Modal from "../modal/modal";
+import Demo from "../demo/demo";
 import GameOver from "../gameover/gameover";
 
 
@@ -19,9 +20,12 @@ class Room extends React.Component {
         this.startGame = this.startGame.bind(this);
         this.prompts = [];
         this.state = {
-            gameOver: false
+            gameOver: false,
+            demo: false,
         }
         this.handleGameOver = this.handleGameOver.bind(this);
+        this.startDemo = this.startDemo.bind(this);
+
 
 
     }
@@ -35,12 +39,21 @@ class Room extends React.Component {
         })
     }
 
+    startDemo() {
+        this.props.openModal('demo');
+    }
+
     handleGameOver() {
         this.props.requestGame(this.props.roomId)
         .then(
             () => this.setState({ gameOver: true })
         )
 
+    }
+
+    handleDemoGameOver(demo) {
+        this.props.receiveDemo(demo);
+        this.setState({ demo: true });
     }
 
     componentDidMount(){
@@ -113,9 +126,11 @@ class Room extends React.Component {
                             {playersList}
                         </div>
                         
-                        <button className='start-button' onClick={this.startGame}>Start</button>
+                        { this.props.room.name.includes("Demo Room") ? <button className="start-button" onClick={this.startDemo}>Demo Game</button> : <button className='start-button' onClick={this.startGame}>Start</button>}
                         {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
                         {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
+                        {this.props.modal === "demo" ?
+                        <Demo demo={true} handleDemoGameOver={this.handleDemoGameOver} /> : "" }
                         
                     </div>
                     <div id='draw-container'>

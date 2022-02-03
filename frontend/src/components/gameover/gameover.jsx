@@ -23,6 +23,11 @@ class GameOver extends React.Component {
     const size = this.props.room.size
     console.log(size)
     // if (!this.props.game.chains.length !== (size + (size * size))) return (<div>loading</div>)
+    if (this.props.demo !== null) {
+      return (
+         <div></div> 
+      )
+    } else {
     return (
       <div className='presentation-container'>
           {this.props.room.players.map(((player,idx) => {
@@ -41,6 +46,7 @@ class GameOver extends React.Component {
       </div>
 
     )
+   }
   }
 }
 
@@ -51,7 +57,8 @@ const mapStateToProps = (state, ownProps) => {
     // roomId: ownProps.roomId
     game: state.entities.games[ownProps.match.params.roomId],
     presentaionObj: sortedChains(state.entities.rooms[ownProps.match.params.roomId], state),
-    users: state.entities.users
+    users: state.entities.users,
+    demo: state.entities.demos,
   }
 }
 
