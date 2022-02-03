@@ -63,14 +63,11 @@ export const sortedDemo = (currentUsername, state) => {
         const players = [currentUsername, "Bot1", "Bot2", "Bot3"]
         
         players.forEach((player) => {
-            debugger
             presentationObj[player] = []
             for (let i = 0; i < 5; i++) {
-                debugger
                 presentationObj[player].push(Object.values(sortedChains.shift())[0])
             }
         })
-        debugger
         return presentationObj;
     }
 }
