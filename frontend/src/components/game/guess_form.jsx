@@ -3,7 +3,6 @@ import { socket } from '../../util/socket_util';
 
 class GuessForm extends React.Component {
     constructor(props) {
-        debugger
         super(props)
         // this.submit = this.submit.bind(this)
         this.state = {
@@ -29,6 +28,7 @@ class GuessForm extends React.Component {
             // chain IDs
         let chain = {};
         chain[this.props.chainId] = this.state.guess;
+
         this.props.updateGame({ roomId: this.props.roomId, chainObj: chain })
                 
             this.socket.emit('submit-chain', this.props.roomId)

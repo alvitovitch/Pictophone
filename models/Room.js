@@ -9,7 +9,7 @@ const RoomSchema = new Schema({
   size: {
     type: Number,
     required: true,
-    min: [4, 'A room needs at least 4 players'],
+    min: [2, 'A room needs at least 4 players'],
     max: [8, 'A room can only have up to 8 players'],
   },
   host: {

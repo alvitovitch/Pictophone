@@ -36,9 +36,9 @@ class Room extends React.Component {
     }
 
     handleGameOver() {
-
-        this.props.createGame({ roomId: this.props.roomId }).then(
-           () => this.setState({ gameOver: true })
+        this.props.requestGame(this.props.roomId)
+        .then(
+            () => this.setState({ gameOver: true })
         )
 
     }

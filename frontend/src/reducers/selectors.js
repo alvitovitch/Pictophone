@@ -33,13 +33,16 @@ export const sortedChains = (room, state) => {
     //     {44: "test"},
     //     {34: "test"},
     // ]
-    const chains = state.entities.games[room._id].chains;
+    const chains = (state.entities.games[room._id].chains).slice();
     // const chains = test;
+    debugger
     const sortedChains = chains.sort((a, b) => (Object.keys(a)[0] - Object.keys(b)[0]));
     const presentationObj = {};
     room.players.forEach((player) => {
         presentationObj[player] = []
         for(let i = 0; i < room.size+1; i++){
+            if (sortedChains[0] === undefined){
+            }
             presentationObj[player].push(Object.values(sortedChains.shift())[0])
         }
     })
