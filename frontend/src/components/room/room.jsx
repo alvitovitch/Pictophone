@@ -124,10 +124,12 @@ class Room extends React.Component {
                   ))
           return (
                 <div className='room-main'>
-                    <div className='left-container'>
                         <div className='players-container'>
                             {playersList}
                         </div>
+                  <div id='game-room-container'>    
+                      <div className='left-container'>
+
                         
                         { this.props.room.name.includes("Demo Room") ? <button className="start-button" onClick={this.startDemo}>Demo Game</button> : <button className='start-button' onClick={this.startGame}>Start</button>}
                         {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
@@ -146,6 +148,9 @@ class Room extends React.Component {
                                 Leave Room
                             </button>
                             <MessageBoxContainer roomId={this.props.roomId} />
+
+                            </div>
+
                         </div>
                     </div>
 

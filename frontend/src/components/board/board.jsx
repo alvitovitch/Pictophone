@@ -33,6 +33,8 @@ class Board extends React.Component {
         
         })
 
+    window.addEventListener('resize', () => this.updateCanvas());
+
     this.updateColor = this.updateColor.bind(this);
     this.updateSize = this.updateSize.bind(this);
     this.updateErase = this.updateErase.bind(this);
@@ -42,8 +44,16 @@ class Board extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.board');
         this.ctx = this.canvas.getContext('2d');
-        const wt = this.canvas.parentElement.offsetWidth - 18;
-        const ht = this.canvas.parentElement.offsetHeight - 18;
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight - 75;
+        this.canvas.width = wt;
+        this.canvas.height = ht;
+        
+    }
+
+    updateCanvas() {
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight - 75;
         this.canvas.width = wt;
         this.canvas.height = ht;
     }
@@ -110,11 +120,11 @@ class Board extends React.Component {
     }
 
     updateErase(size) {
-        this.setState({size: size, color: 'wheat'})
+        this.setState({ size: size, color: 'rgb(245, 245, 245)'})
     }
 
     handleClear() {
-        this.ctx.fillStyle = 'wheat';
+        this.ctx.fillStyle = 'rgb(245, 245, 245)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 

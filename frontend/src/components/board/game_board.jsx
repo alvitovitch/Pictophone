@@ -24,6 +24,8 @@ class GameBoard extends React.Component {
             region: 'us-east-1',
         });
 
+        window.addEventListener('resize', () => this.updateCanvas());
+
         this.updateColor = this.updateColor.bind(this);
         this.updateSize = this.updateSize.bind(this);
         this.updateErase = this.updateErase.bind(this);
@@ -100,8 +102,8 @@ class GameBoard extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.game-board');
         this.ctx = this.canvas.getContext('2d');
-        const wt = this.canvas.parentElement.offsetWidth - 20;
-        const ht = this.canvas.parentElement.offsetHeight - 140;
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight - 70;
         this.canvas.width = wt;
         this.canvas.height = ht;
     }
@@ -114,7 +116,13 @@ class GameBoard extends React.Component {
         this.drawSketch();
     }
 
-
+    updateCanvas() {
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight - 75;
+        this.canvas.width = wt;
+        this.canvas.height = ht;
+    }
+    
     componentDidUpdate() {
         this.drawSketch();
     }
@@ -165,27 +173,26 @@ class GameBoard extends React.Component {
     }
 
     updateErase(size) {
-        this.setState({ size: size, color: 'wheat' });
+        this.setState({ size: size, color: 'rgb(245, 245, 245)' });
     }
 
     handleClear() {
-        this.ctx.fillStyle = 'wheat';
+        this.ctx.fillStyle = 'rgb(245, 245, 245)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     render() {
         return (
             <div className="game-board-container" >
-
+                <canvas className="game-board" ></canvas>
                 <div id='game-errors'>
 
                         You need to draw something before submitting
 
                 </div>
-                <canvas className="game-board" ></canvas>
 
-                <button id='submit' onClick={this.getCanvas}>Submit</button>
-                <canvas className="game-board" ></canvas>
+                
+                
                 <div className='game-draw-controls'>
                     <div className='colors-dropdown'>
 
@@ -250,8 +257,9 @@ class GameBoard extends React.Component {
                     <button
                         className='clear-btn'
                         onClick={() => this.handleClear()}>clear</button>
-                </div>
 
+                    <button id='submit' onClick={this.getCanvas}>Submit</button>
+                </div>
 
             </div>
         )

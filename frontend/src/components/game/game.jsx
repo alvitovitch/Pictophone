@@ -146,7 +146,7 @@ class Game extends React.Component {
 
         } else if (this.state.turn % 2 === 0 && this.state.turn !== this.props.room.size ) {
             //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
-                
+            
             // const guesses = Object.values(this.props.guesses)
             // const guess = guesses.filter(guess => guess.chainId == this.state.fetchChainIds[this.state.turn-1])
             axios.get(`/api/guesses/${this.props.room._id},${this.state.fetchChainIds[this.state.turn-1]}`)

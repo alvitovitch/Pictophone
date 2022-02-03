@@ -2,17 +2,23 @@
     width: 100%;
     height: 100%;
     font-family: 'Noticia Text', serif;
-    background-image: url('../../public/images/paper.jpg');
+    background: url('../../public/images/room-background.png') repeat;
+    animation: backgroundScroll 600s linear infinite;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
+
+@keyframes backgroundScroll {
+    0%   {background-position: 0 0;}
+    100% {background-position: 0 6000%}
+}
+
 #draw-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    
     width: 70vw;
-    min-height: calc(95vh - 280px);
+    height: calc(95vh - 280px);
     display: flex;
-    background-image: url('../../public/images/paper.jpg');
 }
 
 #freeDrawSpace {
@@ -20,18 +26,18 @@
     min-width: 600px;
     background-color: rgb(245, 245, 245);
     border: 3px solid black;
-    outline: 2px solid black;
-    outline-offset: -9px;
 
 }
 
 .board-container {
+     display: flex;
+    flex-direction: column;
+    border: 1px solid red;
     width: 100%;
     height: 100%;
 }
 
 .board {
-    padding: 9px;
     padding-bottom: 20px;
 }
 
@@ -44,8 +50,6 @@
     min-width: 25vw;
     margin-left: 10px;
     border: 3px solid black;
-    outline: 2px solid black;
-    outline-offset: -9px;
 
 }
 
@@ -70,7 +74,11 @@
 }
 
 #chatMessages {
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow-y: initial;
+    width: 90%;
+    height: fit-content;
 }
 
 .colors-dropdown, .size-dropdown, .erase-dropdown, .clear-btn {
@@ -80,9 +88,9 @@
 }
 
 .color-dropdown-content, .size-dropdown-content, .erase-dropdown-content {
-     height: 100px;
-     width: 50px;
-     padding: 10px;
+    height: 100px;
+    width: 50px;
+    padding: 10px;
     display: none;
     position: absolute;
     bottom: 37px;
@@ -166,15 +174,14 @@
     height: fit-content;
     position: relative;
     margin: 0 auto;
-    bottom: 15px;
     display: flex;
+    bottom: 15px;
     justify-content: space-around;
 }
 
 .draw-controls button, .game-draw-controls button {
     border: 2px solid rgb(31,28,18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
-    background-color: transparent;
     text-decoration: none;
     white-space:nowrap;
     width: 60px;
@@ -185,18 +192,20 @@
     font-family: 'Noticia Text', serif;
     font-size: 18px;
     cursor: pointer;
+    background-image: url('../../public/images/paper.jpg');
     
 }
 
 #roomChat {
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    height: 100%;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: flex-start;
     padding-left: 20px;
     margin-bottom: 10px;
+    overflow-y: auto;
 }
 
 .chat-form {
@@ -211,7 +220,6 @@
 .chat-form button {
      border: 2px solid rgb(31,28,18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
-    background-color: transparent;
     text-decoration: none;
     white-space:nowrap;
     width: 60px;
@@ -222,6 +230,8 @@
     font-family: 'Noticia Text', serif;
     font-size: 18px;
     cursor: pointer;
+    background-image: url('../../public/images/paper.jpg');
+
 }
 
 .chat-form input {
@@ -241,21 +251,25 @@
 }
 
 .players-container {
-   display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    height: 8rem;
 }
 
 .players-container img {
-    width: 70px;
-    height: auto;
+    width: auto;
+    height: 70px;
     margin-bottom: 10px;
+   
 }
 
 .players-container p {
-    margin-bottom: 20px;
     text-align: center;
+    background-image: url('../../public/images/paper.jpg');
+    padding: 5px;
+    border: black double 2px;
 }
 
 .start-button {
@@ -263,7 +277,6 @@
     // border-right: 4px solid rgb(31, 28, 18);
     // border-bottom: 4px solid rgb(31, 28, 18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
-    background-color: transparent;
     text-decoration: none;
     white-space:nowrap;
     width: fit-content;
@@ -273,8 +286,23 @@
     font-family: 'Noticia Text', serif;
     font-size: 18px;
     cursor: pointer;
+    background-image: url('../../public/images/paper.jpg');
+
 }
 
 .fade {
     filter: brightness(0.25)
+}
+
+#game-room-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8rem;
+}
+
+.player-list-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
