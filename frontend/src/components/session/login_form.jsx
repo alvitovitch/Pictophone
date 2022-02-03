@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
                     className='login-form'
                     onSubmit={this.handleSubmit}
                 >   <div className="login-header">
-                        <h2>LOG IN TO PICTOPHONE</h2>
+                        <h2>login</h2>
                     </div>
                     <div className='username-input-container'>
                         <input
@@ -59,8 +59,8 @@ class LoginForm extends React.Component {
                     {this.props.errors.handle ? 
                         <p className="session-error">{this.props.errors.handle}</p> : ""}
                     <div className="login-buttons">
-                        <button className="navButton">Sign In</button>
-                        <button className="navButton" onClick={this.handleDemoUser}>Demo User</button>
+                        <button className="navButton">sign in</button>
+                        <button className="navButton" onClick={this.handleDemoUser}>demo user</button>
                     </div>
                 </form>
 

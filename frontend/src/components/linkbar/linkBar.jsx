@@ -9,7 +9,7 @@ class LinkBar extends React.Component {
                 <div className="personalLinks">
                     <div className="tintype-container">
                         <img src="images/alex_d.jpg" alt="" />
-                        <h6>A.D.</h6>
+                        <h6>AD</h6>
                     </div>
                     <div className="links">
                         {/* <div className="linkName">
@@ -28,8 +28,8 @@ class LinkBar extends React.Component {
                 </div>
                 <div className="personalLinks">
                     <div className="tintype-container">
-                        <img src="images/andrew_v.jpg" alt="" />
-                        <h6>A.V.</h6>
+                        <img src="images/andrew_v.png" alt="" />
+                        <h6>AV</h6>
                     </div>
                     <div className="links">
                         {/* <div className="linkName">
@@ -49,7 +49,7 @@ class LinkBar extends React.Component {
                 <div className="personalLinks">
                     <div className="tintype-container">
                         <img src="images/kyle_g.JPG" alt="" />
-                        <h6>K.G.</h6>
+                        <h6>KG</h6>
                     </div>
                     <div className="links">
                         {/* <div className="linkName">
@@ -72,7 +72,7 @@ class LinkBar extends React.Component {
                 <div className="personalLinks">
                     <div className="tintype-container">
                         <img src="images/steph_s.jpg" alt="" />
-                        <h6>S.S.</h6>
+                        <h6>SS</h6>
                     </div>
                     <div className="links">
                         {/* <div className="linkName">

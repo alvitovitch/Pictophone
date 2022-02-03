@@ -3,8 +3,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
-    border-bottom: 5px double rgb(31, 28, 18);
-    font-family: 'Noticia Text', serif;
+    border-bottom:4px solid rgb(31, 28, 18);
     // background-color: rgb(240,219,192);
     // background-color: rgb(252,217,156);
     background-image: url('../../public/images/paper.jpg');
@@ -29,12 +28,19 @@
     #logoPic {
         width: 4vw;
         height: auto;
-        margin-left: 10px;
+        margin: 10px 0 0 10px;
     }
 
     h1 {
         padding: 0 0 10px 5px;
     }
+}
+
+.main-title {
+    font-family: 'Blacktail';
+    font-size: 60px;
+    margin-left: 150px;
+    margin-top: -10px;
 }
 
 
@@ -48,6 +54,7 @@
 
 .navButton {
     border: 2px solid rgb(31,28,18);
+    border-radius: 2px;
     // border-right: 4px solid rgb(31, 28, 18);
     // border-bottom: 4px solid rgb(31, 28, 18);
     box-shadow: 4px 4px 0px rgb(31,28,18);
@@ -57,7 +64,7 @@
     margin: 0 10px;
     padding: 10px;
     color: rgb(31,28,18);
-    font-family: 'Noticia Text', serif;
+    font-family: 'Bagnard';
     font-size: 25px;
 
 }
@@ -84,7 +91,7 @@ a {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-    border-top: 5px double rgb(31, 28, 18);
+    border-top: 4px solid rgb(31, 28, 18);
     background-image: url('../../public/images/paper.jpg');
 }
 
@@ -115,18 +122,18 @@ a {
     h6 {
         text-align: left;
         position: absolute;
-        left: 1.7vw;
-        top: 2vw;
+        left: 1.6vw;
+        top: 1.9vw;
         // display: block;
         opacity: 0;
         transition: 0.5s;
-        font-family: 'Noticia Text', serif;
+        font-family: 'Blacktail';
         font-size:24px;
-        text-shadow: -1px 1px 0 rgb(31,28,18),
-        1px 1px 0 rgb(31,28,18),
-        1px -1px 0 rgb(31,28,18),
-        -1px -1px 0 rgb(31,28,18),
-        -2px 2px white;
+        // text-shadow: -1px 1px 0 rgb(31,28,18),
+        // 1px 1px 0 rgb(31,28,18),
+        // 1px -1px 0 rgb(31,28,18),
+        // -1px -1px 0 rgb(31,28,18),
+        // -2px 2px white;
         color: white;
     }
 }
@@ -140,15 +147,15 @@ a {
     h6 {
         position:absolute;
         // display: block;
-        left: 1.7vw;
-        top: 2vw;
+        left: 1.6vw;
+        top: 1.9vw;
         opacity: 1;
         text-shadow: 0 0 0.5px white;
-        text-shadow: -1px 1px 0 rgb(31,28,18),
-        1px 1px 0 rgb(31,28,18),
-        1px -1px 0 rgb(31,28,18),
-        -1px -1px 0 rgb(31,28,18),
-        -2px 2px white;
+        // text-shadow: -1px 1px 0 rgb(31,28,18),
+        // 1px 1px 0 rgb(31,28,18),
+        // 1px -1px 0 rgb(31,28,18),
+        // -1px -1px 0 rgb(31,28,18),
+        // -2px 2px white;
         transition: 0.5s;
     }
 }
@@ -165,7 +172,7 @@ a {
     // background-color: rgb(31, 28, 18);
     // background-image: url('../../public/images/paper.jpg');
     // width: 13vw;
-    font-family: 'Noticia Text', serif;
+    font-family: 'Blacktail';
     font-size: 21px;
     margin-bottom: 5px;
     // color: rgb(31, 28, 18);

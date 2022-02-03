@@ -32,7 +32,7 @@ class SignupForm extends React.Component {
                     className='signup-form'
                     onSubmit={this.handleSubmit}
                 >   <div className="signup-header">
-                        <h2>SIGN UP FOR PICTOPHONE</h2>
+                        <h2>sign up</h2>
                     </div>
                     <div className='username-input-container'>
                         <input
@@ -48,7 +48,7 @@ class SignupForm extends React.Component {
                     </div>
                     {this.props.errors.password ? 
                         <p className="session-error">{this.props.errors.password}</p> : ""}
-                    <button className="navButton">Sign Up</button>
+                    <button className="navButton">sign up</button>
                 </form>
 
             </div>

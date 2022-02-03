@@ -14,6 +14,10 @@ import { createDrawing, requestAllDrawings, requestDrawing } from './actions/dra
 import { requestAllGuesses, requestGuess, createGuess } from './actions/guesses_actions';
 import { createGame, requestGame, updateGame } from './actions/games_actions';
 
+import './fonts/Canterbury.ttf';
+import './fonts/Blacktail Regular.ttf';
+import './fonts/bagnard.ttf';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
