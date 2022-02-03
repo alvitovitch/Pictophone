@@ -24,6 +24,8 @@ class GameBoard extends React.Component {
             region: 'us-east-1',
         });
 
+        window.addEventListener('resize', () => this.updateCanvas());
+
         this.updateColor = this.updateColor.bind(this);
         this.updateSize = this.updateSize.bind(this);
         this.updateErase = this.updateErase.bind(this);
@@ -99,7 +101,13 @@ class GameBoard extends React.Component {
         this.drawSketch();
     }
 
-
+    updateCanvas() {
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight - 75;
+        this.canvas.width = wt;
+        this.canvas.height = ht;
+    }
+    
     componentDidUpdate() {
         this.drawSketch();
     }
