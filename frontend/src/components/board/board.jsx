@@ -110,11 +110,11 @@ class Board extends React.Component {
     }
 
     updateErase(size) {
-        this.setState({size: size, color: 'wheat'})
+        this.setState({ size: size, color: 'rgb(245, 245, 245)'})
     }
 
     handleClear() {
-        this.ctx.fillStyle = 'wheat';
+        this.ctx.fillStyle = 'rgb(245, 245, 245)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 

@@ -10,16 +10,21 @@
     padding: 115px 0;
 }
 
+#draw-modal {
+    background-color: rgba(28, 28, 28, 0.5);
+}
+
 .game-container {
-    border: 3px solid red;
-    min-width: 800px;
-    min-height: 800px;
-    background-color: white;
+    min-width: 60%;
+    max-width: 60%;
+    min-height: 80%;
+    max-height: 80%;
+    background-color: rgb(245, 245, 245);
     border: 3px solid #000;
     display: flex;
     flex-direction: column;
     align-items: center;
-     
+    
 
     .close-gameboard-button {
         width: fit-content;
@@ -46,42 +51,43 @@
     width: 100%;
     height: 100%;
     z-index: 100;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-around;
-    // align-items: center;
     
 }
 
 #prompt-div {
     position: absolute;
+    z-index: 100;
     top: 10%;
     font-size: 36px;
-    background-color: wheat;
+    background-image: url('../../public/images/paper.jpg');
     color: black;
     padding: 10px;
     font-family: 'Noticia Text', serif;
-    box-shadow: 8px 8px 15px #4e4d4d;
-
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0 #000; 
 }
 
 #submit {
     width: fit-content;
     height: fit-content;
-    background-color: wheat;
+    background-color: rgb(245, 245, 245);
     border: 2px solid #000;
     box-shadow: 3px 3px 0 #000;
     font-family: 'Noticia Text', serif;
     font-size: 18px;
     position: relative;
-    left: 40%;
     cursor: pointer;
+    margin-left: 200px;
 }
 
 #submit:hover {
     transform: scale(1.1);
     transition: 0.5s;
 
+}
+
+.game-draw-controls {
+    margin-top: 15px;
 }
 
 #game-errors {
