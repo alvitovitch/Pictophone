@@ -42,7 +42,7 @@ class Board extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.board');
         this.ctx = this.canvas.getContext('2d');
-        const wt = this.canvas.parentElement.offsetWidth - 18;
+        const wt = this.canvas.parentElement.offsetWidth;
         const ht = this.canvas.parentElement.offsetHeight - 18;
         this.canvas.width = wt;
         this.canvas.height = ht;
