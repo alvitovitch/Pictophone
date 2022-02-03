@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
+    
+    constructor(props){
+        super(props)
+        this.smoothJazz = new Audio('audio/smoothJazz.mp3')
+        this.smoothJazz.volume = .2
+    }
 
     handleLogout = (e) => {
         e.preventDefault();
@@ -18,7 +24,7 @@ class NavBar extends React.Component {
             if (currentUser.username.slice(0, 8) === "DemoUser"){
                 this.props.deleteUser(currentUser)
             }
-        }
+        }  
     }
 
     render() {
@@ -43,6 +49,7 @@ class NavBar extends React.Component {
                 </div>
             )
         } else {
+            this.smoothJazz.play() 
             return(
                 <div id='navBar'>
                     <div id='logoTitle'>

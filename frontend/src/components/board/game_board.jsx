@@ -11,7 +11,8 @@ class GameBoard extends React.Component {
             size: 5
         }
         this.socket = socket
-        
+        this.awooga = new Audio('./audio/awooga.mp3')
+
         AWS.config.update({
             apiVersion: 'latest',
             accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
@@ -46,6 +47,7 @@ class GameBoard extends React.Component {
              const errors = document.getElementById('game-errors')
              errors.style.background = 'rgba(255, 0, 0, .56)'
              errors.style.color = 'rgba(255, 255, 255, 1)'
+             this.awooga.play()
             
              setTimeout(() => {errors.style.background = 'rgba(255, 0, 0, 0)';
                 errors.style.color = 'rgba(255, 255, 255, 0)';
