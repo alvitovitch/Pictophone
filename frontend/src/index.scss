@@ -14,6 +14,7 @@ code {
 
 
 @use './stylesheets/reset.scss';
+
 @use './stylesheets/splash.scss';
 @use './stylesheets/lobby.scss';
 @use './stylesheets/navbar.scss';
@@ -23,3 +24,22 @@ code {
 @use './stylesheets/auth.scss';
 @use './stylesheets/game.scss';
 @use './stylesheets/guess_form.scss';
+
+@font-face {
+  font-family: "Canterbury";
+  src: local("Canterbury"),
+    url("./fonts/Canterbury.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Blacktail";
+  src: local("Blacktail"),
+    url("./fonts/Blacktail Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Bagnard";
+  src: local("Bagnard"),
+    url("./fonts/bagnard.ttf") format("truetype");
+  font-weight: normal;
+}

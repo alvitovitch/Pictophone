@@ -30,13 +30,13 @@ class NavBar extends React.Component {
                             <img id='logoPic' src="/images/transparent_phone.png" />    
                         </div>
                     </div>
-                        <Link to={'/'}> <img className="pictophone" src="/images/Pictophone.png" alt="" /> </Link>
+                    <Link to={'/'} className="main-title">Pictophone</Link>
                     <div id='navButtons'>
                         <button className="navButton">
-                            <Link to={'/login'}>LOGIN</Link>
+                            <Link to={'/login'}>login</Link>
                         </button>
                         <button className="navButton">
-                            <Link to={'/signup'}>SIGN UP</Link>
+                            <Link to={'/signup'}>sign up</Link>
                         </button>
                     </div>
 

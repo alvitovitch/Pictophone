@@ -4,9 +4,9 @@
   justify-content: center;
   align-items: center;
   padding: 30px 0;
-  font-family: 'Noticia Text', serif;
-  background-image: url('../../public/images/paper.jpg') ;
-  background-image: url('../../public/images/transparent-ads.png') ;
+  font-family: 'Bagnard';
+  // background-image: url('../../public/images/paper.jpg') ;
+  background-image: url('../../public/images/transparent-ads.png');
   
 
   .splash-tutorial {
@@ -35,17 +35,17 @@
       background-image: url('../../public/images/paper.jpg') ;
 
       h1 {
-        font-size: 45px;
+        font-size: 37px;
         background-color: rgb(31,28,18);
-        color: #fcd99c;
+        color: rgb(243, 237, 227);
         text-align: center;
         text-shadow: -1px 1px 0 rgb(31,28,18),
         1px 1px 0 rgb(31,28,18),
         1px -1px 0 rgb(31,28,18),
         -1px -1px 0 rgb(31,28,18),
-        -2px 2px #fcd99c;
+        -2px 2px rgb(243, 237, 227);
         //Useful
-        padding: 5px 5px 10px 10px;
+        padding: 15px 5px 5px 5px;
       }
       h2 {
         font-size: 30px;
