@@ -35,12 +35,12 @@ class RoomForm extends React.Component {
             <div className="create-room-form">
                 <h2>CREATE A ROOM</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <h3>Room name: </h3>
+                    <h3>room name: </h3>
                     <input 
                         type="text"
                         value={this.state.name}
                         onChange={e=>this.setState({name: e.currentTarget.value})}/>
-                    <h3>Room Size: </h3>
+                    <h3>room size: </h3>
                     <select
                         defaultValue={4}
                         onChange={e=>this.setState({size: e.currentTarget.value})}>
