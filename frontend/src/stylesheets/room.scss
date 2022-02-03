@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
 }
+
 #draw-container {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -20,8 +21,6 @@
     min-width: 600px;
     background-color: rgb(245, 245, 245);
     border: 3px solid black;
-    outline: 2px solid black;
-    outline-offset: -9px;
 
 }
 
@@ -31,7 +30,6 @@
 }
 
 .board {
-    padding: 9px;
     padding-bottom: 20px;
 }
 
@@ -44,8 +42,7 @@
     min-width: 25vw;
     margin-left: 10px;
     border: 3px solid black;
-    outline: 2px solid black;
-    outline-offset: -9px;
+
 
 }
 
