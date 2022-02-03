@@ -6,6 +6,5 @@ export const fetchAllUsers = () => {
 }
 
 export const deleteUser = (user) => {
-    debugger
     return axios.delete(`/api/users/${user.id}`)
 }

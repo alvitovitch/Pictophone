@@ -107,6 +107,7 @@ class Game extends React.Component {
 
 
     handleSubmit() {
+        
         const nextChainId = this.state.chainId + 11
         if (nextChainId > (this.state.players.length + 1) * 10) {
             this.setState({ chainId: nextChainId - (this.state.players.length * 10) })
@@ -135,7 +136,6 @@ class Game extends React.Component {
             initialPrompt['roomId'] = this.props.room._id; //changed from roomId
             initialPrompt['userId'] = this.props.currentUser.id;
             initialPrompt['chainId'] = this.state.chainId-1;
-            debugger
             this.props.createGuess(initialPrompt);
 
             let chain = {};
@@ -144,8 +144,7 @@ class Game extends React.Component {
             // Initial prompt is patched to backend game with respective players
             // chain IDs
 
-        } else if (this.state.turn % 2 === 0 ) {
-                debugger
+        } else if (this.state.turn % 2 === 0 && this.state.turn !== this.props.room.size ) {
             //   this.props.requestGuess({ roomId: this.props.room._id, chainId: this.state.fetchChainIds[this.state.turn-1] })
                 
             // const guesses = Object.values(this.props.guesses)
@@ -185,7 +184,7 @@ class Game extends React.Component {
                     </div>
                 </div>
             )
-        } else if (this.state.turn > 0) {
+        } else if (this.state.turn > 0 && this.state.turn !== this.props.room.size)  {
             return (
                 (this.state.turn % 2 === 0 ?
                     <div className="game-modal">
@@ -217,6 +216,10 @@ class Game extends React.Component {
                         </div>
                     </div>
                 )
+            )
+        } else {
+            return(
+                <div>It is over</div>
             )
         }
     }

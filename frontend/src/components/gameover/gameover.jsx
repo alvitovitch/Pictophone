@@ -12,12 +12,17 @@ class GameOver extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.requestGame(this.props.roomId)
-  }
+  // componentDidMount() {
+  //   debugger
+  //   this.props.requestGame(this.props.roomId)
+  //   debugger
+  // }
 
   render() {
-    if(!this.props.game) return null
+    console.log(this.props.game.chains.length)
+    const size = this.props.room.size
+    console.log(size)
+    // if (!this.props.game.chains.length !== (size + (size * size))) return (<div>loading</div>)
     return (
       <div className='presentation-container'>
           {this.props.room.players.map(((player,idx) => {
@@ -40,7 +45,8 @@ class GameOver extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-
+  
+  debugger
   return {
     // roomId: ownProps.roomId
     game: state.entities.games[ownProps.match.params.roomId],
