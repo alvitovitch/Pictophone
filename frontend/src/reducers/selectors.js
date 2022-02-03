@@ -33,18 +33,41 @@ export const sortedChains = (room, state) => {
     //     {44: "test"},
     //     {34: "test"},
     // ]
-    const chains = (state.entities.games[room._id].chains).slice();
-    // const chains = test;
-    debugger
-    const sortedChains = chains.sort((a, b) => (Object.keys(a)[0] - Object.keys(b)[0]));
-    const presentationObj = {};
-    room.players.forEach((player) => {
+    if (Object.values(state.entities.games).length === 0) {
+        return {};
+    } else {
+        const chains = (state.entities.games[room._id].chains).slice();
+        // const chains = test;
+        const sortedChains = chains.sort((a, b) => (Object.keys (a)[0] - Object.keys(b)[0]));
+        const presentationObj = {};
+        room.players.forEach((player) => {
         presentationObj[player] = []
         for(let i = 0; i < room.size+1; i++){
             if (sortedChains[0] === undefined){
             }
             presentationObj[player].push(Object.values(sortedChains.shift())[0])
         }
-    })
-    return presentationObj;
+        })
+        return presentationObj;
+    }
+}
+
+export const sortedDemo = (currentUsername, state) => {
+    if (state.entities.demos === null) {
+        return null
+    } else {
+        const chains = state.entities.demos.slice();
+        // const chains = test;
+        const sortedChains = chains.sort((a, b) => (Object.keys(a)[0] - Object.keys(b)[0]));
+        const presentationObj = {};
+        const players = [currentUsername, "Bot1", "Bot2", "Bot3"]
+        
+        players.forEach((player) => {
+            presentationObj[player] = []
+            for (let i = 0; i < 5; i++) {
+                presentationObj[player].push(Object.values(sortedChains.shift())[0])
+            }
+        })
+        return presentationObj;
+    }
 }

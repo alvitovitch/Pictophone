@@ -38,7 +38,11 @@ class GameBoard extends React.Component {
         const drawing = document.querySelector('.game-board');
          if (drawing.getContext('2d').getImageData(0,0,drawing.width, drawing.height).data.some(channel => channel !== 0)){
              drawing.toBlob(blob => {
-                 blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+                 if (this.props.demoBoard) {
+                     blob.name = `drawing${Math.floor(Math.random()*1000000)}`;
+                 } else {
+                     blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+                 }
                  this.uploadFile(blob);  
              })
              let button = document.getElementById('submit')
@@ -63,26 +67,35 @@ class GameBoard extends React.Component {
             Body: file,
         };
         const that = this;
-        this.bucket.upload(params).promise().then(function (data) {
-            let newDrawing = {
-                assetUrl: data.Location,
-                roomId: that.props.roomId,
-                userId: that.props.userId,
-                chainId: that.props.chainId
-            };
-            that.props.createDrawing(newDrawing);
-            // Drawings are patched to backend game with respective players
-            // chain IDs
-            let chain = {};
-            chain[that.props.chainId] = data.Location;
-            that.props.updateGame({ roomId: that.props.roomId, chainObj: chain })
+        if (that.props.demoBoard) {
+            this.bucket.upload(params).promise().then(function(data) {
+                
+                that.props.acceptInput(data.Location)
+            })
+        } else {
+            this.bucket.upload(params).promise().then(function (data) {
+                
+                let newDrawing = {
+                    assetUrl: data.Location,
+                    roomId: that.props.roomId,
+                    userId: that.props.userId,
+                    chainId: that.props.chainId
+                };
+                that.props.createDrawing(newDrawing);
+                // Drawings are patched to backend gamewith respective players
+                // chain IDs
+                let chain = {};
+                chain[that.props.chainId] = data.Location;
+                that.props.updateGame({ roomId: that.props.roomId, chainObj: chain })
+        
+                console.log(`File uploaded successfully.${data.Location}`);
 
-            console.log(`File uploaded successfully. ${data.Location}`);
-        }, function (err) {
-            console.error("Upload failed", err);
-        })
-        .then(() => this.socket.emit('submit-chain', this.props.roomId))
-        .then(() =>  this.props.handleSubmit())
+            }, function (err) {
+                console.error("Upload failed", err);
+            })
+            .then(() => this.socket.emit('submit-chain', this.props.roomId))
+            .then(() =>  this.props.handleSubmit())
+        }
     }
     
 
@@ -96,7 +109,9 @@ class GameBoard extends React.Component {
     }
 
     componentDidMount() {
-        this.props.draw()
+        if (!this.props.demoBoard) {
+            this.props.draw();
+        }
         this.createCanvas();
         this.drawSketch();
     }

@@ -20,6 +20,7 @@ class LobbyIndex extends React.Component {
             this.props.requestAllRooms()
         })
         this.randomDrawing = this.randomDrawing.bind(this);
+        this.handleDemo = this.handleDemo.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +43,17 @@ class LobbyIndex extends React.Component {
             }
         }, 4000)
        
+    }
+
+    handleDemo() {
+        let randomNumber = Math.floor(Math.random()*1000000)
+        this.props.createRoom({name: `Demo Room${randomNumber}`, size: 4, host_id: this.props.currentUser.id })
+        .then(action => {
+            const roomId = action.room.data._id
+            this.props.updateRoom({ 'roomId': roomId, 'playerId': this.props.currentUser.id })
+                .then(() => this.props.history.push(`/rooms/${roomId}`)
+                )
+        })
     }
 
     render() {
@@ -67,6 +79,10 @@ class LobbyIndex extends React.Component {
                             onClick={e => this.props.openModal('createRoom')}>
                             Create a Room
                         </div>
+                        <div
+                            className="index-container-btn"
+                            onClick={this.handleDemo}
+                        >Demo Room</div>
                     </div>
                     <div className="rooms-container-list">
                         {(rooms.length === 0 || Object.values(users).length === 0) ?

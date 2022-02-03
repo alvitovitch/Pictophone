@@ -5,6 +5,7 @@ import MessageBoxContainer from "../messages/messageBoxContainer";
 import Board from '../board/board';
 import GameContainer from "../game/game_container";
 import Modal from "../modal/modal";
+import Demo from "../demo/demo";
 import GameOver from "../gameover/gameover";
 
 
@@ -19,9 +20,13 @@ class Room extends React.Component {
         this.startGame = this.startGame.bind(this);
         this.prompts = [];
         this.state = {
-            gameOver: false
+            gameOver: false,
+            //demo: false,
         }
         this.handleGameOver = this.handleGameOver.bind(this);
+        this.handleDemoGameOver = this.handleDemoGameOver.bind(this);
+        this.startDemo = this.startDemo.bind(this);
+
 
 
     }
@@ -35,12 +40,23 @@ class Room extends React.Component {
         })
     }
 
+    startDemo() {
+        this.props.openModal('demo');
+    }
+
     handleGameOver() {
         this.props.requestGame(this.props.roomId)
         .then(
             () => this.setState({ gameOver: true })
         )
 
+    }
+
+    handleDemoGameOver(demo) {
+
+        this.setState({ gameOver: true })
+        this.props.receiveDemo(demo)
+        
     }
 
     componentDidMount(){
@@ -111,25 +127,30 @@ class Room extends React.Component {
                         <div className='players-container'>
                             {playersList}
                         </div>
-                    <div id='game-room-container'>    
-                        <div className='left-container'>
-                            
-                            <button className='start-button' onClick={this.startGame}>Start</button>
-                            {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
-                            {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
-                            
+                  <div id='game-room-container'>    
+                      <div className='left-container'>
+
+                        
+                        { this.props.room.name.includes("Demo Room") ? <button className="start-button" onClick={this.startDemo}>Demo Game</button> : <button className='start-button' onClick={this.startGame}>Start</button>}
+                        {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
+                        {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
+                        {this.props.modal === "demo" ?
+                        <Demo demo={true} handleDemoGameOver={this.handleDemoGameOver} /> : "" }
+                        
+                    </div>
+                    <div id='draw-container'>
+                        <div id='freeDrawSpace'>
+                            {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
                         </div>
-                        <div id='draw-container'>
-                            <div id='freeDrawSpace'>
-                                {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
+                        <div id='chat-container'>
+                            <button onClick={(e) => { this.leaveRoom(e); this.props.removeDemo(); }}
+                                id='leaveRoom'>
+                                Leave Room
+                            </button>
+                            <MessageBoxContainer roomId={this.props.roomId} />
+
                             </div>
-                            <div id='chat-container'>
-                                <button onClick={this.leaveRoom}
-                                    id='leaveRoom'>
-                                    Leave Room
-                                </button>
-                                <MessageBoxContainer roomId={this.props.roomId} />
-                            </div>
+
                         </div>
                     </div>
 
