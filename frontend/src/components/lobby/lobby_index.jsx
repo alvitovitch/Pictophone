@@ -6,6 +6,12 @@ import { socket } from '../../util/socket_util'
 class LobbyIndex extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            img1: '../../../images/paper.jpg',
+            img2: '../../../images/paper.jpg',
+            img3: '../../../images/paper.jpg',
+            img4: '../../../images/paper.jpg'
+        }
         this.socket = socket
         this.socket.emit("join-room", "lobby")
         this.socket.on("update-index", () => 
@@ -13,33 +19,51 @@ class LobbyIndex extends React.Component {
             console.log("receive update index")
             this.props.requestAllRooms()
         })
+        this.randomDrawing = this.randomDrawing.bind(this);
     }
 
     componentDidMount() {
         this.props.requestAllUsers()
             .then(() => this.props.requestAllRooms())
+            .then(() => this.props.requestAllDrawings())
             .catch((err) => console.log(err))
+        this.randomDrawing();
+    }
+
+    randomDrawing() {
+        setInterval(() => {
+            
+            const imageNum = Math.floor(Math.random() * 5);
+            const imageName = `img${imageNum}`;
+            const max = this.props.drawings.length;
+            const num = Math.floor(Math.random() * max);
+            if (typeof this.props.drawings[num] !== 'undefined') {
+                this.setState({ [imageName]: this.props.drawings[num].assetUrl}) ;
+            }
+        }, 4000)
+       
     }
 
     render() {
-        const { rooms, users, currentUser } = this.props
+        const { rooms, users, currentUser } = this.props;
+
         return (
 
             <div className="lobby-page">
                 <Modal />
                 <aside className="image-feed">
                     <div className="feed-img-box">
-                        <img src="/images/lobby-img/img1.png"/>
+                        <img src={this.state.img1}/>
                     </div>
                     <div className="feed-img-box">
-                        <img src="/images/lobby-img/img2.png" />
+                        <img src={this.state.img2} />
                     </div>
                 </aside>
                 <section className="rooms-container">
                     <div className="rooms-container-header">
                         <h1>CURRENT GAMES</h1>
                         <div
-                            className="index-conrainer-btn"
+                            className="index-container-btn"
                             onClick={e => this.props.openModal('createRoom')}>
                             Create a Room
                         </div>
@@ -66,10 +90,10 @@ class LobbyIndex extends React.Component {
                 </section>
                 <aside className="image-feed">
                     <div className="feed-img-box">
-                        <img src="/images/lobby-img/img3.png" />
+                        <img src={this.state.img3} />
                     </div>
                     <div className="feed-img-box">
-                        <img src="/images/lobby-img/img4.png" />
+                        <img src={this.state.img4} />
                     </div>
                 </aside>
             </div>
