@@ -87,8 +87,8 @@ class GameBoard extends React.Component {
     createCanvas() {
         this.canvas = document.querySelector('.game-board');
         this.ctx = this.canvas.getContext('2d');
-        const wt = this.canvas.parentElement.offsetWidth - 20;
-        const ht = this.canvas.parentElement.offsetHeight - 140;
+        const wt = this.canvas.parentElement.offsetWidth;
+        const ht = this.canvas.parentElement.offsetHeight;
         this.canvas.width = wt;
         this.canvas.height = ht;
     }

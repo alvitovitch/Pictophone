@@ -11,16 +11,14 @@
 }
 
 .game-container {
-    border:3px solid red;
-    width: fit-content;
-    height: fit-content;
-    height: fit-content;
-    background-color: wheat;
+    border: 3px solid red;
+    min-width: 800px;
+    min-height: 800px;
+    background-color: white;
     border: 3px solid #000;
-    outline: 2px solid #000;
-    outline-offset: -9px;
     display: flex;
     flex-direction: column;
+    align-items: center;
      
 
     .close-gameboard-button {
@@ -40,21 +38,18 @@
     .close-gameboard-button:hover {
         transform: scale(1.1);
         transition: 0.5s;
-
     }
 
 }
 
 .game-board-container {
-    width: 700px;
-    max-width: 100%;
-    height: 600px;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-around;
+    // align-items: center;
     
 }
 
