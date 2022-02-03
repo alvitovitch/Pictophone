@@ -36,7 +36,11 @@ class GameBoard extends React.Component {
         const drawing = document.querySelector('.game-board');
          if (drawing.getContext('2d').getImageData(0,0,drawing.width, drawing.height).data.some(channel => channel !== 0)){
              drawing.toBlob(blob => {
-                 blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+                 if (this.props.demoBoard) {
+                     blob.name = `drawing${Math.floor(Math.random()*1000000)}`;
+                 } else {
+                     blob.name = `drawing${this.props.roomId}${this.props.chainId}`; 
+                 }
                  this.uploadFile(blob);  
              })
              let button = document.getElementById('submit')
@@ -63,10 +67,12 @@ class GameBoard extends React.Component {
         const that = this;
         if (that.props.demoBoard) {
             this.bucket.upload(params).promise().then(function(data) {
+                
                 that.props.acceptInput(data.Location)
             })
         } else {
             this.bucket.upload(params).promise().then(function (data) {
+                
                 let newDrawing = {
                     assetUrl: data.Location,
                     roomId: that.props.roomId,

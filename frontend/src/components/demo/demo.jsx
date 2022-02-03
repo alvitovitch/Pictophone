@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import GameBoard from "../board/game_board";
 import GuessFormContainer from "../game/guess_form_container";
+import { receiveDemo } from "../../actions/demo_actions";
 
 class Demo extends React.Component {
   constructor(props) {
@@ -51,8 +52,8 @@ class Demo extends React.Component {
   render() {
     if (this.state.turn === 4) {
       this.props.handleDemoGameOver(this.state.demoGame);
-    }
-    if (this.state.turn % 2 === 0 && this.state.turn < 4) {
+      return null
+    } else if (this.state.turn % 2 === 0 && this.state.turn < 4) {
       return (
         <div id="draw-modal" className="game-modal">
 
@@ -88,8 +89,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    receiveDemo: demo => dispatch(receiveDemo(demo)),
   }
 }
 
-export default connect(null, null)(Demo);
+export default connect(null, mapDispatchToProps)(Demo);

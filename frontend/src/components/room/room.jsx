@@ -21,9 +21,10 @@ class Room extends React.Component {
         this.prompts = [];
         this.state = {
             gameOver: false,
-            demo: false,
+            //demo: false,
         }
         this.handleGameOver = this.handleGameOver.bind(this);
+        this.handleDemoGameOver = this.handleDemoGameOver.bind(this);
         this.startDemo = this.startDemo.bind(this);
 
 
@@ -52,8 +53,10 @@ class Room extends React.Component {
     }
 
     handleDemoGameOver(demo) {
-        this.props.receiveDemo(demo);
-        this.setState({ demo: true });
+
+        this.setState({ gameOver: true })
+        this.props.receiveDemo(demo)
+        
     }
 
     componentDidMount(){
@@ -138,7 +141,7 @@ class Room extends React.Component {
                             {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
                         </div>
                         <div id='chat-container'>
-                            <button onClick={this.leaveRoom}
+                            <button onClick={(e) => { this.leaveRoom(e); this.props.removeDemo(); }}
                                 id='leaveRoom'>
                                 Leave Room
                             </button>

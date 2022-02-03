@@ -8,3 +8,9 @@ export const receiveDemo = demo => {
 
 }
 export const REMOVE_DEMO = 'REMOVE_DEMO';
+
+export const removeDemo = () => {
+  return {
+    type: REMOVE_DEMO,
+  }
+}

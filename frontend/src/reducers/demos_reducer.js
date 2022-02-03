@@ -1,4 +1,4 @@
-import { RECEIVE_DEMO } from "../actions/demo_actions";
+import { RECEIVE_DEMO, REMOVE_DEMO } from "../actions/demo_actions";
 
 let preloadedState = null;
 
@@ -8,8 +8,8 @@ const DemoReducer = (state = preloadedState, action) => {
   switch (action.type) {
     case RECEIVE_DEMO:
       return action.demo;
-    // case REMOVE_DEMO:
-    //   return null;
+    case REMOVE_DEMO:
+      return null;
     default:
       return state;
   }
