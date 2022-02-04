@@ -6,6 +6,8 @@
   align-items: center;
   background-image: url('../../public/images/transparent-ads.png'), url('../../public/images/paper.jpg');
   background-repeat: repeat;
+  animation: backgroundScroll 600s linear infinite;
+
 
   .login-form, .signup-form {
     width: 25vw;
