@@ -6,7 +6,8 @@
     justify-content: space-evenly;
     background-image: url('../../public/images/paper.jpg');
     * {
-        font-family: 'Noticia Text', serif;
+        // font-family: 'Noticia Text', serif;
+        font-family: 'Bagnard';
     }
 }
 
@@ -44,14 +45,19 @@
         color: black;
         -webkit-text-stroke: 1px black;
         // text-shadow: -1px 1px 0 #e2b670, -6px 6px black;
-        font-size: 60px;
+        // font-size: 60px;
+        font-size: 55px;
+        margin-bottom: -5px;
+        margin-left: 5px;
     }
 }
 
 .index-container-btn {
     border: 2px solid black;
+    border-radius: 2px;
     color: black;
-    font-size: 25px;
+    // font-size: 25px;
+    font-size: 24px;
     padding: 20px 10px;
     box-shadow: 4px 4px black;
     background: transparent;
@@ -82,17 +88,19 @@
     
     .top-row {
         padding-left: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         width: 70%;
         display: flex;
         justify-content: space-between;
-        font-size: 25px;
+        font-size: 23px;
         margin: 10px 5px;
         color: #f0eadd;
         z-index: 10;
     }
     
     .bottom-row {
-        padding-left: 20px;
+        padding-left: 15px;
         width: 70%;
         display: flex;
         color: #f0eadd;
@@ -129,8 +137,10 @@
 }
 
 .button-box button{
-    margin: 0 0 10px 10px;
+    margin: -10px 0 10px 10px;
+    padding: 4px;
     border:2px solid black;
+    border-radius: 2px;
     box-shadow: 2px 2px black;
     background-image: url('../../public/images/paper.jpg');    
     
