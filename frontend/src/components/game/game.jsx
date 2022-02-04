@@ -11,8 +11,10 @@ class Game extends React.Component {
         this.socket = socket;
         
         this.ring = new Audio('audio/ring.mp3')
+        this.ring.volume = .4
         this.applause = new Audio('audio/applause.mp3')
         this.jolly = new Audio('audio/jolly-good-show.mp3')
+        this.jolly.volume = .6
 
         this.socket.on('chain-received', () => {
             this.chainCount()
@@ -59,9 +61,9 @@ class Game extends React.Component {
     
        this.volume = document.getElementById("sound-control");
         this.volume.addEventListener("change", ()=> {
-            this.ring.volume = this.volume.value / 100;
+            this.ring.volume = (this.volume.value / 100)*.4;
             this.applause.volume = this.volume.value / 100;
-            this.jolly.volume = this.volume.value / 100;
+            this.jolly.volume = (this.volume.value / 100)*.6;
         })
     }
 

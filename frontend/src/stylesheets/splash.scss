@@ -7,7 +7,9 @@
   font-family: 'Bagnard';
   // background-image: url('../../public/images/paper.jpg') ;
   background-image: url('../../public/images/transparent-ads.png');
-  
+  animation: splashScroll 600s linear infinite;
+  width: 100vw;
+
 
   .splash-tutorial {
     display: flex;
@@ -66,14 +68,7 @@
   height: inherit;
 }
 
-#left-ads {
-  opacity: .5;
-  width: 10%;
-}
-#right-ads {
-  opacity: .5;
-  width: 10%;
-}
+
 
 #splash-container {
   background-image: url('../../public/images/paper.jpg');
@@ -84,4 +79,10 @@
 
 .reverse {
   transform: scaleX(-1);
+}
+
+
+@keyframes splashScroll {
+  0%   {background-position: 0 0;}
+  100% {background-position: 0 1000%}
 }
