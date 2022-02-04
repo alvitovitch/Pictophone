@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Room from './room';
 import { randomPrompts } from '../../reducers/selectors';
 import { requestAllUsers } from '../../actions/users_actions';
-import { requestRoom, updateRoom } from '../../actions/rooms_actions'
+import { deleteRoom, requestRoom, updateRoom } from '../../actions/rooms_actions'
 import { requestAllPrompts } from '../../actions/prompts_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { createGame, requestGame } from '../../actions/games_actions';
@@ -33,6 +33,7 @@ const mDTP = dispatch => {
         requestGame: roomId => dispatch(requestGame(roomId)),
         receiveDemo: demo => dispatch(receiveDemo(demo)),
         removeDemo: () => dispatch(removeDemo()),
+        deleteRoom: (roomId) => dispatch(deleteRoom(roomId))
     }
 }
 

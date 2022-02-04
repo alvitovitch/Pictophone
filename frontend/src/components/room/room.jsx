@@ -21,7 +21,7 @@ class Room extends React.Component {
         this.prompts = [];
         this.state = {
             gameOver: false,
-            //demo: false,
+            gameStart: false
         }
         this.handleGameOver = this.handleGameOver.bind(this);
         this.handleDemoGameOver = this.handleDemoGameOver.bind(this);
@@ -37,11 +37,14 @@ class Room extends React.Component {
         .then(() => {
             this.socket.emit('start-game', this.props.roomId);
             this.props.openModal('game');
+            this.setState({ gameStart: true })
+
         })
     }
 
     startDemo() {
         this.props.openModal('demo');
+        this.setState({gameStart: true})
     }
 
     handleGameOver() {
@@ -99,13 +102,16 @@ class Room extends React.Component {
         e.preventDefault();
         this.socket.emit('leave-room', this.props.roomId);
         this.props.history.push('/lobby');
+        if (this.props.room.name.includes("Demo Room")){
+            this.props.deleteRoom(this.props.roomId);
+        }
     }
 
 
     render() {
-       
-
+        
         if (!this.props.room) return null;
+        const { currentUser, room} = this.props;
         if (!this.props.users) {
             return null
         } else {
@@ -131,7 +137,11 @@ class Room extends React.Component {
                       <div className='left-container'>
 
                         
-                        { this.props.room.name.includes("Demo Room") ? <button className="start-button" onClick={this.startDemo}>Demo Game</button> : <button className='start-button' onClick={this.startGame}>Start</button>}
+                        { this.props.room.name.includes("Demo Room") ? 
+                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className="start-button" onClick={this.startDemo}>Demo Game</button>) 
+                                : 
+                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className='start-button' onClick={this.startGame}>Start</button>)
+                        }
                         {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
                         {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
                         {this.props.modal === "demo" ?
