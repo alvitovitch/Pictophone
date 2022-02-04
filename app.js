@@ -34,11 +34,19 @@ const io = require('socket.io')(server, {
 })
     
 io.on('connection', socket => {
+
+    let roomId = 0;
+    let user = 0; 
+
     socket.on('send-message',  (message, room) => {
         socket.to(room).emit('receive-message', message)
     })
-    socket.on('join-room', (room) => {
+    socket.on('join-room', room => {
+        roomId = room
         socket.join(room)
+    })
+    socket.on('userId', userId => {
+        user = userId;
     })
     socket.on('update-count', () => {
         socket.to("lobby").emit("update-index")
@@ -62,12 +70,8 @@ io.on('connection', socket => {
     socket.on("connect_error", (err) => {
         console.log(`connect_error due to ${err.message}`);
     })
-    // socket.on("test", () => {
-    //     console.log('test')
-    // });
     socket.on('disconnect', reason => {
-        console.log("disconnected");
-        socket.emit("disc", reason)
+        socket.to(roomId).emit("disc", user);
     });
 })
 

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/alvitovitch/Pictophone#readme",
   "dependencies": {
     "aws-sdk": "^2.1059.0",
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "concurrently": "^7.0.0",

@@ -62,6 +62,7 @@ router.patch("/:room_id",
   passport.authenticate('jwt', { session: false }),
 
   (req, res) => {
+    console.log(req.params)
     Room.findById(req.params.room_id)
       .then(room => {
         !room.players.includes(req.body.playerId) && room.players.length < room.size ?
