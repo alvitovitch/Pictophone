@@ -77,12 +77,12 @@ class LobbyIndex extends React.Component {
                         <div
                             className="index-container-btn"
                             onClick={e => this.props.openModal('createRoom')}>
-                            Create a Room
+                            create a room
                         </div>
                         <div
                             className="index-container-btn"
                             onClick={this.handleDemo}
-                        >Demo Room</div>
+                        >demo room</div>
                     </div>
                     <div className="rooms-container-list">
                         {(rooms.length === 0 || Object.values(users).length === 0) ?

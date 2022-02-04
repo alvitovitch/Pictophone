@@ -181,7 +181,7 @@
     position: relative;
     margin: 0 auto;
     display: flex;
-    bottom: 15px;
+    // bottom: 15px;
     justify-content: space-around;
 }
 
@@ -305,6 +305,11 @@
     // background-image: url('../../public/images/paper.jpg');
     background-color: rgb(245, 245, 245);
 
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
 }
 
 .fade {

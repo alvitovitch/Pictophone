@@ -79,7 +79,7 @@ class MessageBox extends React.Component {
                     <form className='chat-form' onSubmit={this.handleSubmit}>
                         <input onChange={this.handleUpdate('message')} type="text" id='textBox' value={this.state.message}/>
                         <button>
-                            Send
+                            send
                         </button>
                     </form>
                 </div>

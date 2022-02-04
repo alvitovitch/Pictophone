@@ -5,6 +5,7 @@
     padding: 20px 30px;
     border: solid 4px black;
     background-color: rgb(245, 245, 245);
+    font-family: 'Bagnard';
     
     h2 {
         font-size: 45px;
@@ -24,10 +25,16 @@
 
     input[type=text] {
         border: 1px solid black;
+        margin-bottom: 10px;
+        font-size: 18px;
+        padding: 5px;
+        outline: none;
     }
 
     select {
         border: 1px solid black;
+        font-size: 18px;
+        padding: 5px;
     }
 
 
@@ -50,10 +57,6 @@
         font-size: 20px;
     }
 }
-
-// .modal-child {
-//     z-index: 22;
-// }
 
 .modal-background {
     z-index: 20;

@@ -138,9 +138,9 @@ class Room extends React.Component {
 
                         
                         { this.props.room.name.includes("Demo Room") ? 
-                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className="start-button" onClick={this.startDemo}>Demo Game</button>) 
+                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className="start-button" onClick={this.startDemo}>demo game</button>) 
                                 : 
-                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className='start-button' onClick={this.startGame}>Start</button>)
+                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className='start-button' onClick={this.startGame}>start</button>)
                         }
                         {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
                         {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
@@ -155,7 +155,7 @@ class Room extends React.Component {
                         <div id='chat-container'>
                             <button onClick={(e) => { this.leaveRoom(e); this.props.removeDemo(); }}
                                 id='leaveRoom'>
-                                Leave Room
+                                leave room
                             </button>
                             <MessageBoxContainer roomId={this.props.roomId} />
 

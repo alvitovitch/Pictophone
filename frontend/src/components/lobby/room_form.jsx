@@ -33,7 +33,7 @@ class RoomForm extends React.Component {
         const { errors } = this.props
         return(
             <div className="create-room-form">
-                <h2>CREATE A ROOM</h2>
+                <h2>Create a Room</h2>
                 <form onSubmit={this.handleSubmit}>
                     <h3>room name: </h3>
                     <input 
@@ -50,7 +50,7 @@ class RoomForm extends React.Component {
                         <option value="8">8</option>
                         <option value="10">10</option>
                     </select>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="submit" />
                 </form>
                 {errors.name ? <p>{errors.name}</p> : ""}
             </div>
