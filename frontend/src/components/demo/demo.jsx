@@ -63,7 +63,7 @@ class Demo extends React.Component {
             <GameBoard  demoBoard={true} acceptInput={this.acceptInput} />
             {/* DRAW */}
           </div>
-          {<div>{this.state.demoGame[this.state.index-1][this.state.promptIndexes[this.state.turn]]}</div>}
+          {<div id='prompt-div'>{this.state.demoGame[this.state.index-1][this.state.promptIndexes[this.state.turn]]}</div>}
         </div>
       )
     } else if (this.state.turn % 2 !== 0 && this.state.turn <4) {
