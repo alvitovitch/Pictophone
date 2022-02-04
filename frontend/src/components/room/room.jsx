@@ -16,6 +16,9 @@ class Room extends React.Component {
         this.socket.emit('join-room', this.props.roomId);
         this.socket.on('start-game', () => {
         this.props.openModal('game') })
+        this.socket.on('disc', reason => {
+            console.log(reason)
+        })
         this.leaveRoom = this.leaveRoom.bind(this);
         this.startGame = this.startGame.bind(this);
         this.prompts = [];
@@ -63,7 +66,12 @@ class Room extends React.Component {
     }
 
     componentDidMount(){
-        
+        // window.addEventListener('beforeunload',e => {
+        //     e.preventDefault()
+        //     e.returnValue = ''
+        //     this.socket.emit("test")
+        // })
+
         this.props.requestAllUsers()
         .then(() => this.props.requestRoom(this.props.roomId))
             .then(()=>{

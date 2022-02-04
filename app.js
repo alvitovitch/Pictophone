@@ -61,7 +61,14 @@ io.on('connection', socket => {
     })
     socket.on("connect_error", (err) => {
         console.log(`connect_error due to ${err.message}`);
-      });
+    })
+    // socket.on("test", () => {
+    //     console.log('test')
+    // });
+    socket.on('disconnect', reason => {
+        console.log("disconnected");
+        socket.emit("disc", reason)
+    });
 })
 
 // Mongoose connecting to our database
