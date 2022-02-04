@@ -34,9 +34,24 @@ class Demo extends React.Component {
         {43: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
         {44: null}, // 19
     ],
-
+    
     };
     this.acceptInput = this.acceptInput.bind(this);
+    this.ring = new Audio('audio/ring.mp3')
+    this.ring.volume = .4
+    this.applause = new Audio('audio/applause.mp3')
+    this.applause.volume = .6
+    this.jolly = new Audio('audio/jolly-good-show.mp3')
+    this.jolly.volume = .6
+  }
+
+  componentDidMount() {
+    this.volume = document.getElementById("sound-control");
+        this.volume.addEventListener("change", ()=> {
+            this.ring.volume = this.volume.value / 100;
+            this.applause.volume = this.volume.value / 100;
+            this.jolly.volume = this.volume.value / 100;
+        })
   }
 
   acceptInput(string) {
@@ -48,12 +63,17 @@ class Demo extends React.Component {
     this.setState({ turn: this.state.turn + 1 });
     // might consolidate these
   }
+  
 
   render() {
     if (this.state.turn === 4) {
       this.props.handleDemoGameOver(this.state.demoGame);
+      this.applause.play()
+      this.jolly.play()
       return null
     } else if (this.state.turn % 2 === 0 && this.state.turn < 4) {
+      this.ring.currentTime = 0
+      this.ring.play()
       return (
         <div id="draw-modal" className="game-modal">
 
@@ -67,6 +87,8 @@ class Demo extends React.Component {
         </div>
       )
     } else if (this.state.turn % 2 !== 0 && this.state.turn <4) {
+      this.ring.currentTime = 0
+      this.ring.play()
       return (
         <div className="game-modal">
           <div className="game-container">
