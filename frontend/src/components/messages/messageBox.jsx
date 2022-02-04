@@ -23,6 +23,14 @@ class MessageBox extends React.Component {
           });
     }
 
+    componentDidMount() {
+        this.volume = document.getElementById("sound-control");
+        this.volume.addEventListener("change", ()=> {
+            this.ding.volume = this.volume.value / 100;
+            this.keystroke.volume = this.volume.value / 100;
+        })
+    }
+
     handleSubmit(e) {
         e.preventDefault()
         const message = this.state.message
