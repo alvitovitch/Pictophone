@@ -40,7 +40,6 @@ class Demo extends React.Component {
     this.ring = new Audio('audio/ring.mp3')
     this.ring.volume = .4
     this.applause = new Audio('audio/applause.mp3')
-    this.applause.volume = .6
     this.jolly = new Audio('audio/jolly-good-show.mp3')
     this.jolly.volume = .6
   }
@@ -48,9 +47,9 @@ class Demo extends React.Component {
   componentDidMount() {
     this.volume = document.getElementById("sound-control");
         this.volume.addEventListener("change", ()=> {
-            this.ring.volume = this.volume.value / 100;
+            this.ring.volume = (this.volume.value / 100)*.4;
             this.applause.volume = this.volume.value / 100;
-            this.jolly.volume = this.volume.value / 100;
+            this.jolly.volume = (this.volume.value / 100)*.6;
         })
   }
 

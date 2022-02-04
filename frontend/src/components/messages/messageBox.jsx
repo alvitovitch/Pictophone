@@ -12,6 +12,7 @@ class MessageBox extends React.Component {
 
         this.ding = new Audio('audio/ding.mp3')
         this.keystroke = new Audio('audio/keystroke.mp3')
+        this.keystroke.volume = .5
 
         this.socket = socket;
         this.socket.on('receive-message', message => {
@@ -27,7 +28,7 @@ class MessageBox extends React.Component {
         this.volume = document.getElementById("sound-control");
         this.volume.addEventListener("change", ()=> {
             this.ding.volume = this.volume.value / 100;
-            this.keystroke.volume = this.volume.value / 100;
+            this.keystroke.volume = (this.volume.value / 100)* .5;
         })
     }
 

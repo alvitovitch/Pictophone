@@ -6,7 +6,6 @@ class Splash extends React.Component {
     render() {
         return (
             <div id='splash-container'>
-                <img id="left-ads" src="/images/ads-left.png" alt="" />
                 <div id='splashMain'>
                     <div className="splash-tutorial">
                         <img src="/images/pointing-hand.webp" alt="tutorial 2" />
@@ -41,7 +40,6 @@ class Splash extends React.Component {
 
                     </div>
                 </div>
-                <img id="right-ads" src="/images/ads-right.png" alt="" />
             </div>
         )
     }

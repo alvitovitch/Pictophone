@@ -7,13 +7,13 @@ class NavBar extends React.Component {
         super(props)
         this.smoothJazz = new Audio('audio/smoothJazz.mp3')
         this.smoothJazz.loop = true
-        this.smoothJazz.volume = .2
+        this.smoothJazz.volume = .4
     }
 
     componentDidMount() {
         this.volume = document.getElementById("music-control");
         this.volume.addEventListener("change", ()=> {
-            this.smoothJazz.volume = this.volume.value / 100;
+            this.smoothJazz.volume = (this.volume.value / 100) *.4;
         })
     }
 
