@@ -23,6 +23,7 @@ const LobbyIndexItem = (props) => {
             )
     }
 
+    const joinClass = room.players.length === room.size ? 'disabled' : '';
 
     return(
         <div className="index-room">
@@ -37,8 +38,7 @@ const LobbyIndexItem = (props) => {
                 <div className="bottom-row">
                     <h2>host: {users[room.host].username}</h2>
                     <div className="button-box">
-                        {room.players.length === room.size ? null :
-                        < button className='join' onClick={e => join(e)}>join</button>}
+                        < button className={`join ${joinClass}`} onClick={e => join(e)}>join</button>
                         {currentUser.id === room.host ?
                             (
                                 <button className="delete" onClick={e => props.deleteRoom(room._id)}>delete</button>
