@@ -73,7 +73,7 @@ class LobbyIndex extends React.Component {
                 </aside>
                 <section className="rooms-container">
                     <div className="rooms-container-header">
-                        <h1>CURRENT GAMES</h1>
+                        <h1>Current Games</h1>
                         <div
                             className="index-container-btn"
                             onClick={e => this.props.openModal('createRoom')}>

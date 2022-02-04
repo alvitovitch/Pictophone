@@ -33,7 +33,8 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            <img id='logoPic' src="/images/transparent_phone.png" />    
+                            {/* <img id='logoPic' src="/images/transparent_phone.png" />   */}
+                            <img id='logoPic' src="/images/vintage_phone.png" />  
                         </div>
                     </div>
                     <Link to={'/'} className="main-title">Pictophone</Link>
@@ -54,14 +55,15 @@ class NavBar extends React.Component {
                 <div id='navBar'>
                     <div id='logoTitle'>
                         <div id='Logo'>
-                            <img id='logoPic' src="/images/transparent_phone.png" />    
+                            {/* <img id='logoPic' src="/images/transparent_phone.png" /> */}
+                            <img id='logoPic' src="/images/vintage_phone.png" /> 
                         </div>
                     </div>
-                        <Link to={'/'}> <img className="pictophone" src="/images/Pictophone.png" alt="" /> </Link>
+                        <Link to={'/'} className="main-title">Pictophone</Link>
                     <div id='navButtons'>
                         {/* <button className="navButton">Profile</button> */}
                         {/* <button className="navButton">Settings</button> */}
-                        <button className="navButton" onClick={this.handleLogout}>Logout</button>
+                        <button className="navButton" onClick={this.handleLogout}>logout</button>
                     </div>
                 </div>
             )
