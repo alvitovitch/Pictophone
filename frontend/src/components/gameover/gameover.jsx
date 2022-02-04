@@ -22,7 +22,8 @@ class GameOver extends React.Component {
 
   scrollLeft(e) {
     e.preventDefault();
-    const idx = (parseInt(e.currentTarget.previousElementSibling.id) + 1) % 4;
+    const idx = this.props.demo !== null ? ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % 4) :
+      ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % this.props.room.players.length - 1 );
     debugger
     const slides = document.querySelector('.presentation-container');
     const slide = document.getElementById(idx);
@@ -67,7 +68,7 @@ class GameOver extends React.Component {
           {this.props.room.players.map(((player,idx) => {
             return(
             <div className='chain-container'>
-              <div className='chain' key={idx}>
+              <div className='chain' id={idx} key={idx}>
                 <h2>{this.props.users[player].username}</h2>
                 <ul className='photo-strip'>{
                   this.props.presentaionObj[player].map((chain,i) => {
