@@ -53,8 +53,10 @@ class GuessForm extends React.Component {
                 <img src={this.props.demoBoard ? this.props.url : `https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
             <form onSubmit={this.submitGuess}>
-                <h2>Your Guess:</h2>
-                <input type="text" value={this.state.guess} onChange={this.updateGuess}/>
+                <input type="text" 
+                placeholder='guess?'
+                value={this.state.guess} 
+                onChange={this.updateGuess}/>
                 <input id='submit-one' type="submit" value="submit"/>
             </form>
             <div id='game-errors'>

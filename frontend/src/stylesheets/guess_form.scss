@@ -1,10 +1,38 @@
 .guess-form {
-    border:3px solid blue;
     width: 300px;
     height: 400px;
     align-self: center;
     margin-top: 50px;
+    
+    input {
+    // width:18vw;
+    width: 100%;
+    min-width: 18vw;
+    font-family: 'Bagnard';
+    font-size: 25px;
+    padding: 4px 5px;
+    margin: 2px 2px;
+    }
+
+    #submit-one {
+        border: 2px solid rgb(31,28,18);
+        border-radius: 2px;
+        // border-right: 4px solid rgb(31, 28, 18);
+        // border-bottom: 4px solid rgb(31, 28, 18);
+        box-shadow: 4px 4px 0px rgb(31,28,18);
+        background-color: transparent;
+        text-decoration: none;
+        white-space:nowrap;
+        margin: 0 10px;
+        padding: 10px;
+        color: rgb(31,28,18);
+        font-family: 'Bagnard';
+        font-size: 25px;
+        cursor: pointer;
+    }
 }
+
+
 
 .img-container {
     width: 100%;
