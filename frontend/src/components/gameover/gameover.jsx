@@ -10,6 +10,8 @@ class GameOver extends React.Component {
     this.state = {
 
     }
+
+    this.scrollLeft = this.scrollLeft.bind(this);
   }
 
   // componentDidMount() {
@@ -18,28 +20,45 @@ class GameOver extends React.Component {
   //   debugger
   // }
 
+  scrollLeft(e) {
+    e.preventDefault();
+    const idx = (parseInt(e.currentTarget.previousElementSibling.id) + 1) % 4;
+    debugger
+    const slides = document.querySelector('.presentation-container');
+    const slide = document.getElementById(idx);
+    slides.scrollTo((slide.offsetLeft - 200), 0);
+    // slides.scrollLeft += slides.offsetWidth;
+    // arrow.style.right += slides.offfsetWidth;
+  }
+
   render() {
     // console.log(this.props.game.chains.length)
     // const size = this.props.room.size
     // console.log(size)
     // if (!this.props.game.chains.length !== (size + (size * size))) return (<div>loading</div>)
     if (this.props.demo !== null) {
-      const players = [this.props.currentUsername, "Bot1", "Bot2", "Bot3"]
+      const players = [this.props.currentUsername, "Ida", "Reginald", "Theodore"]
       return (
       <div className='presentation-container'>
           {players.map(((player,idx) => {
             return(
-              <div className='chain' key={idx}>
-                <h2>{player}</h2>
-                <ul>{
-                  this.props.demo[player].map((chain,i) => {
-                    return chain.includes("https://") ? <li key={i}><img src={chain} /></li> : <li key={i}>{chain}</li>
-                  })
-                }
-                </ul>
+              <div className='chain-container'>
+                <div className='chain' id={idx} key={idx}>
+                  <h2>{player}</h2>
+                  <ul>{
+                    this.props.demo[player].map((chain, i) => {
+                      return chain.includes("https://") ? <li key={i}><img src={chain} /></li> : <li key={i}>{chain}</li>
+                    })
+                  }
+                  </ul>
+                </div>
+                  <p className={`arrow ${idx}`} onClick={this.scrollLeft}>&#9654;</p>
               </div>
+              
             ) 
           }))}
+          
+          
       </div>
       )
     } else {
@@ -47,17 +66,21 @@ class GameOver extends React.Component {
       <div className='presentation-container'>
           {this.props.room.players.map(((player,idx) => {
             return(
+            <div className='chain-container'>
               <div className='chain' key={idx}>
                 <h2>{this.props.users[player].username}</h2>
-                <ul>{
+                <ul className='photo-strip'>{
                   this.props.presentaionObj[player].map((chain,i) => {
                     return chain.includes("https://") ? <li key={i}><img src={chain} /></li> : <li key={i}>{chain}</li>
                   })
                 }
                 </ul>
+            </div>
+                <p className={`arrow ${idx}`} onClick={this.scrollLeft}>&#9654;</p>
               </div>
             ) 
           }))}
+        
       </div>
 
     )

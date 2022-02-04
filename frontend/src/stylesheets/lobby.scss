@@ -11,7 +11,6 @@
     }
 }
 
-
 .rooms-container {
     width: 60%;
     height: 550px;
@@ -85,6 +84,7 @@
     margin-top: 10px;
     padding: 0px 50px;
     height: fit-content;
+    margin-bottom: 30px;
     
     .top-row {
         padding-left: 20px;
@@ -106,7 +106,6 @@
         color: #f0eadd;
         justify-content: space-between; 
         margin: 0 10px; 
-        margin-bottom: 10px;
         z-index: 10;  
     }
 }
@@ -180,4 +179,9 @@
             max-width: 60%;
         }
     }
+}
+
+.disabled {
+    pointer-events: none;
+    filter: brightness(0.5);
 }

@@ -60,7 +60,7 @@ export const sortedDemo = (currentUsername, state) => {
         // const chains = test;
         const sortedChains = chains.sort((a, b) => (Object.keys(a)[0] - Object.keys(b)[0]));
         const presentationObj = {};
-        const players = [currentUsername, "Bot1", "Bot2", "Bot3"]
+        const players = [currentUsername, "Ida", "Reginald", "Theodore"]
         
         players.forEach((player) => {
             presentationObj[player] = []
