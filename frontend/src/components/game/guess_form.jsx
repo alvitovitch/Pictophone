@@ -11,6 +11,8 @@ class GuessForm extends React.Component {
         this.socket = socket
         this.submitGuess = this.submitGuess.bind(this)
         this.updateGuess = this.updateGuess.bind(this);
+        this.awooga = new Audio('./audio/awooga.mp3')
+
     }
 
     async submitGuess(e) {
@@ -40,6 +42,15 @@ class GuessForm extends React.Component {
                 button.style.display = 'none' 
                 button.style.pointerEvents = 'none'
             }
+        } else {
+            const errors = document.getElementById('guess-errors')
+             errors.style.background = 'rgba(255, 0, 0, .9)'
+             errors.style.color = 'rgba(255, 255, 255, 1)'
+             this.awooga.play()
+            
+             setTimeout(() => {errors.style.background = 'rgba(255, 0, 0, 0)';
+                errors.style.color = 'rgba(255, 255, 255, 0)';
+            }, 3000)
         }
     }
 
@@ -49,6 +60,9 @@ class GuessForm extends React.Component {
 
     render(){
         return( <div className="guess-form">
+            <div id='guess-errors'>
+                You need to type something before submitting
+            </div>
             <div className="img-container">
                 <img src={this.props.demoBoard ? this.props.url : `https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
@@ -59,9 +73,6 @@ class GuessForm extends React.Component {
                 onChange={this.updateGuess}/>
                 <input id='submit-one' type="submit" value="submit"/>
             </form>
-            <div id='game-errors'>
-                You need to enter a guess before submitting
-            </div>
         </div>
         )
     }

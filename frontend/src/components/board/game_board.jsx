@@ -54,8 +54,8 @@ class GameBoard extends React.Component {
              document.querySelector('.clear-btn').classList.add('hidden');
              document.querySelector('.wait').classList.remove('hidden');
          } else {
-             const errors = document.getElementById('game-errors')
-             errors.style.background = 'rgba(255, 0, 0, .56)'
+             const errors = document.getElementById('draw-errors')
+             errors.style.background = 'rgba(255, 0, 0, .9)'
              errors.style.color = 'rgba(255, 255, 255, 1)'
              this.awooga.play()
             
@@ -191,7 +191,7 @@ class GameBoard extends React.Component {
         return (
             <div className="game-board-container" >
                 <canvas className="game-board" ></canvas>
-                <div id='game-errors'>
+                <div id='draw-errors'>
 
                         You need to draw something before submitting
 

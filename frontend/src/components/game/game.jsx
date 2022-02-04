@@ -10,6 +10,10 @@ class Game extends React.Component {
         super(props)
         this.socket = socket;
         
+        this.ring = new Audio('audio/ring.mp3')
+        this.applause = new Audio('audio/applause.mp3')
+        this.jolly = new Audio('audio/jolly-good-show.mp3')
+
         this.socket.on('chain-received', () => {
             this.chainCount()
         })
@@ -28,6 +32,8 @@ class Game extends React.Component {
         this.draw = this.draw.bind(this);
         this.socket.on('increased-turn', () => {
             // this.nextId()
+            this.ring.currentTime = 0
+            this.ring.play()
             this.setState({turn: this.state.turn + 1})
         })
 
@@ -50,6 +56,13 @@ class Game extends React.Component {
         console.log(chainIds)
         console.log(fetchChainIds)
        // this.draw();
+    
+       this.volume = document.getElementById("sound-control");
+        this.volume.addEventListener("change", ()=> {
+            this.ring.volume = this.volume.value / 100;
+            this.applause.volume = this.volume.value / 100;
+            this.jolly.volume = this.volume.value / 100;
+        })
     }
 
     // nextId() {
@@ -164,8 +177,11 @@ class Game extends React.Component {
     render() {
         if (this.state.turn === this.props.room.size) {
             this.props.handleGameOver();
+            this.applause.play()
+            this.jolly.play()
         }
         if (this.state.turn === 0) {
+           
             return (
                 <div id="draw-modal" className="game-modal">
 
@@ -185,6 +201,7 @@ class Game extends React.Component {
                 </div>
             )
         } else if (this.state.turn > 0 && this.state.turn !== this.props.room.size)  {
+            
             return (
                 (this.state.turn % 2 === 0 ?
                     <div className="game-modal">
