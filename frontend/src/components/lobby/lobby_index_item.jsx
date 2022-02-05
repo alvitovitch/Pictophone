@@ -5,7 +5,7 @@ import { socket } from '../../util/socket_util'
 const LobbyIndexItem = (props) => {
     
     const { room, users, currentUser } = props;
-    const join = (e) => {
+    const joinRoom = (e) => {
         e.preventDefault();
         props.requestAllRooms()
             .then(
@@ -23,6 +23,14 @@ const LobbyIndexItem = (props) => {
             )
     }
 
+    const deleteRoom = e => {
+        e.preventDefault();
+        props.deleteRoom(room._id)
+            .then(() => {
+                socket.emit("update-count");
+            })
+    }
+
     const joinClass = room.players.length === room.size ? 'disabled' : '';
 
     return(
@@ -38,10 +46,11 @@ const LobbyIndexItem = (props) => {
                 <div className="bottom-row">
                     <h2>host: {users[room.host].username}</h2>
                     <div className="button-box">
-                        < button className={`join ${joinClass}`} onClick={e => join(e)}>join</button>
+                        {room.name.includes("Demo Room") ?
+                        "" : < button className={`join ${joinClass}`} onClick={e => joinRoom(e)}>join</button>}
                         {currentUser.id === room.host ?
                             (
-                                <button className="delete" onClick={e => props.deleteRoom(room._id)}>delete</button>
+                                <button className="delete" onClick={e => deleteRoom(e)}>delete</button>
                             ) : ("")}
                     </div>
                 </div>

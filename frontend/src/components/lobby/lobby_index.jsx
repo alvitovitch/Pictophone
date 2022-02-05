@@ -15,7 +15,7 @@ class LobbyIndex extends React.Component {
         this.socket = socket
         this.socket.emit("join-room", "lobby")
         this.socket.on("update-index", () => this.props.requestAllRooms())
-        this.socket.on("disc", () => {
+        this.socket.on("update-room", () => {
             window.setTimeout(() => this.props.requestAllRooms(), 1000);
         })
         this.randomDrawing = this.randomDrawing.bind(this);
@@ -28,6 +28,10 @@ class LobbyIndex extends React.Component {
             .then(() => this.props.requestAllDrawings())
             .catch((err) => console.log(err))
         this.randomDrawing();
+    }
+
+    componentWillUnmount() {
+        socket.emit("leave-room", "lobby");
     }
 
     randomDrawing() {
