@@ -32,10 +32,11 @@ class LobbyIndex extends React.Component {
 
     componentWillUnmount() {
         socket.emit("leave-room", "lobby");
+        clearInterval(this.interval);
     }
 
     randomDrawing() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
             
             const imageNum = Math.floor(Math.random() * 5);
             const imageName = `img${imageNum}`;
