@@ -46,7 +46,6 @@ class LobbyIndex extends React.Component {
                 this.setState({ [imageName]: this.props.drawings[num].assetUrl}) ;
             }
         }, 4000)
-       
     }
 
     handleDemo() {
