@@ -18,15 +18,16 @@ class Room extends React.Component {
         this.socket.on('start-game', () => {
         this.props.openModal('game') })
         this.socket.on('disc', (userId) => {
-            const players = this.props.room.players;
-            if (userId === players[0]){
-                players.shift()
-            }
-            if (this.props.currentUser.id === players[0]){
-                let object = { 'roomId': this.props.roomId, 'playerId': userId };
-                this.props.updateRoom(object)
-            }
+            // const players = this.props.room.players;
+            // if (userId === players[0]){
+            //     players.shift()
+            // }
+            // if (this.props.currentUser.id === players[0]){
+            //     let object = { 'roomId': this.props.roomId, 'playerId': userId };
+            //     this.props.updateRoom(object)
+            // }
             window.setTimeout((() => this.props.requestRoom(this.props.roomId)),1000)
+            // this.props.requestRoom(this.props.roomId);
         })
         this.leaveRoom = this.leaveRoom.bind(this);
         this.startGame = this.startGame.bind(this);
