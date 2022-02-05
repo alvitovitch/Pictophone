@@ -14,10 +14,9 @@ class LobbyIndex extends React.Component {
         }
         this.socket = socket
         this.socket.emit("join-room", "lobby")
-        this.socket.on("update-index", () => 
-        {
-            console.log("receive update index")
-            this.props.requestAllRooms()
+        this.socket.on("update-index", () => this.props.requestAllRooms())
+        this.socket.on("update-room", () => {
+            window.setTimeout(() => this.props.requestAllRooms(), 1000);
         })
         this.randomDrawing = this.randomDrawing.bind(this);
         this.handleDemo = this.handleDemo.bind(this);
@@ -31,8 +30,13 @@ class LobbyIndex extends React.Component {
         this.randomDrawing();
     }
 
+    componentWillUnmount() {
+        socket.emit("leave-room", "lobby");
+        clearInterval(this.interval);
+    }
+
     randomDrawing() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
             
             const imageNum = Math.floor(Math.random() * 5);
             const imageName = `img${imageNum}`;
@@ -42,7 +46,6 @@ class LobbyIndex extends React.Component {
                 this.setState({ [imageName]: this.props.drawings[num].assetUrl}) ;
             }
         }, 4000)
-       
     }
 
     handleDemo() {

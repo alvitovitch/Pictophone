@@ -14,6 +14,7 @@ const passport = require('passport');
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
 const path = require('path');
+const Room = require('./models/Room');
     
 
 if (process.env.NODE_ENV === 'production') {
@@ -44,6 +45,7 @@ io.on('connection', socket => {
     socket.on('join-room', room => {
         roomId = room
         socket.join(room)
+        socket.to(room).emit('update-room');
     })
     socket.on('userId', userId => {
         user = userId;
@@ -63,6 +65,7 @@ io.on('connection', socket => {
     })
     socket.on('leave-room', room => {
         socket.leave(room)
+        if(room !== "lobby") socket.to(room).emit('update-room')
     })
     socket.on('send-drawing', (drawing, room) => {
         socket.to(room).emit('receive-drawing', drawing)
@@ -71,7 +74,15 @@ io.on('connection', socket => {
         console.log(`connect_error due to ${err.message}`);
     })
     socket.on('disconnect', reason => {
-        socket.to(roomId).emit("disc", user);
+        if (roomId.length > 10){
+            Room.findOne({ _id: roomId})
+                .then(room => {
+                    const filteredPlayers = room.players.filter(player => player !== user);
+                    room.players = filteredPlayers;
+                    room.save({players: room.players});
+                })
+        }
+        socket.broadcast.emit("update-room");
     });
 })
 
@@ -81,7 +92,6 @@ mongoose
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
-    
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
