@@ -18,6 +18,7 @@ class LobbyIndex extends React.Component {
         this.socket.on("update-room", () => {
             window.setTimeout(() => this.props.requestAllRooms(), 1000);
         })
+        this.socket.on('request-users', (() => this.props.requestAllUsers()));
         this.randomDrawing = this.randomDrawing.bind(this);
         this.handleDemo = this.handleDemo.bind(this);
     }

@@ -20,6 +20,7 @@ class Room extends React.Component {
         this.socket.on('update-room', () => {
             window.setTimeout((() => this.props.requestRoom(this.props.roomId)),1000)
         })
+        this.socket.on('request-users', (() => this.props.requestAllUsers()))
         this.leaveRoom = this.leaveRoom.bind(this);
         this.startGame = this.startGame.bind(this);
         this.prompts = [];

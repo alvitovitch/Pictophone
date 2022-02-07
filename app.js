@@ -42,6 +42,9 @@ io.on('connection', socket => {
     socket.on('send-message',  (message, room) => {
         socket.to(room).emit('receive-message', message)
     })
+    socket.on('new-user', () => {
+        socket.broadcast.emit("request-users")
+    })
     socket.on('join-room', room => {
         roomId = room
         socket.join(room)
