@@ -7,10 +7,10 @@ class LobbyIndex extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            img1: '../../../images/paper.jpg',
-            img2: '../../../images/paper.jpg',
-            img3: '../../../images/paper.jpg',
-            img4: '../../../images/paper.jpg'
+            img1: '',
+            img2: '',
+            img3: '',
+            img4: ''
         }
         this.socket = socket
         this.socket.emit("join-room", "lobby")
