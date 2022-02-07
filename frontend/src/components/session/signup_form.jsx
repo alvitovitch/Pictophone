@@ -1,4 +1,5 @@
 import React from "react";
+import { socket } from '../../util/socket_util';
 
 class SignupForm extends React.Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class SignupForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
-        this.props.signup(user);
+        this.props.signup(user)
+            .then(() => socket.emit('new-user'));
     }
 
     update(field) {

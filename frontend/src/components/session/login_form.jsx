@@ -1,4 +1,5 @@
 import React from "react";
+import { socket } from "../../util/socket_util"
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class LoginForm extends React.Component {
         const demoUser = { 
             username: `DemoUser${Math.floor(Math.random() * 1000000000)}`, 
             password: "hunter12"}
-        this.props.signup(demoUser);
+        this.props.signup(demoUser)
+            .then(() => socket.emit('new-user'));
     }
 
     render() {
