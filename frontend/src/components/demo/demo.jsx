@@ -15,23 +15,23 @@ class Demo extends React.Component {
       demoGame: [
         {10: "mammoth"}, // 0
         {11: null}, // 1
-        {12: "test"},
-        {13: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
-        {14: "test"},
-        {20: "test"},
-        {21: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"}, // 6
+        {12: "mammoth"},
+        {13: "https://pictophone-uploads.s3.amazonaws.com/drawing208169"},   //mammoth image
+        {14: "mammoth"},
+        {20: "bagel"},
+        {21: "https://pictophone-uploads.s3.amazonaws.com/drawing888245"}, //bagel image
         {22: null}, // 7
-        {23: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
-        {24: "test"},
-        {30: "test"},
-        {31: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
-        {32: "test"},
+        {23: "https://pictophone-uploads.s3.amazonaws.com/drawing584805"}, //bagel image
+        {24: "bagel"},
+        {30: "lobster"},
+        {31: "https://pictophone-uploads.s3.amazonaws.com/drawing837695"},   //lobster image
+        {32: "lobster"},
         {33: null}, // 13
-        {34: "test"},
-        {40: "test"},
-        {41: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
-        {42: "test"},
-        {43: "https://pictophone-uploads.s3.amazonaws.com/drawing61e9aea15e46f5495e52b69a11"},
+        {34: "lobster"},
+        {40: "popcorn"},
+        {41: "https://pictophone-uploads.s3.amazonaws.com/drawing993332"},  //popcorn image
+        {42: "popcorn"},
+        {43: "https://pictophone-uploads.s3.amazonaws.com/drawing599606"},  //popcorn image
         {44: null}, // 19
     ],
     
