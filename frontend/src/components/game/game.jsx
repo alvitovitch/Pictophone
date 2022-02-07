@@ -98,6 +98,16 @@ class Game extends React.Component {
     // //     }, 30000);
     // }
 
+    componentDidUpdate() {
+        if (document.getElementById('prompt-div') !== null){
+            if (this.state.turn % 2 !== 0) {
+                document.getElementById('prompt-div').style.display = 'none'
+            } else if (this.state.turn !== 0 && this.state.turn % 2 === 0) {
+                document.getElementById('prompt-div').style.display = 'block'
+                }
+            }
+        }
+
     // componentDidUpdate() {
     //     if (this.state.gameover) {
     //         // end the game? or unmount the component?
