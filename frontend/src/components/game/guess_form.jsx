@@ -41,6 +41,8 @@ class GuessForm extends React.Component {
                 let button = document.getElementById('submit-one')
                 button.style.display = 'none' 
                 button.style.pointerEvents = 'none'
+                document.getElementById('guess-submit-text').style.display = 'none'
+                document.querySelector('.wait').classList.remove('hidden')
             }
         } else {
             const errors = document.getElementById('guess-errors')
@@ -67,11 +69,12 @@ class GuessForm extends React.Component {
                 <img src={this.props.demoBoard ? this.props.url : `https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
             <form onSubmit={this.submitGuess}>
-                <input type="text" 
+                <input id='guess-submit-text' type="text" 
                 placeholder='guess?'
                 value={this.state.guess} 
                 onChange={this.updateGuess}/>
                 <input id='submit-one' type="submit" value="submit"/>
+                <p className="wait hidden">waiting for other players...</p>
             </form>
         </div>
         )

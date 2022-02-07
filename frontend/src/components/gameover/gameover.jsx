@@ -23,7 +23,7 @@ class GameOver extends React.Component {
   scrollLeft(e) {
     e.preventDefault();
     const idx = this.props.demo !== null ? ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % 4) :
-      ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % this.props.room.players.length - 1 );
+      ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % this.props.room.players.length);
     debugger
     const slides = document.querySelector('.presentation-container');
     const slide = document.getElementById(idx);
