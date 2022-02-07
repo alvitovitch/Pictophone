@@ -52,11 +52,11 @@ class MessageBox extends React.Component {
         const user = message.user
         const newMessage = document.createElement('div')
         newMessage.innerText = `${user}: ${text}`
-        if (document.getElementById('chatMessages').firstChild.innerText !== newMessage.innerText)
+        if (document.getElementById('chatMessages').firstChild === null || document.getElementById('chatMessages').firstChild.innerText !== newMessage.innerText)
         {
             this.ding.currentTime = 0
             this.ding.play()
-            document.getElementById('chatMessages').prepend(newMessage)
+            document.getElementById('chatMessages').append(newMessage)
         }
         
 
