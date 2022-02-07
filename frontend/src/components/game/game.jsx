@@ -238,7 +238,7 @@ class Game extends React.Component {
             )
         } else {
             return(
-                <div>It is over</div>
+                null
             )
         }
     }
