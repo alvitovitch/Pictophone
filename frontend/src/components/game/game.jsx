@@ -135,12 +135,13 @@ class Game extends React.Component {
 
 
     draw() {
+       
         // on a drawing turn
         // want to fetch the prompt on first turn
         // else fetch the previous chain guess
-        let prompt = ''
-        const promptDiv = document.createElement('div')
-        promptDiv.id = 'prompt-div'
+        let prompt = '';
+        const promptDiv = document.createElement('div');
+        promptDiv.id = 'prompt-div';
         if (this.state.turn === 0) {
             prompt = this.props.prompts[this.state.players.indexOf(this.props.currentUser.id)]
             promptDiv.innerText = prompt.word
@@ -171,12 +172,16 @@ class Game extends React.Component {
                     document.getElementById('prompt-div').innerText = guess.data.word
                 }
             )
-        } 
+        }
         
     }
 
 
     render() {
+        if (this.state.turn % 2 !== 0) {
+            document.getElementById('prompt-div').style.display = 'none';
+        }
+        
         if (this.state.turn === this.props.room.size) {
             this.props.handleGameOver();
             this.applause.play()
@@ -224,7 +229,7 @@ class Game extends React.Component {
                     :
                     <div className="game-modal">
                         <div className="game-container">
-
+                            
                             {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
                             {/* GUESS */}
                             <GuessFormContainer handleSubmit={this.handleSubmit} 
