@@ -174,9 +174,16 @@
         height: 40%;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        flex-shrink: 0;
+        
         img {
+            margin-top: 20%;
+            background-color: whitesmoke;
             max-width: 60%;
+            max-height: 80%;
+            z-index: 1;
+            
         }
     }
 }
