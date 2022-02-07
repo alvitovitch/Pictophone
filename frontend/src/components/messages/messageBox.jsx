@@ -11,8 +11,10 @@ class MessageBox extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
 
         this.ding = new Audio('audio/ding.mp3')
+        this.ding.volume = (document.getElementById("sound-control").value/100)
+        
         this.keystroke = new Audio('audio/keystroke.mp3')
-        this.keystroke.volume = .5
+        this.keystroke.volume = (document.getElementById("sound-control").value/100) * .5
 
         this.socket = socket;
         this.socket.on('receive-message', message => {
