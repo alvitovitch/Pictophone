@@ -1,7 +1,7 @@
 .presentation-container {
     // background-color: white;
     padding: 10px;
-    height: 600px;
+    height: 95%;
     overflow-x: scroll;
     scroll-behavior: smooth;
     display: flex;
@@ -40,7 +40,6 @@
        }
 
     .chain{
-       
         display: flex;
         flex-direction: column;
         align-items: center;
