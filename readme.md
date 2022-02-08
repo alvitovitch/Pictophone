@@ -24,11 +24,11 @@ During gameplay each player will receive a unique prompt and attempt to draw it.
 
 ## Lobby/Rooms
 
-[Lobby]
+![Lobby](frontend/public/images/lobby_screenshot.png)
 
 After signing up or logging in, users will be taken to Pictophone's main lobby and greeted by previously created rooms. Players are free to join those rooms or create a new one as a host. If players try to join a room, our full stack structure checks to see if that user has already joined the room or if that room is full. If it is not full and the player has not joined, their unique identifier is persisted to the backend and the frontend will route them to that unique room:
 
-`````
+```javascript
 
 // Joining existing rooms (frontend)
 
@@ -90,7 +90,9 @@ const Modal = ({modal, closeModal}) => {
 }
 
 `````
-`````
+
+```javascript
+
 // Create room (backend)
 
 router.post("/", 
@@ -138,9 +140,11 @@ router.patch("/:room_id",
 
 ## Game Drawings & Guesses
 
+![Playing the game](frontend/public/images/game_demo.gif)
+
 After all players have joined a room and a game begins, each player is given a randomly generated prompt and asked to draw it for the next user. After that drawing is passed down the "chain" to the next user, they are asked to guess what the prompt for that drawing was. This was a challenging process that involved converting our canvas manipulation to a blob asset, uploading it to AWS S3, and persisting that drawing's unique identifiers to the backend. Once the turn changed and the next player needed those drawings, it required fetching the correct drawings in our game "chain". On the frontend, this involved crafting an algorithm from scratch that could identify a player's placement in the "chain" and know which respective drawings and guesses they needed for each turn. The algorithm utilized the unique room's identifier and a generated chain identifier to satisfy this demand:
 
-````
+```javascript
 
 // Start game (frontend)
 
@@ -154,7 +158,7 @@ startGame() {
                         
 ````
 
-````
+```javascript
 // Save player's drawing (backend)
 
 router.post("/", 
@@ -200,11 +204,11 @@ router.post("/",
 
 ## Free Draw
 
-[Freedraw]
+![Freedraw](frontend/public/images/freedraw_demo.gif)
 
 Prior to starting a game, users are able to engage in a shared drawing canvas either solo or with other players also occupying the same room. In order to accomplish this functionality, we needed to write custom websocket events and actions that listened for canvas manipulation on a user's frontend. After canvas manipulation occurs, it is relayed via our websocket emit to our base connection and sent out to all other user's socket connections in that specific room. This allows users to share canvases, but only in their respective rooms and not globally.
 
-````
+```javascript
 
 // Capture and send drawing data (frontend)
 
@@ -227,7 +231,8 @@ const drawLine = function () {
 
 Prior to starting a game, users are also able to engage in a live chat with other players also occupying the same room. In order to accomplish this functionality, we needed to write additional websocket events and actions that listened for user message input. After this occurs, their message input is relayed via our websocket emit to our base connection and sent out to all other user's socket connections in that specific room. This allows users to communicate with each other, but again, only in their respective rooms and not globally.
 
-````
+```javascript
+
 // Chat setup (backend)
 
 const io = require('socket.io')(server, {
