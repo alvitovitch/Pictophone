@@ -1,6 +1,8 @@
 # Welcome to Pictophone!
 
  [Pictophone](https://pictophone.herokuapp.com/#/) is an online, multiplayer, collaborative drawing game.
+ 
+ ![Pictophone](frontend/public/images/splash_screenshot.png)
 
 ## Background and Overview
 
