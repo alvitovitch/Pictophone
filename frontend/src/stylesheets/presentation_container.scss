@@ -72,7 +72,8 @@
             height: 250px;  
         } 
         img {
-            width: inherit;
+            // width: inherit;
+            max-width: 280px;
             height: inherit;
             
         }
