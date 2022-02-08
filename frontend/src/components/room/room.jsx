@@ -146,9 +146,17 @@ class Room extends React.Component {
                         { this.props.room.name.includes("Demo Room") ? 
                             ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className="start-button" onClick={this.startDemo}>demo game</button>) 
                                 : 
-                            ((this.state.gameStart || room.host !== currentUser.id) ? "" : <button className='start-button' onClick={this.startGame}>start</button>)
+                            ((this.state.gameStart || room.host !== currentUser.id) ? 
+                                (room.players.length < room.size ?
+                                    <div className="game-msg">{`Missing ${room.size - room.players.length} players`}</div>
+                                        :
+                                    <div className="game-msg">{'Ready to start'}</div>) 
+                                    : 
+                                (room.players.length < room.size ? 
+                                    <div className="game-msg">{`Missing ${room.size - room.players.length} players`}</div> 
+                                        :
+                                    <button className='start-button' onClick={this.startGame}>start</button>))
                         }
-                        {/* <button className='start-button' onClick={this.handleGameOver}>Start</button> */}
                         {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} handleGameOver={this.handleGameOver}/> : ""}
                         {this.props.modal === "demo" ?
                         <Demo demo={true} handleDemoGameOver={this.handleDemoGameOver} /> : "" }
