@@ -51,7 +51,6 @@
     }
 
     .username-input-container, .password-input-container {
-      // width: fit-content;
       width: 40%;
       margin-top: 10px;
       height: fit-content;
@@ -60,7 +59,6 @@
       justify-content: center;
 
       input {
-        // width:18vw;
         width: 100%;
         min-width: 18vw;
         font-family: 'Bagnard';
@@ -71,8 +69,6 @@
     }
 
     button {
-      // width: 19vw;
-      // width: 95%;
       font-family: 'Bagnard';
       padding: 4px 5px;
       font-size: 25px;

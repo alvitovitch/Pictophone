@@ -21,7 +21,6 @@ router.get("/:drawingId",
   passport.authenticate('jwt', { session: false }),
   
   (req, res) => {
-    console.log(req.params.drawingId.split(','));
     const roomId= req.params.drawingId.split(',')[0]; 
     const chainId= req.params.drawingId.split(',')[1]; 
 
@@ -31,7 +30,6 @@ router.get("/:drawingId",
         let drawing = drawings.filter(drawing => drawing.roomId === roomId);
         res.json(...drawing);
       })
-      .then(() => console.log("second"))
       .catch(err => res.status(404).json({ nodrawingfound: 'No drawing with that chainId and roomId found' }))
   }
 )

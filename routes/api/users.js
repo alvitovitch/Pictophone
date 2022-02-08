@@ -126,10 +126,8 @@ router.get("/",
 router.delete("/:userId",
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log(req.params);
     User.findOne({ _id: req.params.userId })
       .then(user => {
-        console.log(user);
         user.delete().then(user => res.json(user));
       })
       .catch(err => 
