@@ -10,7 +10,7 @@ Enter Pictophone!
 
 Upon signing up or logging in, Pictophoners<sup>tm</sup> can create or join their own online party rooms. Upon entering a room, a user can communicate with others in the room via live chat and participate in a communal 'free draw' session while they are waiting for the start of the game. 
 
-During gameplay each player will receive a unique prompt and attempt to draw it within a given time. Once the time has elapsed, their drawing will be passed to the subsequent player, who will guess the prompt! Their guess is then passed to the next player who will create a drawing based off of the guess! The cycle continues until the last player in the cycle guesses. When the cycle ends players will see the journey their drawings and guesses took and how they mutated over time. As a team, we were interested in building a turn-based game that integrates live functionality and offers a user-friendly design. The technologies implemented in this project include:
+During gameplay each player will receive a unique prompt and attempt to draw it. Once everyone has submitted, their drawing will be passed to the subsequent player, who will guess the prompt! Their guess is then passed to the next player who will create a drawing based off of the guess! The cycle continues until the last player in the cycle guesses. When the cycle ends players will see the journey their drawings and guesses took and how they mutated over time. As a team, we were interested in building a turn-based game that integrates live functionality and offers a user-friendly design. The technologies implemented in this project include:
 
 * Languages: JavaScript, HTML, and CSS
 * Frontend: React-Redux
@@ -20,16 +20,17 @@ During gameplay each player will receive a unique prompt and attempt to draw it 
 * Websockets: Socket.io
 * Asset Storage: AWS Simple Cloud Storage (S3)
 
-# MVPS
+# MVP Features
 
 ## Lobby/Rooms
 
+[Lobby]
+
 After signing up or logging in, users will be taken to Pictophone's main lobby and greeted by previously created rooms. Players are free to join those rooms or create a new one as a host. If players try to join a room, our full stack structure checks to see if that user has already joined the room or if that room is full. If it is not full and the player has not joined, their unique identifier is persisted to the backend and the frontend will route them to that unique room:
 
-Frontend-
 `````
 
-// Joining existing rooms
+// Joining existing rooms (frontend)
 
 const join = (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const join = (e) => {
 }
 
 
-//Room creation and error handling
+// Room creation and error handling (frontend)
 
 handleSubmit = (e) => {
         e.preventDefault();
@@ -66,7 +67,7 @@ componentDidUpdate(prevProps, prevState){
     }
 }
 
-// Create Room Modal
+// Create room modal (frontend)
 
 const Modal = ({modal, closeModal}) => {
     if(!modal) return null;
@@ -89,8 +90,9 @@ const Modal = ({modal, closeModal}) => {
 }
 
 `````
-Backend-
-````
+`````
+// Create room (backend)
+
 router.post("/", 
   passport.authenticate('jwt', { session: false }),
 
@@ -116,6 +118,8 @@ router.post("/",
   }
 )
 
+// Add new player to room (backend)
+
 router.patch("/:room_id",
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -136,10 +140,9 @@ router.patch("/:room_id",
 
 After all players have joined a room and a game begins, each player is given a randomly generated prompt and asked to draw it for the next user. After that drawing is passed down the "chain" to the next user, they are asked to guess what the prompt for that drawing was. This was a challenging process that involved converting our canvas manipulation to a blob asset, uploading it to AWS S3, and persisting that drawing's unique identifiers to the backend. Once the turn changed and the next player needed those drawings, it required fetching the correct drawings in our game "chain". On the frontend, this involved crafting an algorithm from scratch that could identify a player's placement in the "chain" and know which respective drawings and guesses they needed for each turn. The algorithm utilized the unique room's identifier and a generated chain identifier to satisfy this demand:
 
-Frontend-
 ````
 
-// Start Game
+// Start game (frontend)
 
 <button className='start-button' onClick={this.startGame}>Start</button>
 {this.props.modal === "game" ? <GameContainer prompts={this.prompts} room={this.props.room} /> : ""}
@@ -151,9 +154,9 @@ startGame() {
                         
 ````
 
-Backend-
 ````
-// Drawings
+// Save player's drawing (backend)
+
 router.post("/", 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -174,7 +177,9 @@ router.post("/",
       })
   }
 )
-// Guesses
+
+// Save player's guess (backend)
+
 router.post("/",
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -195,10 +200,27 @@ router.post("/",
 
 ## Free Draw
 
+[Freedraw]
+
 Prior to starting a game, users are able to engage in a shared drawing canvas either solo or with other players also occupying the same room. In order to accomplish this functionality, we needed to write custom websocket events and actions that listened for canvas manipulation on a user's frontend. After canvas manipulation occurs, it is relayed via our websocket emit to our base connection and sent out to all other user's socket connections in that specific room. This allows users to share canvases, but only in their respective rooms and not globally.
 
 ````
-Socket and canvas code needed here
+
+// Capture and send drawing data (frontend)
+
+const drawLine = function () {
+      that.ctx.beginPath();
+      that.ctx.moveTo(prevPos.x, prevPos.y);
+      that.ctx.lineTo(currentPos.x, currentPos.y);
+      that.ctx.closePath();
+      that.ctx.stroke();
+
+      if (that.timeout !== undefined) clearTimeout(that.timeout);
+      that.timeout = setTimeout(function () {
+          const drawingData = that.canvas.toDataURL("image/png");
+          that.socket.emit("send-drawing", drawingData, that.props.roomId);
+      }, 1000)
+  };
 ````
 
 ## Live Chat
@@ -206,7 +228,7 @@ Socket and canvas code needed here
 Prior to starting a game, users are also able to engage in a live chat with other players also occupying the same room. In order to accomplish this functionality, we needed to write additional websocket events and actions that listened for user message input. After this occurs, their message input is relayed via our websocket emit to our base connection and sent out to all other user's socket connections in that specific room. This allows users to communicate with each other, but again, only in their respective rooms and not globally.
 
 ````
-// Backend Chat Setup
+// Chat setup (backend)
 
 const io = require('socket.io')(server, {
     cors: {
@@ -224,7 +246,7 @@ io.on('connection', socket => {
         socket.join(room)
     })
 
-// Frontend Setup
+// Chat setup (frontend)
 
  this.socket = socket;
         this.socket.on('receive-message', message => {
