@@ -6,14 +6,7 @@ import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
-
-
-import './index.scss'
-import { deleteRoom, requestAllRooms, createRoom, updateRoom, requestRoom } from './actions/rooms_actions';
-import { createDrawing, requestAllDrawings, requestDrawing } from './actions/drawings_actions';
-import { requestAllGuesses, requestGuess, createGuess } from './actions/guesses_actions';
-import { createGame, requestGame, updateGame } from './actions/games_actions';
-
+import './index.scss';
 import './fonts/Canterbury.ttf';
 import './fonts/Blacktail Regular.ttf';
 import './fonts/bagnard.ttf';
@@ -38,27 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
 
   ReactDOM.render(<Root store={store} />, root);
-
-  // DELETE LATER
-  window.dispatch = store.dispatch;
-  window.logout = logout;
-  window.requestAllRooms = requestAllRooms;
-  window.requestRoom = requestRoom;
-  window.createRoom = createRoom;
-  window.updateRoom = updateRoom;
-  window.deleteRoom = deleteRoom;
-  window.getState = store.getState;
-
-  window.requestAllDrawings = requestAllDrawings;
-  window.requestDrawing = requestDrawing;
-  window.createDrawing = createDrawing;
-  window.requestAllGuesses = requestAllGuesses;
-  window.requestGuess = requestGuess;
-  window.createGuess = createGuess;
-
-
-  window.requestGame = requestGame;
-  window.createGame = createGame;
-  window.updateGame = updateGame;
 
 })

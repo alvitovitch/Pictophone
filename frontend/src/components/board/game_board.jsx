@@ -94,8 +94,6 @@ class GameBoard extends React.Component {
                 chain[that.props.chainId] = data.Location;
                 that.props.updateGame({ roomId: that.props.roomId, chainObj: chain })
         
-                console.log(`File uploaded successfully.${data.Location}`);
-
             }, function (err) {
                 console.error("Upload failed", err);
             })

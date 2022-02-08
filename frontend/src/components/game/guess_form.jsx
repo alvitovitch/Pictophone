@@ -4,7 +4,6 @@ import { socket } from '../../util/socket_util';
 class GuessForm extends React.Component {
     constructor(props) {
         super(props)
-        // this.submit = this.submit.bind(this)
         this.state = {
             guess: "",
         }

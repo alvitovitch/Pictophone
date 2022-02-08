@@ -6,7 +6,6 @@
     justify-content: space-evenly;
     background-image: url('../../public/images/paper.jpg');
     * {
-        // font-family: 'Noticia Text', serif;
         font-family: 'Bagnard';
     }
 }
@@ -43,8 +42,6 @@
     h1 {
         color: black;
         -webkit-text-stroke: 1px black;
-        // text-shadow: -1px 1px 0 #e2b670, -6px 6px black;
-        // font-size: 60px;
         font-size: 55px;
         margin-bottom: -5px;
         margin-left: 5px;
@@ -55,7 +52,6 @@
     border: 2px solid black;
     border-radius: 2px;
     color: black;
-    // font-size: 25px;
     font-size: 24px;
     padding: 20px 10px;
     box-shadow: 4px 4px black;
@@ -77,7 +73,6 @@
 }
 
 .index-room {
-    // background: black;
     background-image: url('../../public/images/paper.jpg');
     position: relative;
     display: flex;
