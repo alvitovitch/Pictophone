@@ -1,7 +1,6 @@
 export const RECEIVE_DEMO = 'RECEIVE_DEMO';
 
 export const receiveDemo = demo => {
-  debugger
   return {
     type: RECEIVE_DEMO,
     demo

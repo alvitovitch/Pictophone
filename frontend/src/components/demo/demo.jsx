@@ -60,7 +60,6 @@ class Demo extends React.Component {
     this.setState({ index: this.state.index + 6 });
     this.setState({ key: this.state.key + 11 });
     this.setState({ turn: this.state.turn + 1 });
-    // might consolidate these
   }
   
 
@@ -77,8 +76,6 @@ class Demo extends React.Component {
         <div id="draw-modal" className="game-modal">
 
           <div className="game-container">
-            {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
-
             <GameBoard  demoBoard={true} acceptInput={this.acceptInput} />
             {/* DRAW */}
           </div>
@@ -92,7 +89,6 @@ class Demo extends React.Component {
         <div className="game-modal">
           <div className="game-container">
 
-            {/* <button className="close-gameboard-button" onClick={this.props.closeModal}>Close</button> */}
             {/* GUESS */}
             <GuessFormContainer demoBoard={true} acceptInput={this.acceptInput} url={ this.state.demoGame[this.state.index - 1][this.state.promptIndexes[this.state.turn]] }/>
           </div>

@@ -14,29 +14,17 @@ class GameOver extends React.Component {
     this.scrollLeft = this.scrollLeft.bind(this);
   }
 
-  // componentDidMount() {
-  //   debugger
-  //   this.props.requestGame(this.props.roomId)
-  //   debugger
-  // }
-
   scrollLeft(e) {
     e.preventDefault();
     const idx = this.props.demo !== null ? ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % 4) :
       ((parseInt(e.currentTarget.previousElementSibling.id) + 1) % this.props.room.players.length);
-    debugger
     const slides = document.querySelector('.presentation-container');
     const slide = document.getElementById(idx);
     slides.scrollTo((slide.offsetLeft - 200), 0);
-    // slides.scrollLeft += slides.offsetWidth;
-    // arrow.style.right += slides.offfsetWidth;
+
   }
 
   render() {
-    // console.log(this.props.game.chains.length)
-    // const size = this.props.room.size
-    // console.log(size)
-    // if (!this.props.game.chains.length !== (size + (size * size))) return (<div>loading</div>)
     if (this.props.demo !== null) {
       const players = [this.props.currentUsername, "Ida", "Reginald", "Theodore"]
       return (
@@ -58,8 +46,6 @@ class GameOver extends React.Component {
               
             ) 
           }))}
-          
-          
       </div>
       )
     } else {
@@ -92,7 +78,6 @@ class GameOver extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   
   return {
-    // roomId: ownProps.roomId
     game: state.entities.games[ownProps.match.params.roomId],
     presentaionObj: sortedChains(state.entities.rooms[ownProps.match.params.roomId], state),
     users: state.entities.users,

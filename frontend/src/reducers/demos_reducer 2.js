@@ -7,7 +7,6 @@ const DemoReducer = (state = preloadedState, action) => {
 
   switch (action.type) {
     case RECEIVE_DEMO:
-      debugger
       return action.demo;
     case REMOVE_DEMO:
       return null;
