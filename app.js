@@ -108,11 +108,3 @@ app.use("/api/drawings", drawings);
 app.use("/api/guesses", guesses);
 app.use("/api/games", games);
 app.use(cors());
-
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'frontend/public/index.html'), function (err) {
-        if (err) {
-            res.status(500).send(err)
-        }
-    })
-})
