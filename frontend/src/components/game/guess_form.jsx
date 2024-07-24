@@ -65,7 +65,7 @@ class GuessForm extends React.Component {
                 You need to type something before submitting
             </div>
             <div className="img-container">
-                <img src={this.props.demoBoard ? this.props.url : `https://pictophone-uploads.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
+                <img src={this.props.demoBoard ? this.props.url : `https://pictophone-drawings.s3.amazonaws.com/drawing${this.props.roomId}${this.props.fetchChainId}`} alt="" />
             </div>
             <form onSubmit={this.submitGuess}>
                 <input id='guess-submit-text' type="text" 

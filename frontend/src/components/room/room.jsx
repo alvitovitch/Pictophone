@@ -77,12 +77,12 @@ class Room extends React.Component {
                     this.props.updateRoom(object);
                 }
             })
-            .then(() => {
-                this.props.requestAllPrompts().then(
-                    () => {
-                        this.fillPrompts()
-                    }
-            )})
+            // .then(() => {
+            //     this.props.requestAllPrompts().then(
+            //         () => {
+            //             this.fillPrompts()
+            //         }
+            // )})
     }
 
     fillPrompts() {
@@ -112,10 +112,7 @@ class Room extends React.Component {
         }
     }
 
-
-    render() {
-
-        
+    render() {        
         if (!this.props.room) return null;
         const { currentUser, room} = this.props;
         if (!this.props.users) {
@@ -136,11 +133,11 @@ class Room extends React.Component {
                   ))
           return (
                 <div className='room-main'>
-                        <div className='players-container'>
+                    <div className='players-container'>
                             {playersList}
-                        </div>
-                  <div id='game-room-container'>    
-                      <div className='left-container'>
+                    </div>
+                    <div id='game-room-container'>    
+                        <div className='left-container'>
 
                         
                         { this.props.room.name.includes("Demo Room") ? 
@@ -161,25 +158,23 @@ class Room extends React.Component {
                         {this.props.modal === "demo" ?
                         <Demo demo={true} handleDemoGameOver={this.handleDemoGameOver} /> : "" }
                         
-                    </div>
-                    <div id='draw-container'>
-                        <div id='freeDrawSpace'>
-                            {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
                         </div>
-                        <div id='chat-container'>
-                            <button onClick={(e) => { this.leaveRoom(e); this.props.removeDemo(); }}
-                                id='leaveRoom'>
-                                leave room
-                            </button>
-                            <MessageBoxContainer roomId={this.props.roomId} />
+                        <div id='draw-container'>
+                            <div id='freeDrawSpace'>
+                            {this.state.gameOver ? <GameOver roomId = {this.props.roomId} room = {this.props.room}/> : <Board roomId={this.props.roomId}></Board>}
+                            </div>
+                            <div id='chat-container'>
+                                <button onClick={(e) => { this.leaveRoom(e); this.props.removeDemo(); }}
+                                    id='leaveRoom'>
+                                    leave room
+                                </button>
+                                <MessageBoxContainer roomId={this.props.roomId} />
 
                             </div>
 
                         </div>
                     </div>
-
                 </div>
-
             )
           }
     }
