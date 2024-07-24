@@ -77,12 +77,12 @@ class Room extends React.Component {
                     this.props.updateRoom(object);
                 }
             })
-            // .then(() => {
-            //     this.props.requestAllPrompts().then(
-            //         () => {
-            //             this.fillPrompts()
-            //         }
-            // )})
+            .then(() => {
+                this.props.requestAllPrompts().then(
+                    () => {
+                        this.fillPrompts()
+                    }
+            )})
     }
 
     fillPrompts() {
