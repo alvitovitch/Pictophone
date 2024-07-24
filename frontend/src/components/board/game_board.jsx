@@ -21,7 +21,7 @@ class GameBoard extends React.Component {
        
 
         this.bucket = new AWS.S3({
-            params: { Bucket: 'pictophone-uploads' },
+            params: { Bucket: 'pictophone-drawings' },
             region: 'us-east-1',
         });
 

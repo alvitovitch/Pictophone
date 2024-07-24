@@ -23,14 +23,14 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     })
 }
+app.use(cors());
     
 // socket.io connection
     
 const io = require('socket.io')(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        origin: ["http://localhost:3000", "https://pictophone-9df6754aa1d3.herokuapp.com/#/"],
         transports: ["websocket", "polling"]
-
     }
 })
     
@@ -107,4 +107,3 @@ app.use("/api/prompts", prompts);
 app.use("/api/drawings", drawings);
 app.use("/api/guesses", guesses);
 app.use("/api/games", games);
-app.use(cors());
